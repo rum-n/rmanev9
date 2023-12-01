@@ -7,7 +7,6 @@ type LayoutProps = {
 const LayoutContainer = styled.div`
   overflow: hidden;
   position: relative;
-  // border: 1px solid #777;
   margin: 2rem;
   width: 95vw;
   height: 90vh;

@@ -26,9 +26,11 @@ const MenuItemList = styled.li`
   width: 5rem;
   display: flex;
   align-items: center;
+  transition: 0.3s ease-in-out;
 
   &: hover {
     color: #777;
+    transition: 0.3s ease-in-out;
   }
 `;
 
@@ -62,6 +64,7 @@ const menuItems = [
 
 export const NavMenu = ({ menuItem }: NavMenuProps) => {
   const navigate = useNavigate();
+  //@ts-ignore
   const { setPath } = useContext(PathContext);
 
   const handleNavigation = (url: string) => {

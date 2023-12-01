@@ -1,9 +1,6 @@
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
 import { NavMenu } from "../components/NavMenu";
-import { useContext, useEffect } from "react";
-import { PathContext } from "../context/PathContext";
-import { useLocation } from "react-router-dom";
 
 const TitleBox = styled.div`
   p {

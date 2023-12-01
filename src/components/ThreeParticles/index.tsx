@@ -60,32 +60,31 @@ function ThreeParticles() {
     }
 
     const updateCamera = () => {
-      const dampingFactor = 0.1;
+      const dampingFactor = 0.08;
       camera.position.lerp(targetCameraPosition, dampingFactor);
       camera.lookAt(scene.position);
       renderer.render(scene, camera);
     };
 
-    const handleResize = () => {
-      sizes.width = window.innerWidth;
-      sizes.height = window.innerHeight;
-      camera.aspect = sizes.width / sizes.height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(sizes.width, sizes.height);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    const animate = () => {
+    const animate = function () {
       requestAnimationFrame(animate);
+      // particleMesh.rotation.x += 0.01;
+      particleMesh.rotation.y += 0.001;
+      renderer.render(scene, camera);
 
+      renderer.setPixelRatio(2);
+
+      window.addEventListener("resize", () => {
+        sizes.width = window.innerWidth;
+        sizes.height = window.innerHeight;
+        camera.updateProjectionMatrix();
+        camera.aspect = sizes.width / sizes.height;
+        renderer.setSize(sizes.width, sizes.height);
+      });
       updateCamera();
     };
-
     animate();
-
     return () => {
-      window.removeEventListener("resize", handleResize);
       refContainer?.current?.removeChild(renderer.domElement);
     };
   }, [currentPath]);
