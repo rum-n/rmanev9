@@ -59,10 +59,18 @@ function ThreeParticles() {
       targetCameraPosition = new THREE.Vector3(0, 0, 10);
     }
 
+    if (currentPath.path === "/links") {
+      targetCameraPosition = new THREE.Vector3(0, 0, 30);
+    }
+    if (currentPath.path === "/contact") {
+      targetCameraPosition = new THREE.Vector3(0, 0, 50);
+    }
+
     const updateCamera = () => {
-      const dampingFactor = 0.08;
+      const dampingFactor = 0.04;
       camera.position.lerp(targetCameraPosition, dampingFactor);
       camera.lookAt(scene.position);
+
       renderer.render(scene, camera);
     };
 
