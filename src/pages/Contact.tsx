@@ -19,8 +19,10 @@ const ContactBox = styled.div`
 `;
 
 const ContactWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  form {
+    display: flex;
+    flex-direction: column;
+  }
   gap: 1rem;
 `;
 

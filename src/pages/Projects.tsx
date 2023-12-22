@@ -43,7 +43,7 @@ interface ProjectData {
   url?: string;
 }
 
-const projects: ProjectData[] = [
+const myProjects: ProjectData[] = [
   {
     title: "Race Results",
     year: "2017",
@@ -81,6 +81,21 @@ const projects: ProjectData[] = [
   },
 ];
 
+const clientProjects = [
+  {
+    title: "Brightvision",
+    year: "2022",
+    tech: "React, Next.js, Payload CMS",
+    url: "https://brightvision.com/",
+  },
+  {
+    title: "Dave's Family NFT",
+    year: "2021",
+    tech: "React, Solidity",
+    url: "",
+  },
+];
+
 export const Projects = () => {
   return (
     <Layout>
@@ -88,7 +103,24 @@ export const Projects = () => {
         <NavMenu menuItem="Projects" />
         <ProjectsBox>
           <ProjectsWrapper>
-            {(projects as ProjectData[])
+            <span>Client projects</span>
+            {(clientProjects as ProjectData[])
+              .sort((a, b) => Number(b.year) - Number(a.year))
+              .map((project) => (
+                <ProjectLine
+                  key={project.title}
+                  onClick={
+                    project.url
+                      ? () => window.open(project.url || "", "_blank")
+                      : undefined
+                  }
+                >
+                  <span style={{ fontSize: "2rem" }}>{project.title}</span> /{" "}
+                  {project.year} / {project.tech}
+                </ProjectLine>
+              ))}
+            <span>Personal projects</span>
+            {(myProjects as ProjectData[])
               .sort((a, b) => Number(b.year) - Number(a.year))
               .map((project) => (
                 <ProjectLine

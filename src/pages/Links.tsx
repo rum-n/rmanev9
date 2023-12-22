@@ -44,7 +44,7 @@ interface Links {
 const links: Links[] = [
   {
     title: "GitHub",
-    url: "https://github.com/rum_n",
+    url: "https://github.com/rum-n",
   },
   {
     title: "Twitter",

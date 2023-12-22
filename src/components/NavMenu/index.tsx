@@ -56,10 +56,10 @@ const menuItems = [
     title: "Links",
     url: "/links",
   },
-  {
-    title: "Contact",
-    url: "/contact",
-  },
+  // {
+  //   title: "Contact",
+  //   url: "/contact",
+  // },
 ];
 
 export const NavMenu = ({ menuItem }: NavMenuProps) => {
