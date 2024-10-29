@@ -4,7 +4,11 @@ import { NavMenu } from "../components/NavMenu";
 
 const TitleBox = styled.div`
   font-family: "Lato", sans-serif;
-  width: 600px;
+  width: 600px;  
+  
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const ProjectsWrapper = styled.ul`

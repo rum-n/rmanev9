@@ -8,7 +8,7 @@ import { PathProvider } from "./context/PathContext";
 function App() {
   return (
     <PathProvider>
-      <ThreeParticles />
+      {/* <ThreeParticles /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />

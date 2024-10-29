@@ -11,7 +11,7 @@ const LayoutContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 5rem;
+  padding: 5rem 2rem 2rem 2rem;
 `;
 
 const LinksBox = styled.div`
@@ -35,6 +35,22 @@ const Link = styled.li`
     color: #777;
     transition: 0.3s ease-in-out;
   }
+`;
+
+const MobileLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+`;
+
+const MobileLinksWrapper = styled.ul`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  list-style: none;
 `;
 
 interface Links {
@@ -66,20 +82,36 @@ const links: Links[] = [
 ];
 
 export const Layout = ({ children }: LayoutProps) => {
+  const width = window.innerWidth;
+
   return (
     <LayoutContainer>
       {children}
-      <LinksBox>
-        <LinksWrapper>
-          {(links as Links[]).map((project) => (
-            <Link
-              key={project.title}
-              onClick={() => window.open(project.url || "", "_blank")}
-            >
-              {project.title}
-            </Link>
-          ))}
-        </LinksWrapper>
-      </LinksBox>
+      {width > 1024 ? (
+        <LinksBox>
+          <LinksWrapper>
+            {(links as Links[]).map((project) => (
+              <Link
+                key={project.title}
+                onClick={() => window.open(project.url || "", "_blank")}
+              >
+                {project.title}
+              </Link>
+            ))}
+          </LinksWrapper>
+        </LinksBox>) :
+        <MobileLinks>
+          <MobileLinksWrapper>
+            {(links as Links[]).map((project) => (
+              <Link
+                key={project.title}
+                onClick={() => window.open(project.url || "", "_blank")}
+              >
+                {project.title}
+              </Link>
+            ))}
+          </MobileLinksWrapper>
+        </MobileLinks>
+      }
     </LayoutContainer>);
 };
