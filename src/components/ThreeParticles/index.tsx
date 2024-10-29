@@ -1,92 +1,99 @@
 import * as THREE from "three";
-import { useContext, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { PathContext } from "../../context/PathContext";
 
-const ParticlesWrapper = styled.div`
-   position: absolute;
-   z-index: -10;
+const WaveWrapper = styled.div`
+  position: absolute;
+  z-index: -10;
+  top: 0;
+  left: 0;
+  width: 50vw;
+  height: 100vh;
+  overflow: hidden;
 `;
 
-function ThreeParticles() {
+function ConfinedWaveAnimation() {
   const refContainer = useRef<HTMLDivElement>(null);
-  const pathContext = useContext(PathContext);
-  const currentPath = typeof pathContext?.currentPath === 'object' ? pathContext.currentPath : { path: "" };
 
   useEffect(() => {
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x000000, 5, 20);
 
-    const sizes = { width: window.innerWidth, height: window.innerHeight };
-    const camera = new THREE.PerspectiveCamera(20, sizes.width / sizes.height, 0.1, 100);
+    const sizes = {
+      width: window.innerWidth * 0.5,
+      height: window.innerHeight,
+    };
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
+    camera.position.z = 5;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(sizes.width, sizes.height);
-    renderer.setPixelRatio(window.devicePixelRatio < 2 ? window.devicePixelRatio : 2);
-
+    renderer.setPixelRatio(window.devicePixelRatio);
     if (refContainer.current) {
       refContainer.current.appendChild(renderer.domElement);
     }
 
-    const geometry = new THREE.BufferGeometry();
-    const particlesCnt = 5000;
-    const posArray = new Float32Array(particlesCnt * 3);
-    const colorArray = new Float32Array(particlesCnt * 3);
+    // Create a plane with vertical lines only
+    const widthSegments = 50;
+    const heightSegments = 50;
+    const geometry = new THREE.PlaneGeometry(5, 10, widthSegments, heightSegments);
 
-    for (let i = 0; i < particlesCnt; i++) {
-      posArray[i * 3] = (Math.random() - 0.5) * 10;
-      posArray[i * 3 + 1] = (Math.random() - 0.5) * 10;
-      posArray[i * 3 + 2] = (Math.random() - 0.5) * 20;
+    const lineVertices: number[] = [];
+    const { array: vertices } = geometry.attributes.position;
 
-      colorArray[i * 3] = Math.random();
-      colorArray[i * 3 + 1] = Math.random();
-      colorArray[i * 3 + 2] = Math.random();
+    // Extract only vertical line segments from the plane geometry
+    for (let y = 0; y < heightSegments; y++) {
+      for (let x = 0; x <= widthSegments; x++) {
+        const i = y * (widthSegments + 1) + x;
+        const j = (y + 1) * (widthSegments + 1) + x;
+
+        lineVertices.push(vertices[i * 3], vertices[i * 3 + 1], vertices[i * 3 + 2]);
+        lineVertices.push(vertices[j * 3], vertices[j * 3 + 1], vertices[j * 3 + 2]);
+      }
     }
 
-    geometry.setAttribute("position", new THREE.BufferAttribute(posArray, 3));
-    geometry.setAttribute("color", new THREE.BufferAttribute(colorArray, 3));
+    const lineGeometry = new THREE.BufferGeometry();
+    lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(lineVertices, 3));
 
-    const material = new THREE.PointsMaterial({
-      size: 0.01,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.8,
+    // Shader for smooth wave displacement on vertical lines
+    const material = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0.0 },
+      },
+      vertexShader: `
+        uniform float uTime;
+        void main() {
+          vec3 pos = position;
+          pos.z += 3.2 * sin(pos.x * 2.5 + uTime) + 0.15 * sin(pos.y * 2.9 + uTime * 1.7);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `,
+      fragmentShader: `
+        void main() {
+          gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+        }
+      `,
+      wireframe: false,
     });
 
-    const particleMesh = new THREE.Points(geometry, material);
-    scene.add(particleMesh);
+    const verticalLines = new THREE.LineSegments(lineGeometry, material);
+    verticalLines.position.x = -2.5;
+    scene.add(verticalLines);
 
-    let targetCameraPosition = new THREE.Vector3(0, 0, 20);
-    if (currentPath.path === "/projects") targetCameraPosition = new THREE.Vector3(0, 0, 10);
-    if (currentPath.path === "/contact") targetCameraPosition = new THREE.Vector3(0, 0, 50);
-
-    const mouse = new THREE.Vector2();
-    window.addEventListener("mousemove", (event) => {
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      camera.position.x += (mouse.x * 0.1 - camera.position.x) * 0.05;
-      camera.position.y += (mouse.y * 0.1 - camera.position.y) * 0.05;
-    });
-
-    const updateCamera = () => {
-      const dampingFactor = 0.04;
-      camera.position.lerp(targetCameraPosition, dampingFactor);
-      camera.lookAt(scene.position);
+    // Animate the shader's time uniform
+    const animateWave = () => {
+      material.uniforms.uTime.value += 0.005;
       renderer.render(scene, camera);
+      requestAnimationFrame(animateWave);
     };
 
-    const animate = () => {
-      requestAnimationFrame(animate);
-      particleMesh.rotation.y += 0.001;
-      material.size = 0.005 + 0.0025 * Math.sin(Date.now() * 0.001);
-      updateCamera();
-    };
-    animate();
+    animateWave();
 
+    // Handle resizing
     window.addEventListener("resize", () => {
-      sizes.width = window.innerWidth;
+      sizes.width = window.innerWidth * 0.5;
       sizes.height = window.innerHeight;
+
       camera.aspect = sizes.width / sizes.height;
       camera.updateProjectionMatrix();
       renderer.setSize(sizes.width, sizes.height);
@@ -94,12 +101,12 @@ function ThreeParticles() {
 
     return () => {
       if (refContainer.current) {
-        (refContainer.current as HTMLDivElement).removeChild(renderer.domElement);
+        refContainer.current.removeChild(renderer.domElement);
       }
     };
-  }, [currentPath]);
+  }, []);
 
-  return <ParticlesWrapper ref={refContainer}></ParticlesWrapper>;
+  return <WaveWrapper ref={refContainer}></WaveWrapper>;
 }
 
-export default ThreeParticles;
+export default ConfinedWaveAnimation;
