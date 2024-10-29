@@ -8,29 +8,30 @@ interface NavMenuProps {
 }
 
 const NameText = styled.h1`
-  margin: 2rem 0 0 2rem;
+  margin: 0;
 `;
 
 const SubtitleText = styled.p`
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  margin: 0;
 `;
 
 const MenuList = styled.ul`
   list-style: none;
-  margin-top: 5rem;
+  display: flex;
+  flex-direction: row;
 `;
 
 const MenuItemList = styled.li`
-  margin-top: 0.5rem;
   cursor: pointer;
   width: 5rem;
   display: flex;
   align-items: center;
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
 
-  &: hover {
+  &:hover {
     color: #777;
-    transition: 0.3s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
 `;
 
@@ -52,14 +53,6 @@ const menuItems = [
     title: "Projects",
     url: "/projects",
   },
-  {
-    title: "Links",
-    url: "/links",
-  },
-  // {
-  //   title: "Contact",
-  //   url: "/contact",
-  // },
 ];
 
 export const NavMenu = ({ menuItem }: NavMenuProps) => {
@@ -75,7 +68,7 @@ export const NavMenu = ({ menuItem }: NavMenuProps) => {
   return (
     <>
       <NameText>Rumen Manev</NameText>
-      <SubtitleText>Frontend developer</SubtitleText>
+      <SubtitleText>Fullstack developer</SubtitleText>
       <MenuList>
         {menuItems.map((item, index) => (
           <MenuItemList onClick={() => handleNavigation(item.url)} key={index}>

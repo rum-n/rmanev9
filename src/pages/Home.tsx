@@ -3,23 +3,12 @@ import { Layout } from "../components/Layout";
 import { NavMenu } from "../components/NavMenu";
 
 const TitleBox = styled.div`
-  p {
-    margin: 0 0 0 2rem;
-  }
   font-family: "Lato", sans-serif;
-`;
-
-const SummaryBox = styled.div`
-  margin: 5rem 0 0 2rem;
-  display: flex;
-  justify-content: flex-end;
-  height: 30%;
+  width: 600px;
 `;
 
 const SummaryWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  margin-top: 2rem;
 `;
 
 export const Home = () => {
@@ -27,24 +16,24 @@ export const Home = () => {
     <Layout>
       <TitleBox>
         <NavMenu menuItem="Home" />
-        <SummaryBox>
-          <SummaryWrapper>
+        <SummaryWrapper>
+          <p>
+            I used to do sales,
+            business development and project management.
+            It taught me some incredibly valuable skills, but it wasn't for me.
+          </p>
+          <p>
+            In 2020 I started working as a junior frontend developer. It felt like I finally found the missing piece.
+            Since then I've worked both full-time and freelance. Both remote and on-site.
             <p>
-              Up until the year 2020, I used to do sales, <br />
-              business development and project management. <br />
-              It wasn't for me.
+              Currently I'm working full stack with React, React Native and Node.js.
+              I'm aiming to get better at it every day and expand into different functions and technologies.
             </p>
-            <p>
-              Now I do frontend development <br /> and I'm aiming to get better
-              at it every day.
-            </p>
-            <p>
-              Feel free to poke around, <br />
-              check out what I'm currently working on, <br />
-              and if anything catches your eye - reach out!
-            </p>
-          </SummaryWrapper>
-        </SummaryBox>
+          </p>
+          <p>
+            Feel free to poke around, check out what I'm currently working on, and if anything catches your eye - reach out!
+          </p>
+        </SummaryWrapper>
       </TitleBox>
     </Layout>
   );

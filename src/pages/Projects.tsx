@@ -3,36 +3,26 @@ import { Layout } from "../components/Layout";
 import { NavMenu } from "../components/NavMenu";
 
 const TitleBox = styled.div`
-  p {
-    margin: 0 0 0 2rem;
-  }
   font-family: "Lato", sans-serif;
-`;
-
-const ProjectsBox = styled.div`
-  margin: 5rem 0 0 2rem;
-  display: flex;
-  justify-content: flex-end;
-  height: 30%;
-  height: 300px;
-  overflow-y: scroll;
+  width: 600px;
 `;
 
 const ProjectsWrapper = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
   list-style: none;
-  // overflow-y: scroll;
+  margin-top: 2rem;
+  padding: 0;
 `;
 
 const ProjectLine = styled.li`
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
 
-  &: hover {
+  &:hover {
     color: #777;
-    transition: 0.3s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
 `;
 
@@ -79,6 +69,12 @@ const myProjects: ProjectData[] = [
     tech: "Vue.js, Strapi",
     url: "https://webthreegigs.com/",
   },
+  {
+    title: "Boulder Monday",
+    year: "2024",
+    tech: "React, Next.js, Prisma, Supabase",
+    url: "https://boudlermonday.com/",
+  },
 ];
 
 const clientProjects = [
@@ -101,38 +97,36 @@ export const Projects = () => {
     <Layout>
       <TitleBox>
         <NavMenu menuItem="Projects" />
-        <ProjectsBox>
-          <ProjectsWrapper>
-            <span>Client projects</span>
-            {(clientProjects as ProjectData[])
-              .sort((a, b) => Number(b.year) - Number(a.year))
-              .map((project) => (
-                <ProjectLine
-                  key={project.title}
-                  onClick={
-                    project.url
-                      ? () => window.open(project.url || "", "_blank")
-                      : undefined
-                  }
-                >
-                  <span style={{ fontSize: "2rem" }}>{project.title}</span> /{" "}
-                  {project.year} / {project.tech}
-                </ProjectLine>
-              ))}
-            <span>Personal projects</span>
-            {(myProjects as ProjectData[])
-              .sort((a, b) => Number(b.year) - Number(a.year))
-              .map((project) => (
-                <ProjectLine
-                  key={project.title}
-                  onClick={() => window.open(project.url || "", "_blank")}
-                >
-                  <span style={{ fontSize: "2rem" }}>{project.title}</span> /{" "}
-                  {project.year} / {project.tech}
-                </ProjectLine>
-              ))}
-          </ProjectsWrapper>
-        </ProjectsBox>
+        <ProjectsWrapper>
+          <span>Client projects</span>
+          {(clientProjects as ProjectData[])
+            .sort((a, b) => Number(b.year) - Number(a.year))
+            .map((project) => (
+              <ProjectLine
+                key={project.title}
+                onClick={
+                  project.url
+                    ? () => window.open(project.url || "", "_blank")
+                    : undefined
+                }
+              >
+                <span style={{ fontSize: "2rem" }}>{project.title}</span> /{" "}
+                {project.year} / {project.tech}
+              </ProjectLine>
+            ))}
+          <span>Personal projects</span>
+          {(myProjects as ProjectData[])
+            .sort((a, b) => Number(b.year) - Number(a.year))
+            .map((project) => (
+              <ProjectLine
+                key={project.title}
+                onClick={() => window.open(project.url || "", "_blank")}
+              >
+                <span style={{ fontSize: "2rem" }}>{project.title}</span> /{" "}
+                {project.year} / {project.tech}
+              </ProjectLine>
+            ))}
+        </ProjectsWrapper>
       </TitleBox>
     </Layout>
   );
