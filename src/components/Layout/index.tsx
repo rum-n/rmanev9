@@ -8,9 +8,9 @@ const LayoutContainer = styled.div`
   overflow: hidden;
   position: relative;
   width: 100vw;
+  min-height: 50vh;
   display: flex;
   justify-content: center;
-  align-items: center;
   padding: 5rem 2rem 2rem 2rem;
 `;
 
@@ -87,7 +87,7 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <LayoutContainer>
       {children}
-      {width > 1024 ? (
+      {width > 1300 ? (
         <LinksBox>
           <LinksWrapper>
             {(links as Links[]).map((project) => (

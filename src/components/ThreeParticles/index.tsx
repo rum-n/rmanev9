@@ -8,12 +8,16 @@ const WaveWrapper = styled.div`
   top: 0;
   left: 0;
   width: 50vw;
-  height: 100vh;
   overflow: hidden;
+  @media (max-width: 768px) {
+    /* background-color: #000000; */
+  }
+
 `;
 
 function ConfinedWaveAnimation() {
   const refContainer = useRef<HTMLDivElement>(null);
+  const width = window.innerWidth;
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -37,7 +41,6 @@ function ConfinedWaveAnimation() {
     const widthSegments = 50;
     const heightSegments = 50;
     const geometry = new THREE.PlaneGeometry(5, 10, widthSegments, heightSegments);
-
     const lineVertices: number[] = [];
     const { array: vertices } = geometry.attributes.position;
 
@@ -77,12 +80,12 @@ function ConfinedWaveAnimation() {
     });
 
     const verticalLines = new THREE.LineSegments(lineGeometry, material);
-    verticalLines.position.x = -2.5;
+    verticalLines.position.x = -2;
     scene.add(verticalLines);
 
     // Animate the shader's time uniform
     const animateWave = () => {
-      material.uniforms.uTime.value += 0.005;
+      material.uniforms.uTime.value += 0.002;
       renderer.render(scene, camera);
       requestAnimationFrame(animateWave);
     };

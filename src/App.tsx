@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Projects } from "./pages/Projects";
 import ThreeParticles from "./components/ThreeParticles";
 import { PathProvider } from "./context/PathContext";
-// import { Contact } from "./pages/Contact";
+import { Writing } from "./pages/Writing";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="projects" element={<Projects />}></Route>
-          {/* <Route path="contact" element={<Contact />}></Route> */}
+          <Route path="writing" element={<Writing />}></Route>
         </Routes>
       </BrowserRouter>
     </PathProvider>

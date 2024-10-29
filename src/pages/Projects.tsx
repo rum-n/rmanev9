@@ -8,6 +8,7 @@ const TitleBox = styled.div`
   
   @media (max-width: 768px) {
     width: 100%;
+    background-color: #00000082;
   }
 `;
 
@@ -18,6 +19,9 @@ const ProjectsWrapper = styled.ul`
   list-style: none;
   margin-top: 2rem;
   padding: 0;
+  height: 500px;
+  overflow-y: auto;
+  scrollbar-color: #8a5858 #000000;
 `;
 
 const ProjectLine = styled.li`
@@ -77,7 +81,7 @@ const myProjects: ProjectData[] = [
     title: "Boulder Monday",
     year: "2024",
     tech: "React, Next.js, Prisma, Supabase",
-    url: "https://boudlermonday.com/",
+    url: "https://bouldermonday.com/",
   },
 ];
 

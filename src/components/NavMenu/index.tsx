@@ -21,11 +21,12 @@ const MenuList = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: row;
+  padding-left: 1rem;
+  gap: 2rem;
 `;
 
 const MenuItemList = styled.li`
   cursor: pointer;
-  width: 5rem;
   display: flex;
   align-items: center;
   transition: 0.2s ease-in-out;
@@ -39,7 +40,7 @@ const MenuItemList = styled.li`
 const MenuDot = styled.div`
   width: 0.5rem;
   height: 0.5rem;
-  background: #777;
+  background: #8a5858;
   border-radius: 50%;
   margin-right: 0.5rem;
   margin-left: -1rem;
@@ -53,6 +54,10 @@ const menuItems = [
   {
     title: "Projects",
     url: "/projects",
+  },
+  {
+    title: "Writing",
+    url: "/writing",
   },
 ];
 
