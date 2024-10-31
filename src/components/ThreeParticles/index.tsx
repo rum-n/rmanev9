@@ -17,7 +17,6 @@ const WaveWrapper = styled.div`
 
 function ConfinedWaveAnimation() {
   const refContainer = useRef<HTMLDivElement>(null);
-  const width = window.innerWidth;
 
   useEffect(() => {
     const scene = new THREE.Scene();
