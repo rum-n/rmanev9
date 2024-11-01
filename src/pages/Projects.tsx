@@ -75,7 +75,7 @@ const myProjects: ProjectData[] = [
     title: "Web3 Gigs",
     year: "2021",
     tech: "Vue.js, Strapi",
-    url: "https://webthreegigs.com/",
+    url: "https://remoteweb3jobs.netlify.app/",
   },
   {
     title: "Boulder Monday",
