@@ -8,7 +8,6 @@ const BlogContent = styled.div`
   margin-top: 2rem;
   line-height: 1.6;
 
-  /* Style your HTML content */
   h2 {
     margin-top: 2rem;
     margin-bottom: 1rem;
