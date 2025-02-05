@@ -41,9 +41,6 @@ const BlogContent = styled.div`
 `;
 
 const TitleBox = styled.div`
-  p {
-    margin: 0 0 0 2rem;
-  }
   font-family: "Lato", sans-serif;
   width: 600px;
   
