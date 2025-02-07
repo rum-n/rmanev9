@@ -81,6 +81,9 @@ export const NavMenu = ({ menuItem }: NavMenuProps) => {
             <MenuItemList onClick={() => handleNavigation(menuItems[0].url)}>
               {menuItems[0].title}
             </MenuItemList>
+            <MenuItemList onClick={() => handleNavigation(menuItems[2].url)}>
+              {menuItems[2].title}
+            </MenuItemList>
           </MenuList>
         </> :
         <>
