@@ -1,6 +1,8 @@
 import { closuresContent } from "./1-closures";
 import { pureFunctionsContent } from "./2-pure-functions";
 import { fpVsOopContent } from "./3-fp-vs-oop";
+import { promisesContent } from "./4-promises";
+import { tddContent } from "./5-tdd";
 
 export const blogPosts = [
   {
@@ -26,5 +28,21 @@ export const blogPosts = [
     excerpt: "Understanding the difference between Functional Programming and Object-Oriented Programming",
     content: fpVsOopContent,
     slug: "coding-essentials-fp-vs-oop"
+  },
+  {
+    id: "4",
+    title: "Coding essentials #4: Promises",
+    date: "2025-02-09",
+    excerpt: "Understanding Promises and asynchronous JavaScript",
+    content: promisesContent,
+    slug: "coding-essentials-promises"
+  },
+  {
+    id: "5",
+    title: "Coding essentials #5: Test-Driven Development",
+    date: "2025-02-09",
+    excerpt: "Understanding TDD and its importance in modern software development",
+    content: tddContent,
+    slug: "coding-essentials-tdd"
   }
 ];
