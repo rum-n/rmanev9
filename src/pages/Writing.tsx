@@ -74,9 +74,40 @@ const Tag = styled.button<{ isActive: boolean }>`
   }
 `;
 
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+`;
+
+const PaginationButton = styled.button<{ disabled: boolean }>`
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: ${props => props.disabled ? '#444' : '#8a5858'};
+  color: white;
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  opacity: ${props => props.disabled ? 0.5 : 1};
+  border: none;
+  transition: all 0.2s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background-color: #6d4646;
+  }
+`;
+
+const PageInfo = styled.span`
+  color: #777;
+  font-size: 0.9rem;
+`;
+
+const POSTS_PER_PAGE = 10;
+
 export const Writing = () => {
   const navigate = useNavigate();
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const allTags = Array.from(
     new Set(
@@ -89,12 +120,20 @@ export const Writing = () => {
     selectedTags.some(tag => post.tags.includes(tag))
   );
 
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const paginatedPosts = filteredPosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
+  );
+
   const toggleTag = (tag: string) => {
     setSelectedTags(prev =>
       prev.includes(tag)
         ? prev.filter(t => t !== tag)
         : [...prev, tag]
     );
+    setCurrentPage(1); // Reset to first page when filtering
   };
 
   return (
@@ -113,7 +152,7 @@ export const Writing = () => {
           ))}
         </TagsContainer>
         <BlogList>
-          {filteredPosts.map((post) => (
+          {paginatedPosts.map((post) => (
             <BlogPost
               key={post.id}
               onClick={() => navigate(`/writing/${post.slug}`)}
@@ -126,6 +165,23 @@ export const Writing = () => {
             </BlogPost>
           ))}
         </BlogList>
+        {totalPages > 1 && (
+          <PaginationContainer>
+            <PaginationButton
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </PaginationButton>
+            <PageInfo>Page {currentPage} of {totalPages}</PageInfo>
+            <PaginationButton
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </PaginationButton>
+          </PaginationContainer>
+        )}
       </TitleBox>
     </Layout>
   );
