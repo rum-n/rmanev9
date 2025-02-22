@@ -8,6 +8,8 @@ import { throttlingContent } from "./7-throttling";
 import { bubblingContent } from "./8-bubbling";
 import { domContent } from "./9-dom";
 import { jobHuntContent } from "./10-job-hunt";
+import { thisKeywordContent } from "./11-this";
+
 export const blogPosts = [
   {
     id: "1",
@@ -98,5 +100,14 @@ export const blogPosts = [
     content: jobHuntContent,
     slug: "job-hunt",
     tags: ["personal"]
+  },
+  {
+    id: "11",
+    title: "JS essentials #11: The 'this' keyword",
+    date: "2025-02-22",
+    excerpt: "Understanding the 'this' keyword and its behavior in different contexts",
+    content: thisKeywordContent,
+    slug: "js-essentials-this-keyword",
+    tags: ["javascript"]
   }
 ];
