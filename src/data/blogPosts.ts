@@ -9,6 +9,7 @@ import { bubblingContent } from "./8-bubbling";
 import { domContent } from "./9-dom";
 import { jobHuntContent } from "./10-job-hunt";
 import { thisKeywordContent } from "./11-this";
+import { solidContent } from "./12-solid";
 
 export const blogPosts = [
   {
@@ -108,6 +109,15 @@ export const blogPosts = [
     excerpt: "Understanding the 'this' keyword and its behavior in different contexts",
     content: thisKeywordContent,
     slug: "js-essentials-this-keyword",
+    tags: ["javascript"]
+  },
+  {
+    id: "12",
+    title: "JS essentials #12: SOLID Principles",
+    date: "2025-02-23",
+    excerpt: "Understanding SOLID principles and their application in JavaScript",
+    content: solidContent,
+    slug: "js-essentials-solid",
     tags: ["javascript"]
   }
 ];
