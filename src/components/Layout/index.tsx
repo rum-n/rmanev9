@@ -60,8 +60,8 @@ const links: Links[] = [
     url: "https://github.com/rum-n",
   },
   {
-    title: "Twitter",
-    url: "https://twitter.com/room_n",
+    title: "Bluesky",
+    url: "https://bsky.app/profile/room-n.bsky.social",
   },
   {
     title: "Medium",
