@@ -9,7 +9,6 @@ const TitleBox = styled.div`
   
   @media (max-width: 768px) {
     width: 100%;
-    background-color: #00000082;
   }
 `;
 
@@ -23,6 +22,10 @@ const ProjectsWrapper = styled.ul`
   height: 500px;
   overflow-y: auto;
   scrollbar-color: #8a5858 #000000;
+
+  @media (max-width: 768px) {
+    height: 100%;
+  }
 `;
 
 const ProjectLine = styled.li`

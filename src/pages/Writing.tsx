@@ -15,7 +15,6 @@ const TitleBox = styled.div`
 `;
 
 const BlogList = styled.div`
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -45,7 +44,7 @@ const BlogExcerpt = styled.p`
 `;
 
 const TagsContainer = styled.div`
-  margin: 1rem 0;
+  margin: 2rem 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;

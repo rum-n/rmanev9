@@ -7,9 +7,8 @@ type LayoutProps = {
 };
 
 const LayoutContainer = styled.div`
-  overflow: hidden;
   position: relative;
-  width: 100vw;
+  width: 100%;
   min-height: 50vh;
   display: flex;
   justify-content: center;
@@ -39,20 +38,15 @@ const Link = styled.li`
   }
 `;
 
-const MobileLinks = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+const MobileLinksWrapper = styled.ul`
   position: absolute;
   top: 0rem;
   left: 0rem;
-`;
-
-const MobileLinksWrapper = styled.ul`
   display: flex;
   flex-direction: row;
   gap: 1rem;
   list-style: none;
+  margin-left: -0.5rem;
 `;
 
 interface Links {
@@ -84,23 +78,23 @@ const links: Links[] = [
 ];
 
 export const Layout = ({ children }: LayoutProps) => {
-  const width = window.innerWidth;
   const location = useLocation();
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1300);
 
-  const [showLinks, setShowLinks] = useState(width > 1300);
   useEffect(() => {
-    if (width > 1300) {
-      setShowLinks(true);
-    } else {
-      setShowLinks(false);
-    }
-  }, [width]);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1300);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <LayoutContainer>
       {children}
       {location.pathname.includes("/writing/") ? null : <>
-        {showLinks ? (
+        {!isMobile ? (
           <LinksBox>
             <LinksWrapper>
               {(links as Links[]).map((project) => (
@@ -113,18 +107,16 @@ export const Layout = ({ children }: LayoutProps) => {
               ))}
             </LinksWrapper>
           </LinksBox>) :
-          <MobileLinks>
-            <MobileLinksWrapper>
-              {(links as Links[]).map((project) => (
-                <Link
-                  key={project.title}
-                  onClick={() => window.open(project.url || "", "_blank")}
-                >
-                  {project.title}
-                </Link>
-              ))}
-            </MobileLinksWrapper>
-          </MobileLinks>
+          <MobileLinksWrapper>
+            {(links as Links[]).map((project) => (
+              <Link
+                key={project.title}
+                onClick={() => window.open(project.url || "", "_blank")}
+              >
+                {project.title}
+              </Link>
+            ))}
+          </MobileLinksWrapper>
         }
       </>}
     </LayoutContainer>);

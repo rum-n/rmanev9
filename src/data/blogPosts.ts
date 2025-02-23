@@ -10,6 +10,7 @@ import { domContent } from "./9-dom";
 import { jobHuntContent } from "./10-job-hunt";
 import { thisKeywordContent } from "./11-this";
 import { solidContent } from "./12-solid";
+import { rustOwnershipContent } from "./13-rust-ownership";
 
 export const blogPosts = [
   {
@@ -100,7 +101,7 @@ export const blogPosts = [
     excerpt: "Once again on the hunt for a job.",
     content: jobHuntContent,
     slug: "job-hunt",
-    tags: ["personal"]
+    tags: ["non-tech"]
   },
   {
     id: "11",
@@ -119,5 +120,14 @@ export const blogPosts = [
     content: solidContent,
     slug: "js-essentials-solid",
     tags: ["javascript"]
+  },
+  {
+    id: "13",
+    title: "Rust basics #1: Understanding Ownership",
+    date: "2025-02-24",
+    excerpt: "Understanding Rust's ownership system - one of its most unique features",
+    content: rustOwnershipContent,
+    slug: "rust-basics-ownership",
+    tags: ["rust"]
   }
 ];

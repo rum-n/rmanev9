@@ -26,14 +26,24 @@ function App() {
 const ParticlesWrapper = () => {
   const [showParticles, setShowParticles] = useState(true);
   const location = useLocation();
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
-    if (location.pathname.includes("/writing")) {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname.includes("/writing") || isMobile) {
       setShowParticles(false);
     } else {
       setShowParticles(true);
     }
-  }, [location.pathname]);
+  }, [location.pathname, isMobile]);
 
   return showParticles ? <ThreeParticles /> : null;
 };
