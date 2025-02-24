@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { PathContext } from "../../context/PathContext";
 
@@ -71,7 +71,6 @@ export const NavMenu = ({ menuItem }: NavMenuProps) => {
   const navigate = useNavigate();
   //@ts-ignore
   const { setPath } = useContext(PathContext);
-  const location = useLocation();
 
   const handleNavigation = (url: string) => {
     setPath({ path: url, setPath: setPath });
@@ -80,29 +79,15 @@ export const NavMenu = ({ menuItem }: NavMenuProps) => {
 
   return (
     <>
-      {location.pathname.includes("/writing/") ?
-        <>
-          <MenuList>
-            <MenuItemList onClick={() => handleNavigation(menuItems[0].url)}>
-              {menuItems[0].title}
-            </MenuItemList>
-            <MenuItemList onClick={() => handleNavigation(menuItems[2].url)}>
-              {menuItems[2].title}
-            </MenuItemList>
-          </MenuList>
-        </> :
-        <>
-          <NameText>Rumen Manev</NameText>
-          <SubtitleText>Fullstack developer</SubtitleText>
-          <MenuList>
-            {menuItems.map((item, index) => (
-              <MenuItemList onClick={() => handleNavigation(item.url)} key={index}>
-                {menuItem === item.title ? <MenuDot /> : ""} {item.title}
-              </MenuItemList>
-            ))}
-          </MenuList>
-        </>
-      }
+      <NameText>Rumen Manev</NameText>
+      <SubtitleText>Fullstack developer</SubtitleText>
+      <MenuList>
+        {menuItems.map((item, index) => (
+          <MenuItemList onClick={() => handleNavigation(item.url)} key={index}>
+            {menuItem === item.title ? <MenuDot /> : ""} {item.title}
+          </MenuItemList>
+        ))}
+      </MenuList>
     </>
   );
 };

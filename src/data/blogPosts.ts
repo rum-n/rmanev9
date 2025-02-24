@@ -11,6 +11,7 @@ import { jobHuntContent } from "./10-job-hunt";
 import { thisKeywordContent } from "./11-this";
 import { solidContent } from "./12-solid";
 import { rustOwnershipContent } from "./13-rust-ownership";
+import { cachingContent } from "./14-caching";
 
 export const blogPosts = [
   {
@@ -129,5 +130,14 @@ export const blogPosts = [
     content: rustOwnershipContent,
     slug: "rust-basics-ownership",
     tags: ["rust"]
+  },
+  {
+    id: "14",
+    title: "JS essentials #14: Caching Strategies",
+    date: "2025-02-25",
+    excerpt: "Understanding different caching strategies and their implementation in JavaScript",
+    content: cachingContent,
+    slug: "js-essentials-caching",
+    tags: ["javascript"]
   }
 ];

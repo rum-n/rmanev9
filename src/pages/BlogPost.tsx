@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
 import { NavMenu } from "../components/NavMenu";
@@ -54,8 +54,26 @@ const BlogDate = styled.span`
   color: #777;
 `;
 
+const BackButton = styled.button`
+  background: none;
+  border: none;
+  color: #8a5858;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &:hover {
+    color: #6d4646;
+  }
+`;
+
 export const BlogPost = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const post = blogPosts.find(post => post.slug === slug);
 
   if (!post) {
@@ -65,7 +83,9 @@ export const BlogPost = () => {
   return (
     <Layout>
       <TitleBox>
-        <NavMenu menuItem="Writing" />
+        <BackButton onClick={() => navigate('/writing')}>
+          ← Back
+        </BackButton>
         <h1>{post.title}</h1>
         <BlogDate>{new Date(post.date).toLocaleDateString()}</BlogDate>
         <BlogContent dangerouslySetInnerHTML={{ __html: post.content }} />
