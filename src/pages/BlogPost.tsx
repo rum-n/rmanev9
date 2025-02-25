@@ -1,7 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
-import { NavMenu } from "../components/NavMenu";
 import { blogPosts } from "../data/blogPosts";
 
 const BlogContent = styled.div`
