@@ -1,5 +1,5 @@
 export const cachingContent = `
-      <h2>JS essentials #14: Caching Strategies</h2>
+      <h2>Caching Strategies</h2>
       <p>Caching is a crucial technique for improving application performance by storing and reusing previously computed data or fetched resources. JavaScript offers several approaches to implement caching at different levels.</p>
       
       <h3>Memoization</h3>

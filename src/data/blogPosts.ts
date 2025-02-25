@@ -12,6 +12,7 @@ import { thisKeywordContent } from "./11-this";
 import { solidContent } from "./12-solid";
 import { rustOwnershipContent } from "./13-rust-ownership";
 import { cachingContent } from "./14-caching";
+import { marshallingContent } from "./15-marshaling";
 
 export const blogPosts = [
   {
@@ -138,6 +139,15 @@ export const blogPosts = [
     excerpt: "Understanding different caching strategies and their implementation in JavaScript",
     content: cachingContent,
     slug: "js-essentials-caching",
+    tags: ["javascript"]
+  },
+  {
+    id: "15",
+    title: "JS essentials #15: Data Marshalling",
+    date: "2025-02-26",
+    excerpt: "Understanding data marshalling and its implementation in JavaScript",
+    content: marshallingContent,
+    slug: "js-essentials-marshalling",
     tags: ["javascript"]
   }
 ];
