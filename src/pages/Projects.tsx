@@ -124,11 +124,18 @@ const myProjects: ProjectData[] = [
 
 const clientProjects = [
   {
+    title: "ArtQ",
+    year: "2020",
+    tech: "React",
+    url: "https://artq-pi.vercel.app/",
+    description: "An MVP for a social media platform for artists. I worked on the project together with a designer and another developer as part of a hackathon where students come together to assist startup founders work on their venture ideas."
+  },
+  {
     title: "Brightvision",
     year: "2022",
     tech: "React, Next.js, Payload CMS",
     url: "https://brightvision.com/",
-    description: "Content management system for a marketing agency."
+    description: "Content management system for a marketing agency, based in Sweden. I worked together with the company's marketing team to create a custom CMS for their website."
   },
   {
     title: "Dave's Family NFT",
