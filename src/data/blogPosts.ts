@@ -13,6 +13,7 @@ import { solidContent } from "./12-solid";
 import { rustOwnershipContent } from "./13-rust-ownership";
 import { cachingContent } from "./14-caching";
 import { marshallingContent } from "./15-marshaling";
+import { concurrencyContent } from "./16-concurrency";
 
 export const blogPosts = [
   {
@@ -148,6 +149,15 @@ export const blogPosts = [
     excerpt: "Understanding data marshalling and its implementation in JavaScript",
     content: marshallingContent,
     slug: "js-essentials-marshalling",
+    tags: ["javascript"]
+  },
+  {
+    id: "16",
+    title: "JS essentials #16: Concurrency",
+    date: "2025-02-27",
+    excerpt: "Understanding concurrency patterns and best practices in JavaScript",
+    content: concurrencyContent,
+    slug: "js-essentials-concurrency",
     tags: ["javascript"]
   }
 ];
