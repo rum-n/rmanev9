@@ -5,10 +5,14 @@ import { useState } from "react";
 
 const TitleBox = styled.div`
   font-family: "Lato", sans-serif;
-  width: 600px;  
+  width: 600px;
+  max-width: 100%;
+  padding: 0 1rem;
   
   @media (max-width: 768px) {
     width: 100%;
+    padding: 0;
+    margin-top: 1rem;
   }
 `;
 
@@ -22,9 +26,12 @@ const ProjectsWrapper = styled.ul`
   height: 500px;
   overflow-y: auto;
   scrollbar-color: #8a5858 #000000;
+  max-width: 100%;
 
   @media (max-width: 768px) {
     height: 100%;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 1rem;
   }
 `;
 
@@ -32,6 +39,15 @@ const ProjectLine = styled.li`
   cursor: pointer;
   transition: 0.2s ease-in-out;
   margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  
+  span {
+    font-size: 2rem;
+    
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+  }
 
   &:hover {
     color: #777;

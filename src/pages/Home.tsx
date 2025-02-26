@@ -5,14 +5,17 @@ import { NavMenu } from "../components/NavMenu";
 const TitleBox = styled.div`
   font-family: "Lato", sans-serif;
   width: 600px;
-
+  max-width: 100%;
+  padding: 0 1rem;
+  
   @media (max-width: 768px) {
     width: 100%;
+    padding: 0;
+    margin-top: 1rem;
   }
 `;
 
-const SummaryWrapper = styled.div`
-  margin-top: 2rem;
+const SummaryWrapper = styled.div`  margin-top: 2rem;
 `;
 
 export const Home = () => {
@@ -42,3 +45,4 @@ export const Home = () => {
     </Layout>
   );
 };
+

@@ -13,6 +13,10 @@ const LayoutContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const LinksBox = styled.div`
@@ -46,7 +50,6 @@ const MobileLinksWrapper = styled.ul`
   flex-direction: row;
   gap: 1rem;
   list-style: none;
-  margin-left: -0.5rem;
 `;
 
 interface Links {

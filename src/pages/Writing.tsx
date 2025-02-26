@@ -7,10 +7,14 @@ import { useState } from "react";
 
 const TitleBox = styled.div`
   font-family: "Lato", sans-serif;
-  width: 600px;  
+  width: 600px;
+  max-width: 100%;
+  padding: 0 1rem;
   
   @media (max-width: 768px) {
     width: 100%;
+    padding: 0;
+    margin-top: 1rem;
   }
 `;
 
