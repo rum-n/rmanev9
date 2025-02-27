@@ -14,6 +14,8 @@ import { rustOwnershipContent } from "./13-rust-ownership";
 import { cachingContent } from "./14-caching";
 import { marshallingContent } from "./15-marshaling";
 import { concurrencyContent } from "./16-concurrency";
+import { dataStructuresContent } from "./17-data-structures";
+import { separationOfConcernsContent } from "./18-separation-of-concerns";
 
 export const blogPosts = [
   {
@@ -159,5 +161,23 @@ export const blogPosts = [
     content: concurrencyContent,
     slug: "js-essentials-concurrency",
     tags: ["javascript"]
+  },
+  {
+    id: "17",
+    title: "JS essentials #17: Data Structures",
+    date: "2025-02-27",
+    excerpt: "Understanding JavaScript's built-in data structures and their practical applications",
+    content: dataStructuresContent,
+    slug: "js-essentials-data-structures",
+    tags: ["javascript"]
+  },
+  {
+    id: "18",
+    title: "Separation of Concerns",
+    date: "2025-02-27",
+    excerpt: "Understanding the principle of separation of concerns and its applications",
+    content: separationOfConcernsContent,
+    slug: "separation-of-concerns",
+    tags: ["general programming"]
   }
 ];

@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
 import { blogPosts } from "../data/blogPosts";
@@ -73,16 +73,23 @@ const BackButton = styled.button`
 export const BlogPost = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const post = blogPosts.find(post => post.slug === slug);
 
   if (!post) {
     return <div>Post not found</div>;
   }
 
+  const handleBack = () => {
+    navigate('/writing', {
+      state: location.state || {}
+    });
+  };
+
   return (
     <Layout>
       <TitleBox>
-        <BackButton onClick={() => navigate('/writing')}>
+        <BackButton onClick={handleBack}>
           ← Back
         </BackButton>
         <h1>{post.title}</h1>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Layout } from "../components/Layout";
 import { NavMenu } from "../components/NavMenu";
 import { blogPosts } from "../data/blogPosts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 const TitleBox = styled.div`
@@ -109,8 +109,15 @@ const POSTS_PER_PAGE = 10;
 
 export const Writing = () => {
   const navigate = useNavigate();
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const location = useLocation();
+
+  // Initialize state from location state if available
+  const [selectedTags, setSelectedTags] = useState<string[]>(
+    location.state?.selectedTags || []
+  );
+  const [currentPage, setCurrentPage] = useState(
+    location.state?.currentPage || 1
+  );
 
   const allTags = Array.from(
     new Set(
@@ -139,6 +146,16 @@ export const Writing = () => {
     setCurrentPage(1); // Reset to first page when filtering
   };
 
+  // Modify the blog post click handler to include state
+  const handlePostClick = (slug: string) => {
+    navigate(`/writing/${slug}`, {
+      state: {
+        currentPage,
+        selectedTags
+      }
+    });
+  };
+
   return (
     <Layout>
       <TitleBox>
@@ -158,7 +175,7 @@ export const Writing = () => {
           {paginatedPosts.map((post) => (
             <BlogPost
               key={post.id}
-              onClick={() => navigate(`/writing/${post.slug}`)}
+              onClick={() => handlePostClick(post.slug)}
             >
               <BlogTitle>{post.title}</BlogTitle>
               <BlogDate>
@@ -171,14 +188,14 @@ export const Writing = () => {
         {totalPages > 1 && (
           <PaginationContainer>
             <PaginationButton
-              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              onClick={() => setCurrentPage((prev: number) => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
             >
               Previous
             </PaginationButton>
             <PageInfo>Page {currentPage} of {totalPages}</PageInfo>
             <PaginationButton
-              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              onClick={() => setCurrentPage((prev: number) => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
             >
               Next
