@@ -70,6 +70,40 @@ const BackButton = styled.button`
   }
 `;
 
+const NavigationContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eeeeee81;
+  gap: 2rem;
+`;
+
+const NavigationButton = styled.button`
+  background: none;
+  border: none;
+  color: #8a5858;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  display: block;
+  transition: color 0.2s ease-in-out;
+  max-width: 250px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    color: #6d4646;
+  }
+
+  &:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+  }
+`;
+
 export const BlogPost = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -80,8 +114,22 @@ export const BlogPost = () => {
     return <div>Post not found</div>;
   }
 
+  const currentIndex = blogPosts.findIndex(p => p.slug === slug);
+
+  const hasPrevious = currentIndex > 0;
+  const hasNext = currentIndex < blogPosts.length - 1;
+
+  const previousPost = hasPrevious ? blogPosts[currentIndex - 1] : null;
+  const nextPost = hasNext ? blogPosts[currentIndex + 1] : null;
+
   const handleBack = () => {
     navigate('/writing', {
+      state: location.state || {}
+    });
+  };
+
+  const handleNavigate = (postSlug: string) => {
+    navigate(`/writing/${postSlug}`, {
       state: location.state || {}
     });
   };
@@ -95,6 +143,22 @@ export const BlogPost = () => {
         <h1>{post.title}</h1>
         <BlogDate>{new Date(post.date).toLocaleDateString()}</BlogDate>
         <BlogContent dangerouslySetInnerHTML={{ __html: post.content }} />
+
+        <NavigationContainer>
+          {previousPost ? (
+            <NavigationButton onClick={() => handleNavigate(previousPost.slug)}>
+              ← Previous: {previousPost.title}
+            </NavigationButton>
+          ) : (
+            <div></div>
+          )}
+
+          {nextPost && (
+            <NavigationButton onClick={() => handleNavigate(nextPost.slug)}>
+              Next: {nextPost.title} →
+            </NavigationButton>
+          )}
+        </NavigationContainer>
       </TitleBox>
     </Layout>
   );

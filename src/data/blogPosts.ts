@@ -16,6 +16,8 @@ import { marshallingContent } from "./15-marshaling";
 import { concurrencyContent } from "./16-concurrency";
 import { dataStructuresContent } from "./17-data-structures";
 import { separationOfConcernsContent } from "./18-separation-of-concerns";
+import { designPrinciplesContent } from "./19-design-principles";
+import { xssContent } from "./20-xss";
 
 export const blogPosts = [
   {
@@ -179,5 +181,23 @@ export const blogPosts = [
     content: separationOfConcernsContent,
     slug: "separation-of-concerns",
     tags: ["general programming"]
+  },
+  {
+    id: "19",
+    title: "Design Principles",
+    date: "2025-02-28",
+    excerpt: "Understanding the principles of design and their applications",
+    content: designPrinciplesContent,
+    slug: "design-principles",
+    tags: ["general programming"]
+  },
+  {
+    id: "20",
+    title: "Understanding Cross-Site Scripting (XSS)",
+    date: "2025-02-28",
+    excerpt: "Learn about XSS vulnerabilities and how to protect your web applications",
+    content: xssContent,
+    slug: "understanding-xss",
+    tags: ["security", "web development"]
   }
 ];
