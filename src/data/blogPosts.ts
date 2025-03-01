@@ -18,6 +18,7 @@ import { dataStructuresContent } from "./17-data-structures";
 import { separationOfConcernsContent } from "./18-separation-of-concerns";
 import { designPrinciplesContent } from "./19-design-principles";
 import { xssContent } from "./20-xss";
+import { csrfContent } from "./21-csrf";
 
 export const blogPosts = [
   {
@@ -193,11 +194,20 @@ export const blogPosts = [
   },
   {
     id: "20",
-    title: "Understanding Cross-Site Scripting (XSS)",
+    title: "Cross-Site Scripting (XSS)",
     date: "2025-02-28",
     excerpt: "Learn about XSS vulnerabilities and how to protect your web applications",
     content: xssContent,
-    slug: "understanding-xss",
+    slug: "xss",
+    tags: ["security", "web development"]
+  },
+  {
+    id: "21",
+    title: "Cross-Site Request Forgery (CSRF)",
+    date: "2025-03-01",
+    excerpt: "Learn about CSRF attacks and how to implement effective protection measures",
+    content: csrfContent,
+    slug: "csrf",
     tags: ["security", "web development"]
   }
 ];
