@@ -136,6 +136,13 @@ const myProjects: ProjectData[] = [
     url: "https://dailyobservable.com/",
     description: "A newsletter service delivering daily job opportunities based on your preferences."
   },
+  {
+    title: "Devjob Flashcards",
+    year: "2025",
+    tech: "React, Next.js, Vercel AI SDK",
+    url: "https://devjob-flashcards.vercel.app",
+    description: "A flashcard app to help developers prepare for technical interviews. It also has a feature for the user to explain a software concept out loud and get feedback from AI."
+  },
 ];
 
 const clientProjects = [
