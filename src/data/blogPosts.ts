@@ -20,6 +20,7 @@ import { designPrinciplesContent } from "./19-design-principles";
 import { xssContent } from "./20-xss";
 import { csrfContent } from "./21-csrf";
 import { higherOrderFunctionsContent } from "./22-higher-order-functions";
+import { pollingContent } from "./23-polling";
 
 export const blogPosts = [
   {
@@ -219,5 +220,14 @@ export const blogPosts = [
     content: higherOrderFunctionsContent,
     slug: "js-essentials-higher-order-functions",
     tags: ["javascript"]
+  },
+  {
+    id: "23",
+    title: "JS essentials #19: Polling",
+    date: "2025-03-05",
+    excerpt: "Understanding polling techniques and their implementation in JavaScript",
+    content: pollingContent,
+    slug: "js-essentials-polling",
+    tags: ["javascript", "web development"]
   }
 ];
