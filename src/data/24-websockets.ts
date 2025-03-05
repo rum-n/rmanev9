@@ -1,55 +1,20 @@
 export const webSocketsContent = `
-# Understanding WebSockets in JavaScript
+<article>
+  <p>WebSocket is a communication protocol that provides full-duplex communication channels over a single TCP connection. Unlike HTTP, which is unidirectional where the client requests and the server responds, WebSocket enables real-time, bidirectional communication between the client and server.</p>
 
-WebSocket is a communication protocol that provides full-duplex communication channels over a single TCP connection. Unlike HTTP, which is unidirectional where the client must initiate communication, WebSocket enables both client and server to send messages to each other independently.
+  <h2>Why WebSockets?</h2>
+  <p>Traditional HTTP requests are great for regular web traffic, but they're not ideal for real-time applications. WebSockets solve this by:</p>
+  <ul>
+    <li>Maintaining a persistent connection</li>
+    <li>Enabling real-time data transfer</li>
+    <li>Reducing overhead compared to polling</li>
+    <li>Supporting bidirectional communication</li>
+  </ul>
 
-## Why WebSockets?
-
-Traditional web communication methods like HTTP polling or long polling have limitations:
-- They create unnecessary overhead with headers in each request
-- They require constant new connections
-- They don't provide real-time capabilities efficiently
-
-WebSocket solves these issues by:
-- Maintaining a persistent connection
-- Enabling bi-directional communication
-- Reducing overhead after initial handshake
-- Providing true real-time capabilities
-
-## WebSocket Protocol
-
-The WebSocket protocol consists of two parts:
-1. The handshake - where the connection is established
-2. The data transfer - where messages are exchanged
-
-### The Handshake
-
-The client initiates a WebSocket connection by sending an HTTP upgrade request:
-
-\`\`\`http
-GET /chat HTTP/1.1
-Host: server.example.com
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
-Sec-WebSocket-Version: 13
-\`\`\`
-
-The server responds with:
-
-\`\`\`http
-HTTP/1.1 101 Switching Protocols
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
-\`\`\`
-
-## Using WebSocket in JavaScript
-
-Here's how to create a WebSocket connection:
-
-\`\`\`javascript
-const socket = new WebSocket('ws://example.com/socketserver');
+  <h2>Basic WebSocket Implementation</h2>
+  <pre><code class="language-javascript">
+// Creating a WebSocket connection
+const socket = new WebSocket('ws://your-server-url');
 
 // Connection opened
 socket.addEventListener('open', (event) => {
@@ -63,167 +28,87 @@ socket.addEventListener('message', (event) => {
 });
 
 // Handle errors
-socket.addEventListener('error', (event) => {
-    console.error('WebSocket error:', event);
+socket.addEventListener('error', (error) => {
+    console.error('WebSocket error:', error);
 });
 
 // Connection closed
 socket.addEventListener('close', (event) => {
     console.log('Disconnected from WebSocket server');
 });
-\`\`\`
+  </code></pre>
 
-## Building a Simple Chat Application
+  <h2>Implementing a Simple Chat Application</h2>
+  <p>Let's create a basic chat application to demonstrate WebSockets in action:</p>
 
-Here's a basic example of a chat application using WebSocket:
-
-\`\`\`javascript
-// Client-side code
+  <pre><code class="language-javascript">
 class ChatApp {
     constructor() {
-        this.socket = new WebSocket('ws://localhost:8080');
+        this.socket = new WebSocket('ws://chat-server-url');
         this.setupEventListeners();
     }
 
     setupEventListeners() {
         this.socket.onopen = () => {
-            console.log('Connected to chat server');
+            this.updateStatus('Connected');
         };
 
         this.socket.onmessage = (event) => {
             this.displayMessage(JSON.parse(event.data));
         };
 
-        // Handle form submission
-        document.getElementById('chatForm').onsubmit = (e) => {
-            e.preventDefault();
-            const input = document.getElementById('messageInput');
-            const message = {
-                type: 'message',
-                content: input.value,
-                timestamp: new Date().toISOString()
-            };
-            this.socket.send(JSON.stringify(message));
-            input.value = '';
+        this.socket.onclose = () => {
+            this.updateStatus('Disconnected');
         };
     }
 
+    sendMessage(message) {
+        if (this.socket.readyState === WebSocket.OPEN) {
+            this.socket.send(JSON.stringify({
+                type: 'message',
+                content: message,
+                timestamp: new Date().toISOString()
+            }));
+        }
+    }
+
     displayMessage(message) {
-        const messageDiv = document.createElement('div');
-        messageDiv.textContent = \`\${new Date(message.timestamp).toLocaleTimeString()}: \${message.content}\`;
-        document.getElementById('messages').appendChild(messageDiv);
+        // Handle message display logic
+        console.log(\`\${message.timestamp}: \${message.content}\`);
+    }
+
+    updateStatus(status) {
+        console.log('Connection status:', status);
     }
 }
-\`\`\`
+  </code></pre>
 
-## Best Practices
+  <h2>Best Practices</h2>
+  <ul>
+    <li>Always implement reconnection logic for dropped connections</li>
+    <li>Use heartbeat mechanisms to detect connection health</li>
+    <li>Handle connection errors gracefully</li>
+    <li>Implement proper message serialization/deserialization</li>
+  </ul>
 
-1. **Always handle connection errors**
-   - Implement error handling
-   - Consider implementing reconnection logic
+  <h2>When to Use WebSockets</h2>
+  <p>WebSockets are ideal for:</p>
+  <ul>
+    <li>Real-time applications (chat, gaming)</li>
+    <li>Live data feeds (stock tickers, sports updates)</li>
+    <li>Collaborative tools (shared documents, whiteboards)</li>
+    <li>IoT applications</li>
+  </ul>
 
-2. **Message Format**
-   - Use a consistent message format (e.g., JSON)
-   - Include message types for different kinds of messages
+  <h2>Alternatives to WebSockets</h2>
+  <p>Sometimes WebSockets might not be the best solution. Consider these alternatives:</p>
+  <ul>
+    <li>Server-Sent Events (SSE) for one-way server-to-client communication</li>
+    <li>Long polling for simple real-time needs</li>
+    <li>WebRTC for peer-to-peer communication</li>
+  </ul>
 
-3. **Connection Management**
-   - Implement heartbeat mechanisms
-   - Handle connection timeouts
-   - Clean up resources when connection closes
-
-4. **Security Considerations**
-   - Validate all incoming messages
-   - Use wss:// (WebSocket Secure) in production
-   - Implement proper authentication
-
-## Example: Implementing Heartbeat
-
-\`\`\`javascript
-class WebSocketClient {
-    constructor(url) {
-        this.url = url;
-        this.reconnectAttempts = 0;
-        this.maxReconnectAttempts = 5;
-        this.heartbeatInterval = null;
-        this.connect();
-    }
-
-    connect() {
-        this.ws = new WebSocket(this.url);
-        this.ws.onopen = this.onOpen.bind(this);
-        this.ws.onclose = this.onClose.bind(this);
-        this.ws.onerror = this.onError.bind(this);
-        this.ws.onmessage = this.onMessage.bind(this);
-    }
-
-    onOpen() {
-        console.log('Connected');
-        this.reconnectAttempts = 0;
-        this.startHeartbeat();
-    }
-
-    startHeartbeat() {
-        this.heartbeatInterval = setInterval(() => {
-            if (this.ws.readyState === WebSocket.OPEN) {
-                this.ws.send(JSON.stringify({ type: 'ping' }));
-            }
-        }, 30000); // Send heartbeat every 30 seconds
-    }
-
-    onClose() {
-        clearInterval(this.heartbeatInterval);
-        if (this.reconnectAttempts < this.maxReconnectAttempts) {
-            this.reconnectAttempts++;
-            setTimeout(() => this.connect(), 1000 * this.reconnectAttempts);
-        }
-    }
-
-    onError(error) {
-        console.error('WebSocket error:', error);
-    }
-
-    onMessage(event) {
-        const data = JSON.parse(event.data);
-        if (data.type === 'pong') {
-            console.log('Heartbeat acknowledged');
-            return;
-        }
-        // Handle other message types
-    }
-}
-\`\`\`
-
-## When to Use WebSockets
-
-WebSockets are ideal for:
-- Real-time applications (chat, gaming)
-- Live data feeds (stock tickers, sports scores)
-- Collaborative features (shared editing)
-- Any scenario requiring frequent bi-directional communication
-
-However, they might not be the best choice for:
-- Simple request-response patterns
-- Infrequent updates
-- When HTTP REST APIs would suffice
-
-## Alternatives to WebSockets
-
-1. **Server-Sent Events (SSE)**
-   - One-way server-to-client communication
-   - Built on HTTP
-   - Simpler to implement for one-way updates
-
-2. **Long Polling**
-   - More compatible with older browsers
-   - Easier to implement
-   - Higher latency
-
-3. **WebRTC**
-   - Peer-to-peer communication
-   - Better for video/audio streaming
-   - More complex to implement
-
-## Conclusion
-
-WebSockets provide a powerful way to implement real-time features in web applications. While they require more setup and consideration than traditional HTTP communications, they offer significant benefits for applications requiring live updates and bi-directional communication. Understanding when to use WebSockets and how to implement them properly is crucial for modern web development.
+  <h2>Conclusion</h2>
+  <p>WebSockets provide a powerful way to implement real-time features in web applications. While they require more setup than traditional HTTP requests, the benefits of full-duplex communication make them invaluable for modern web applications requiring real-time functionality.</p>
+</article>
 `; 
