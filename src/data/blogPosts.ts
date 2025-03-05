@@ -21,6 +21,7 @@ import { xssContent } from "./20-xss";
 import { csrfContent } from "./21-csrf";
 import { higherOrderFunctionsContent } from "./22-higher-order-functions";
 import { pollingContent } from "./23-polling";
+import { webSocketsContent } from "./24-websockets";
 
 export const blogPosts = [
   {
@@ -228,6 +229,15 @@ export const blogPosts = [
     excerpt: "Understanding polling techniques and their implementation in JavaScript",
     content: pollingContent,
     slug: "js-essentials-polling",
+    tags: ["javascript", "web development"]
+  },
+  {
+    id: "24",
+    title: "JS essentials #20: WebSockets",
+    date: "2025-03-10",
+    excerpt: "Understanding WebSocket protocol and real-time communication in JavaScript",
+    content: webSocketsContent,
+    slug: "js-essentials-websockets",
     tags: ["javascript", "web development"]
   }
 ];
