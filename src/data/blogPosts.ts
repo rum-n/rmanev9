@@ -22,6 +22,7 @@ import { csrfContent } from "./21-csrf";
 import { higherOrderFunctionsContent } from "./22-higher-order-functions";
 import { pollingContent } from "./23-polling";
 import { webSocketsContent } from "./24-websockets";
+import { apiComparisonContent } from "./25-api-comparison";
 
 export const blogPosts = [
   {
@@ -234,10 +235,19 @@ export const blogPosts = [
   {
     id: "24",
     title: "JS essentials #20: WebSockets",
-    date: "2025-03-10",
+    date: "2025-03-06",
     excerpt: "Understanding WebSocket protocol and real-time communication in JavaScript",
     content: webSocketsContent,
     slug: "js-essentials-websockets",
     tags: ["javascript", "web development"]
+  },
+  {
+    id: "25",
+    title: "API Technologies: REST vs GraphQL vs gRPC",
+    date: "2025-03-07",
+    excerpt: "A comprehensive comparison of modern API technologies and when to use each",
+    content: apiComparisonContent,
+    slug: "api-technologies-comparison",
+    tags: ["web development"]
   }
 ];
