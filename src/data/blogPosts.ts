@@ -23,6 +23,7 @@ import { higherOrderFunctionsContent } from "./22-higher-order-functions";
 import { pollingContent } from "./23-polling";
 import { webSocketsContent } from "./24-websockets";
 import { apiComparisonContent } from "./25-api-comparison";
+import { curryingContent } from "./26-currying";
 
 export const blogPosts = [
   {
@@ -249,5 +250,14 @@ export const blogPosts = [
     content: apiComparisonContent,
     slug: "api-technologies-comparison",
     tags: ["web development"]
+  },
+  {
+    id: "26",
+    title: "JS essentials #21: Currying",
+    date: "2025-03-08",
+    excerpt: "Understanding currying and partial application in functional JavaScript",
+    content: curryingContent,
+    slug: "js-essentials-currying",
+    tags: ["javascript"]
   }
 ];
