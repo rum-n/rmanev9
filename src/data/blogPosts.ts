@@ -24,6 +24,7 @@ import { pollingContent } from "./23-polling";
 import { webSocketsContent } from "./24-websockets";
 import { apiComparisonContent } from "./25-api-comparison";
 import { curryingContent } from "./26-currying";
+import { callbacksContent } from "./27-callbacks";
 
 export const blogPosts = [
   {
@@ -258,6 +259,15 @@ export const blogPosts = [
     excerpt: "Understanding currying and partial application in functional JavaScript",
     content: curryingContent,
     slug: "js-essentials-currying",
+    tags: ["javascript"]
+  },
+  {
+    id: "27",
+    title: "JS essentials #22: Callbacks",
+    date: "2025-03-12",
+    excerpt: "Mastering callback functions and understanding asynchronous JavaScript",
+    content: callbacksContent,
+    slug: "js-essentials-callbacks",
     tags: ["javascript"]
   }
 ];
