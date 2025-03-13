@@ -25,6 +25,7 @@ import { webSocketsContent } from "./24-websockets";
 import { apiComparisonContent } from "./25-api-comparison";
 import { curryingContent } from "./26-currying";
 import { callbacksContent } from "./27-callbacks";
+import { proxyContent } from "./28-proxy";
 
 export const blogPosts = [
   {
@@ -268,6 +269,15 @@ export const blogPosts = [
     excerpt: "Mastering callback functions and understanding asynchronous JavaScript",
     content: callbacksContent,
     slug: "js-essentials-callbacks",
+    tags: ["javascript"]
+  },
+  {
+    id: "28",
+    title: "JS essentials #23: Proxy",
+    date: "2025-03-13",
+    excerpt: "Understanding JavaScript Proxies for intercept and customize object operations",
+    content: proxyContent,
+    slug: "js-essentials-proxy",
     tags: ["javascript"]
   }
 ];
