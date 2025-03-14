@@ -26,6 +26,7 @@ import { apiComparisonContent } from "./25-api-comparison";
 import { curryingContent } from "./26-currying";
 import { callbacksContent } from "./27-callbacks";
 import { proxyContent } from "./28-proxy";
+import { webWorkersContent } from "./29-web-workers";
 
 export const blogPosts = [
   {
@@ -279,5 +280,14 @@ export const blogPosts = [
     content: proxyContent,
     slug: "js-essentials-proxy",
     tags: ["javascript"]
+  },
+  {
+    id: "29",
+    title: "JS essentials #24: Web Workers",
+    date: "2025-04-30",
+    excerpt: "Leveraging Web Workers for multi-threaded JavaScript in the browser",
+    content: webWorkersContent,
+    slug: "js-essentials-web-workers",
+    tags: ["javascript", "web development"]
   }
 ];
