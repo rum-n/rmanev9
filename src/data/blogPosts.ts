@@ -27,6 +27,7 @@ import { curryingContent } from "./26-currying";
 import { callbacksContent } from "./27-callbacks";
 import { proxyContent } from "./28-proxy";
 import { webWorkersContent } from "./29-web-workers";
+import { webRTCContent } from "./30-webrtc";
 
 export const blogPosts = [
   {
@@ -289,5 +290,14 @@ export const blogPosts = [
     content: webWorkersContent,
     slug: "js-essentials-web-workers",
     tags: ["javascript", "web development"]
+  },
+  {
+    id: "30",
+    title: "JS essentials #25: WebRTC",
+    date: "2025-05-15",
+    excerpt: "Building real-time communication applications with WebRTC",
+    content: webRTCContent,
+    slug: "js-essentials-webrtc",
+    tags: ["javascript", "web development", "networking"]
   }
 ];
