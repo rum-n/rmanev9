@@ -28,6 +28,7 @@ import { callbacksContent } from "./27-callbacks";
 import { proxyContent } from "./28-proxy";
 import { webWorkersContent } from "./29-web-workers";
 import { webRTCContent } from "./30-webrtc";
+import { gitCommandsContent } from "./31-git-commands";
 
 export const blogPosts = [
   {
@@ -285,7 +286,7 @@ export const blogPosts = [
   {
     id: "29",
     title: "JS essentials #24: Web Workers",
-    date: "2025-04-30",
+    date: "2025-03-14",
     excerpt: "Leveraging Web Workers for multi-threaded JavaScript in the browser",
     content: webWorkersContent,
     slug: "js-essentials-web-workers",
@@ -294,10 +295,19 @@ export const blogPosts = [
   {
     id: "30",
     title: "JS essentials #25: WebRTC",
-    date: "2025-05-15",
+    date: "2025-03-15",
     excerpt: "Building real-time communication applications with WebRTC",
     content: webRTCContent,
     slug: "js-essentials-webrtc",
     tags: ["javascript", "web development", "networking"]
+  },
+  {
+    id: "31",
+    title: "Git Commands Every Developer Should Know",
+    date: "2025-03-17",
+    excerpt: "A practical guide to the most useful Git commands for everyday development",
+    content: gitCommandsContent,
+    slug: "git-commands",
+    tags: ["web development"]
   }
 ];
