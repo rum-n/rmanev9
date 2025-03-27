@@ -79,8 +79,6 @@ export const NavMenu = ({ menuItem }: NavMenuProps) => {
 
   return (
     <>
-      <NameText>Rumen Manev</NameText>
-      <SubtitleText>Fullstack developer</SubtitleText>
       <MenuList>
         {menuItems.map((item, index) => (
           <MenuItemList onClick={() => handleNavigation(item.url)} key={index}>
@@ -88,6 +86,12 @@ export const NavMenu = ({ menuItem }: NavMenuProps) => {
           </MenuItemList>
         ))}
       </MenuList>
+      {menuItem === "Home" && (
+        <>
+          <NameText>Rumen Manev</NameText>
+          <SubtitleText>Fullstack developer</SubtitleText>
+        </>
+      )}
     </>
   );
 };

@@ -23,7 +23,7 @@ const ProjectsWrapper = styled.ul`
   list-style: none;
   margin-top: 2rem;
   padding: 0;
-  height: 500px;
+  height: 600px;
   overflow-y: auto;
   scrollbar-color: #8a5858 #000000;
   max-width: 100%;
@@ -175,7 +175,7 @@ const clientProjects = [
     description: "A landing page for minting an NFT.",
   },
   {
-    title: "Violetta Boyadzhieva homepage and webshop",
+    title: "Artist online shop",
     year: "2025",
     tech: "Next.js, Prisma, Stripe",
     url: "https://villy-shop.vercel.app",
