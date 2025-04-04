@@ -1,5 +1,4 @@
 export const closuresContent = `
-      <h2>What is a Closure?</h2>
       <p>A closure is a fundamental JavaScript concept where a function retains access to variables from its outer scope even after the outer function has finished executing. In simpler terms, it's like a function remembering the environment it was created in.</p>
       
       <h3>Example</h3>
@@ -38,4 +37,4 @@ console.log(counter.increment()); // Output: 2
         <li>Partial application and currying</li>
         <li>Module patterns</li>
       </ul>
-    `
+    `;

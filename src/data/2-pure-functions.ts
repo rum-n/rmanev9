@@ -1,5 +1,4 @@
 export const pureFunctionsContent = `
-      <h2>What is a Pure Function?</h2>
       <p>A pure function is a function that, given the same inputs, will always return the same output and has no side effects. It's a fundamental concept in functional programming that makes code more predictable, testable, and easier to reason about.</p>
       
       <h3>Key Characteristics</h3>
@@ -77,4 +76,4 @@ function calculateItemTotals(items) {
     total: item.price * item.quantity
   }));
 }</code></pre>
-    `
+    `;

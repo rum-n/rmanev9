@@ -1,5 +1,4 @@
 export const concurrencyContent = `
-      <h2>Understanding Concurrency in JavaScript</h2>
       <p>JavaScript is single-threaded but provides several mechanisms for handling concurrent operations. Understanding these patterns is crucial for building performant web applications.</p>
       
       <h3>Core Concepts</h3>
@@ -156,4 +155,4 @@ async function controlledFetch(url) {
         <li>Atomics: For thread-safe operations</li>
         <li>Service Workers: For offline functionality and background processing</li>
       </ul>
-    `
+    `;

@@ -1,5 +1,4 @@
 export const domContent = `
-      <h2>Understanding the DOM (Document Object Model)</h2>
       <p>The DOM is a programming interface for HTML documents. It represents the page as a tree-like structure where each node is an object representing a part of the document, allowing JavaScript to dynamically access and modify the content, structure, and style of web pages.</p>
       
       <h3>DOM Tree Structure</h3>
@@ -86,4 +85,4 @@ for (let i = 0; i < 1000; i++) {
   fragment.appendChild(div);
 }
 container.appendChild(fragment);</code></pre>
-    `
+    `;

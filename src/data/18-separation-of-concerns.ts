@@ -1,5 +1,4 @@
 export const separationOfConcernsContent = `
-      <h2>Separation of Concerns</h2>
       <p>Separation of Concerns (SoC) is a design principle that divides a program into distinct sections, each addressing a separate concern. This principle is fundamental to creating maintainable, scalable, and testable code.</p>
       
       <h3>Core Principles</h3>
@@ -58,4 +57,4 @@ document.getElementById('edit-profile').addEventListener('click', () => {
         <li>Regularly refactor to maintain separation</li>
         <li>Use linting rules to enforce separation</li>
       </ul>
-    `
+    `;

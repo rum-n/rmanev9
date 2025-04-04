@@ -1,5 +1,4 @@
 export const promisesContent = `
-      <h2>What is a Promise?</h2>
       <p>A Promise in JavaScript is an object representing the eventual completion (or failure) of an asynchronous operation. It's a way to handle asynchronous operations in a more elegant way than callbacks.</p>
       
       <h3>Promise States</h3>
@@ -77,4 +76,4 @@ const fetchMultipleUsers = async (userIds) => {
         <li>Use async/await for cleaner code</li>
         <li>Return promises from functions for better composability</li>
       </ul>
-    `
+    `;

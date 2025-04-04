@@ -1,5 +1,4 @@
 export const thisKeywordContent = `
-      <h2>JS essentials #11: The 'this' keyword</h2>
       <p>The 'this' keyword in JavaScript is a special identifier that refers to the current execution context. Understanding how 'this' works is crucial for JavaScript development, as its behavior can be quite different from other programming languages.</p>
       
       <h3>Global Context</h3>
@@ -96,4 +95,4 @@ boundGreet(); // "Hello, John!"</code></pre>
         <li>Use bind when you need a permanent this binding</li>
         <li>Consider using class syntax for clearer this behavior</li>
       </ul>
-    `
+    `;

@@ -1,5 +1,4 @@
 export const fpVsOopContent = `
-      <h2>Functional Programming vs Object-Oriented Programming</h2>
       <p>Two major programming paradigms dominate modern software development: Functional Programming (FP) and Object-Oriented Programming (OOP). Each has its strengths, philosophies, and ideal use cases. Let's explore both approaches and understand when to use each.</p>
       
       <h3>Key Differences</h3>
@@ -97,4 +96,4 @@ const service = new DataService([1, 2, 3, 4])
   .map(n => n * 2);
 
 // Result: [6, 8]</code></pre>
-    `
+    `;

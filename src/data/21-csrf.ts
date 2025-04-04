@@ -1,5 +1,4 @@
 export const csrfContent = `
-      <h2>Understanding Cross-Site Request Forgery (CSRF)</h2>
       <p>Cross-Site Request Forgery (CSRF) is a type of security vulnerability that allows an attacker to trick users into performing unwanted actions on a website where they're already authenticated. Unlike XSS, which exploits the trust a user has in a particular site, CSRF exploits the trust that a site has in a user's browser.</p>
       
       <h3>How CSRF Attacks Work</h3>
@@ -119,4 +118,4 @@ if (req.cookies.csrfToken !== req.body.csrf) {
 
       <h3>Conclusion</h3>
       <p>CSRF attacks remain a significant security concern despite being well-understood. By implementing proper token validation, using SameSite cookies, and following security best practices, developers can effectively protect their applications from CSRF vulnerabilities.</p>
-    `
+    `;

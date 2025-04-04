@@ -1,5 +1,4 @@
 export const bubblingContent = `
-      <h2>Event Bubbling in JavaScript</h2>
       <p>Event bubbling is a mechanism in the DOM where an event triggered on a nested element "bubbles up" through its parent elements in the DOM tree. Understanding this concept is crucial for proper event handling in web applications.</p>
       
       <h3>How Bubbling Works</h3>
@@ -100,4 +99,4 @@ element.addEventListener('click', e => {
     });
   }
 }</code></pre>
-    `
+    `;

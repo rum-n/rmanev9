@@ -1,5 +1,4 @@
 export const cachingContent = `
-      <h2>Caching Strategies</h2>
       <p>Caching is a crucial technique for improving application performance by storing and reusing previously computed data or fetched resources. JavaScript offers several approaches to implement caching at different levels.</p>
       
       <h3>Memoization</h3>
@@ -119,5 +118,4 @@ function UserProfile({ userId }) {
         <li>Use appropriate storage mechanism (Memory, LocalStorage, IndexedDB)</li>
         <li>Handle cache errors gracefully</li>
       </ul>
-    `
-
+    `;

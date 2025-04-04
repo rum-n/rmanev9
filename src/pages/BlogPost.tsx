@@ -6,6 +6,7 @@ import { blogPosts } from "../data/blogPosts";
 const BlogContent = styled.div`
   margin-top: 2rem;
   line-height: 1.6;
+  font-size: 1.1rem;
 
   h2 {
     margin-top: 2rem;
@@ -21,7 +22,8 @@ const BlogContent = styled.div`
     margin-bottom: 1rem;
   }
 
-  ul, ol {
+  ul,
+  ol {
     margin-bottom: 1rem;
     padding-left: 1.5rem;
   }
@@ -32,6 +34,7 @@ const BlogContent = styled.div`
     border-radius: 4px;
     overflow-x: auto;
     margin: 1rem 0;
+    font-size: 0.8rem;
   }
 
   code {
@@ -42,7 +45,7 @@ const BlogContent = styled.div`
 const TitleBox = styled.div`
   font-family: "Lato", sans-serif;
   width: 600px;
-  
+
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -108,13 +111,13 @@ export const BlogPost = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const post = blogPosts.find(post => post.slug === slug);
+  const post = blogPosts.find((post) => post.slug === slug);
 
   if (!post) {
     return <div>Post not found</div>;
   }
 
-  const currentIndex = blogPosts.findIndex(p => p.slug === slug);
+  const currentIndex = blogPosts.findIndex((p) => p.slug === slug);
 
   const hasPrevious = currentIndex > 0;
   const hasNext = currentIndex < blogPosts.length - 1;
@@ -123,23 +126,21 @@ export const BlogPost = () => {
   const nextPost = hasNext ? blogPosts[currentIndex + 1] : null;
 
   const handleBack = () => {
-    navigate('/writing', {
-      state: location.state || {}
+    navigate("/writing", {
+      state: location.state || {},
     });
   };
 
   const handleNavigate = (postSlug: string) => {
     navigate(`/writing/${postSlug}`, {
-      state: location.state || {}
+      state: location.state || {},
     });
   };
 
   return (
     <Layout>
       <TitleBox>
-        <BackButton onClick={handleBack}>
-          ← Back
-        </BackButton>
+        <BackButton onClick={handleBack}>← Back</BackButton>
         <h1>{post.title}</h1>
         <BlogDate>{new Date(post.date).toLocaleDateString()}</BlogDate>
         <BlogContent dangerouslySetInnerHTML={{ __html: post.content }} />

@@ -1,5 +1,4 @@
 export const dataStructuresContent = `
-      <h2>JavaScript Data Structures: Arrays, Maps, Sets, Queues, and Stacks</h2>
       <p>Understanding different data structures is crucial for writing efficient and maintainable code. JavaScript provides several built-in data structures, each with its own use cases and performance characteristics.</p>
       
       <h3>Arrays</h3>
@@ -215,4 +214,4 @@ console.log(isBalanced('(()')); // false</code></pre>
         <li>Implement custom data structures only when necessary</li>
         <li>Consider memory usage, especially for large collections</li>
       </ul>
-    `
+    `;

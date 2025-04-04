@@ -1,5 +1,4 @@
 export const designPrinciplesContent = `
-      <h2>Design Principles in Software Development</h2>
       <p>Design principles are fundamental guidelines that help developers create maintainable, scalable, and robust software. These principles have evolved over decades of software engineering practice and represent collective wisdom about what makes good code.</p>
       
       <h3>Core Design Principles</h3>
@@ -156,4 +155,4 @@ class User {
         <li>Tight deadlines might necessitate pragmatic compromises</li>
         <li>Domain-specific requirements might call for specialized approaches</li>
       </ul>
-    `
+    `;

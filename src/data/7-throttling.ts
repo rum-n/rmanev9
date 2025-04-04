@@ -1,5 +1,4 @@
 export const throttlingContent = `
-      <h2>What is Throttling?</h2>
       <p>Throttling is a technique used to limit the rate at which a function can be called. It ensures that a function is executed at most once in a specified time period, regardless of how many times it's called.</p>
       
       <h3>Basic Implementation</h3>
@@ -98,4 +97,4 @@ searchInput.addEventListener('input', (e) => {
         <li>Clean up throttled functions when components unmount</li>
         <li>Use existing libraries for production code</li>
       </ul>
-    `
+    `;

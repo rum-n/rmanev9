@@ -1,5 +1,4 @@
 export const higherOrderFunctionsContent = `
-      <h2>Understanding Higher-Order Functions in JavaScript</h2>
       <p>Higher-order functions are a powerful concept in JavaScript that allows for more flexible, reusable, and expressive code. They are functions that either take other functions as arguments or return functions as their result.</p>
       
       <h3>What Makes a Function "Higher-Order"?</h3>
@@ -216,4 +215,4 @@ handleSearch('app');
 
       <h3>Conclusion</h3>
       <p>Higher-order functions are a cornerstone of functional programming in JavaScript. They enable powerful patterns like composition, currying, and memoization that can make your code more modular, reusable, and expressive. By mastering higher-order functions, you'll be able to write more elegant solutions to complex problems and take full advantage of JavaScript's functional capabilities.</p>
-    `
+    `;

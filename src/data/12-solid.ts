@@ -1,5 +1,4 @@
 export const solidContent = `
-      <h2>JS essentials #12: SOLID Principles</h2>
       <p>SOLID is an acronym for five design principles that help create maintainable and scalable software. While these principles were originally conceived for object-oriented design, they're valuable in any programming paradigm, including JavaScript.</p>
       
       <h3>S - Single Responsibility Principle (SRP)</h3>
@@ -184,4 +183,4 @@ const notificationService = new NotificationService(emailSender);</code></pre>
         <li>Reduced coupling between components</li>
         <li>More reusable code</li>
       </ul>
-    `
+    `;

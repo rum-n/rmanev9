@@ -1,5 +1,4 @@
 export const rustOwnershipContent = `
-      <h2>Understanding Ownership in Rust</h2>
       <p>Ownership is one of Rust's most unique and important features. It enables Rust to make memory safety guarantees without needing a garbage collector.</p>
       
       <h3>Basic Rules of Ownership</h3>
@@ -90,4 +89,4 @@ fn gives_ownership() -> String {
 fn take_and_give_back(a_string: String) -> String {
     a_string
 }</code></pre>
-    `
+    `;

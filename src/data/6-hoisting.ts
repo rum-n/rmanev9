@@ -1,5 +1,4 @@
 export const hoistingContent = `
-      <h2>What is Hoisting?</h2>
       <p>Hoisting is a JavaScript behavior where variable and function declarations are moved to the top of their respective scopes during the compilation phase, before the code is executed.</p>
       
       <h3>Variable Hoisting</h3>
@@ -53,4 +52,4 @@ test();</code></pre>
         <li>Important for debugging and troubleshooting</li>
         <li>Critical for understanding scope in JavaScript</li>
       </ul>
-    `
+    `;

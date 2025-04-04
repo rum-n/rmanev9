@@ -1,5 +1,4 @@
 export const marshallingContent = `
-      <h2>Data Marshalling</h2>
       <p>Data marshalling is the process of transforming memory representations of objects to a data format suitable for storage or transmission. In JavaScript, this is commonly used when working with APIs, file systems, or cross-platform communication.</p>
       
       <h3>Common Marshalling Formats</h3>
@@ -117,4 +116,4 @@ const safeUnmarshall = (str, schema) => {
         <li>Be mindful of deep object structures</li>
         <li>Handle circular references appropriately</li>
       </ul>
-    `
+    `;

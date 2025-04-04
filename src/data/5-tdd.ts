@@ -1,5 +1,4 @@
 export const tddContent = `
-      <h2>Test-Driven Development (TDD)</h2>
       <p>Test-Driven Development is a software development approach where you write tests before writing the actual code. This methodology follows a simple cycle: Red (write a failing test), Green (make the test pass), and Refactor (improve the code while keeping tests green).</p>
       
       <h3>The TDD Cycle</h3>
@@ -87,4 +86,4 @@ describe('UserService', () => {
         <li>Maintain test independence</li>
         <li>Use descriptive test names</li>
       </ul>
-    `
+    `;

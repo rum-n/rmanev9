@@ -1,5 +1,4 @@
 export const xssContent = `
-      <h2>Understanding Cross-Site Scripting (XSS)</h2>
       <p>Cross-Site Scripting (XSS) is one of the most common web application security vulnerabilities. It allows attackers to inject client-side scripts into web pages viewed by other users, potentially compromising sensitive data and user sessions.</p>
       
       <h3>Types of XSS Attacks</h3>
@@ -122,4 +121,4 @@ javascript:alert('XSS')
 
       <h3>Conclusion</h3>
       <p>XSS remains a critical security concern despite being well-understood. By implementing proper encoding, validation, and security headers, developers can significantly reduce the risk of XSS vulnerabilities in their applications.</p>
-    `
+    `;

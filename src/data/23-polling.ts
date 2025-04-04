@@ -1,5 +1,4 @@
 export const pollingContent = `
-      <h2>Understanding Polling in JavaScript</h2>
       <p>Polling is a technique where a client repeatedly checks a server at regular intervals to see if there's new data or if a condition has been met. It's a common approach for real-time updates when more advanced solutions like WebSockets aren't available.</p>
       
       <h3>Basic Polling Implementation</h3>
@@ -169,4 +168,4 @@ startPolling('https://api.example.com/updates', 5000); // Poll every 5 seconds</
     });
   }
 }</code></pre>
-    `
+    `;
