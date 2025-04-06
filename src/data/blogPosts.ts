@@ -30,6 +30,7 @@ import { webWorkersContent } from "./29-web-workers";
 import { webRTCContent } from "./30-webrtc";
 import { gitCommandsContent } from "./31-git-commands";
 import { dependencyInjectionContent } from "./32-dependency-injection";
+import { memoizationContent } from "./33-memoization";
 
 export const blogPosts = [
   {
@@ -346,5 +347,15 @@ export const blogPosts = [
     content: dependencyInjectionContent,
     slug: "dependency-injection",
     tags: ["general programming", "javascript"],
+  },
+  {
+    id: "33",
+    title: "JS essentials #27: Memoization",
+    date: "2025-04-06",
+    excerpt:
+      "Understanding memoization and its benefits in optimizing function calls",
+    content: memoizationContent,
+    slug: "memoization",
+    tags: ["javascript"],
   },
 ];
