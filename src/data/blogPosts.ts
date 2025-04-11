@@ -31,11 +31,12 @@ import { webRTCContent } from "./30-webrtc";
 import { gitCommandsContent } from "./31-git-commands";
 import { dependencyInjectionContent } from "./32-dependency-injection";
 import { memoizationContent } from "./33-memoization";
+import { useMemoVsUseCallbackContent } from "./34-useMemoVsUseCallBack";
 
 export const blogPosts = [
   {
     id: "1",
-    title: "JS essentials #1: Closures",
+    title: "Closures",
     date: "2025-02-05",
     excerpt:
       "Understanding closures - one of JavaScript's most powerful features",
@@ -45,7 +46,7 @@ export const blogPosts = [
   },
   {
     id: "2",
-    title: "JS essentials #2: Pure Functions",
+    title: "Pure Functions",
     date: "2025-02-07",
     excerpt:
       "Understanding pure functions and their importance in modern JavaScript",
@@ -55,7 +56,7 @@ export const blogPosts = [
   },
   {
     id: "3",
-    title: "JS essentials #3: FP vs OOP",
+    title: "FP vs OOP",
     date: "2025-02-07",
     excerpt:
       "Understanding the difference between Functional Programming and Object-Oriented Programming",
@@ -65,7 +66,7 @@ export const blogPosts = [
   },
   {
     id: "4",
-    title: "JS essentials #4: Promises",
+    title: "Promises",
     date: "2025-02-09",
     excerpt: "Understanding Promises and asynchronous JavaScript",
     content: promisesContent,
@@ -74,7 +75,7 @@ export const blogPosts = [
   },
   {
     id: "5",
-    title: "JS essentials #5: Test-Driven Development",
+    title: "Test-Driven Development",
     date: "2025-02-09",
     excerpt:
       "Understanding TDD and its importance in modern software development",
@@ -84,7 +85,7 @@ export const blogPosts = [
   },
   {
     id: "6",
-    title: "JS essentials #6: Hoisting",
+    title: "Hoisting",
     date: "2025-02-18",
     excerpt: "Understanding hoisting and its implications in JavaScript",
     content: hoistingContent,
@@ -93,7 +94,7 @@ export const blogPosts = [
   },
   {
     id: "7",
-    title: "JS essentials #7: Throttling",
+    title: "Throttling",
     date: "2025-02-18",
     excerpt:
       "Understanding throttling and its practical applications in JavaScript",
@@ -103,7 +104,7 @@ export const blogPosts = [
   },
   {
     id: "8",
-    title: "JS essentials #8: Event Bubbling",
+    title: "Event Bubbling",
     date: "2025-02-18",
     excerpt:
       "Understanding event bubbling and its practical applications in JavaScript",
@@ -113,7 +114,7 @@ export const blogPosts = [
   },
   {
     id: "9",
-    title: "JS essentials #9: The DOM",
+    title: "The DOM",
     date: "2025-02-18",
     excerpt:
       "Understanding the Document Object Model and how to manipulate it effectively",
@@ -132,7 +133,7 @@ export const blogPosts = [
   },
   {
     id: "11",
-    title: "JS essentials #11: The 'this' keyword",
+    title: "The 'this' keyword",
     date: "2025-02-22",
     excerpt:
       "Understanding the 'this' keyword and its behavior in different contexts",
@@ -142,7 +143,7 @@ export const blogPosts = [
   },
   {
     id: "12",
-    title: "JS essentials #12: SOLID Principles",
+    title: "SOLID Principles",
     date: "2025-02-23",
     excerpt:
       "Understanding SOLID principles and their application in JavaScript",
@@ -152,7 +153,7 @@ export const blogPosts = [
   },
   {
     id: "13",
-    title: "Rust basics #1: Understanding Ownership",
+    title: "Understanding Ownership in Rust",
     date: "2025-02-24",
     excerpt:
       "Understanding Rust's ownership system - one of its most unique features",
@@ -162,7 +163,7 @@ export const blogPosts = [
   },
   {
     id: "14",
-    title: "JS essentials #14: Caching Strategies",
+    title: "Caching Strategies",
     date: "2025-02-25",
     excerpt:
       "Understanding different caching strategies and their implementation in JavaScript",
@@ -172,7 +173,7 @@ export const blogPosts = [
   },
   {
     id: "15",
-    title: "JS essentials #15: Data Marshalling",
+    title: "Data Marshalling",
     date: "2025-02-26",
     excerpt:
       "Understanding data marshalling and its implementation in JavaScript",
@@ -182,7 +183,7 @@ export const blogPosts = [
   },
   {
     id: "16",
-    title: "JS essentials #16: Concurrency",
+    title: "Concurrency",
     date: "2025-02-27",
     excerpt:
       "Understanding concurrency patterns and best practices in JavaScript",
@@ -192,7 +193,7 @@ export const blogPosts = [
   },
   {
     id: "17",
-    title: "JS essentials #17: Data Structures",
+    title: "Data Structures",
     date: "2025-02-27",
     excerpt:
       "Understanding JavaScript's built-in data structures and their practical applications",
@@ -241,7 +242,7 @@ export const blogPosts = [
   },
   {
     id: "22",
-    title: "JS essentials #18: Higher-Order Functions",
+    title: "Higher-Order Functions",
     date: "2025-03-02",
     excerpt:
       "Understanding higher-order functions and their powerful applications in JavaScript",
@@ -251,7 +252,7 @@ export const blogPosts = [
   },
   {
     id: "23",
-    title: "JS essentials #19: Polling",
+    title: "Polling",
     date: "2025-03-05",
     excerpt:
       "Understanding polling techniques and their implementation in JavaScript",
@@ -261,7 +262,7 @@ export const blogPosts = [
   },
   {
     id: "24",
-    title: "JS essentials #20: WebSockets",
+    title: "WebSockets",
     date: "2025-03-06",
     excerpt:
       "Understanding WebSocket protocol and real-time communication in JavaScript",
@@ -281,7 +282,7 @@ export const blogPosts = [
   },
   {
     id: "26",
-    title: "JS essentials #21: Currying",
+    title: "Currying",
     date: "2025-03-08",
     excerpt:
       "Understanding currying and partial application in functional JavaScript",
@@ -291,7 +292,7 @@ export const blogPosts = [
   },
   {
     id: "27",
-    title: "JS essentials #22: Callbacks",
+    title: "Callbacks",
     date: "2025-03-12",
     excerpt:
       "Mastering callback functions and understanding asynchronous JavaScript",
@@ -301,7 +302,7 @@ export const blogPosts = [
   },
   {
     id: "28",
-    title: "JS essentials #23: Proxy",
+    title: "Proxy",
     date: "2025-03-13",
     excerpt:
       "Understanding JavaScript Proxies for intercept and customize object operations",
@@ -311,7 +312,7 @@ export const blogPosts = [
   },
   {
     id: "29",
-    title: "JS essentials #24: Web Workers",
+    title: "Web Workers",
     date: "2025-03-14",
     excerpt:
       "Leveraging Web Workers for multi-threaded JavaScript in the browser",
@@ -321,7 +322,7 @@ export const blogPosts = [
   },
   {
     id: "30",
-    title: "JS essentials #25: WebRTC",
+    title: "WebRTC",
     date: "2025-03-15",
     excerpt: "Building real-time communication applications with WebRTC",
     content: webRTCContent,
@@ -340,7 +341,7 @@ export const blogPosts = [
   },
   {
     id: "32",
-    title: "JS essentials #26: Dependency Injection",
+    title: "Dependency Injection",
     date: "2025-03-19",
     excerpt:
       "A comprehensive guide to dependency injection and its implementation in modern applications",
@@ -350,12 +351,22 @@ export const blogPosts = [
   },
   {
     id: "33",
-    title: "JS essentials #27: Memoization",
+    title: "Memoization",
     date: "2025-04-06",
     excerpt:
       "Understanding memoization and its benefits in optimizing function calls",
     content: memoizationContent,
     slug: "memoization",
     tags: ["javascript"],
+  },
+  {
+    id: "34",
+    title: "useMemo vs useCallback",
+    date: "2025-04-11",
+    excerpt:
+      "Understanding the differences between useMemo and useCallback in React",
+    content: useMemoVsUseCallbackContent,
+    slug: "useMemo-vs-useCallback",
+    tags: ["react"],
   },
 ];
