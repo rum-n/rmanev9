@@ -32,6 +32,7 @@ import { gitCommandsContent } from "./31-git-commands";
 import { dependencyInjectionContent } from "./32-dependency-injection";
 import { memoizationContent } from "./33-memoization";
 import { useMemoVsUseCallbackContent } from "./34-useMemoVsUseCallBack";
+import { stateManagementContent } from "./35-state-management";
 
 export const blogPosts = [
   {
@@ -367,6 +368,15 @@ export const blogPosts = [
       "Understanding the differences between useMemo and useCallback in React",
     content: useMemoVsUseCallbackContent,
     slug: "useMemo-vs-useCallback",
+    tags: ["react"],
+  },
+  {
+    id: "35",
+    title: "State Management in React",
+    date: "2025-04-18",
+    excerpt: "A comprehensive guide to state management in React applications",
+    content: stateManagementContent,
+    slug: "state-management-in-react",
     tags: ["react"],
   },
 ];
