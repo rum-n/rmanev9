@@ -33,6 +33,7 @@ import { dependencyInjectionContent } from "./32-dependency-injection";
 import { memoizationContent } from "./33-memoization";
 import { useMemoVsUseCallbackContent } from "./34-useMemoVsUseCallBack";
 import { stateManagementContent } from "./35-state-management";
+import { berlinBlogPost } from "./36-berlin";
 
 export const blogPosts = [
   {
@@ -378,5 +379,15 @@ export const blogPosts = [
     content: stateManagementContent,
     slug: "state-management-in-react",
     tags: ["react"],
+  },
+  {
+    id: "36",
+    title: "Some of my favourite places in Berlin",
+    date: "2025-04-29",
+    excerpt:
+      "Some time ago I made this map of places in Berlin I like so I decided to have it live here, as a future reference.",
+    content: berlinBlogPost,
+    slug: "berlin",
+    tags: ["non-tech"],
   },
 ];
