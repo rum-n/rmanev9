@@ -148,6 +148,14 @@ const myProjects: ProjectData[] = [
     description:
       "A flashcard app to help developers prepare for technical interviews. It also has a feature for the user to explain a software concept out loud and get feedback from AI.",
   },
+  {
+    title: "Remote Job Matching",
+    year: "2025",
+    tech: "React, Next.js, Prisma, MongoDB, Mistral AI",
+    url: "https://remotejobmatching.com",
+    description:
+      "A platform that matches job seekers with remote job opportunities based on their skills and preferences. It uses AI to analyze resumes and job descriptions to find the best matches. It also write a cover letter for the user based on their resume and the job description.",
+  },
 ];
 
 const clientProjects = [
