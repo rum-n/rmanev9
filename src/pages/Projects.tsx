@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
 import { NavMenu } from "../components/NavMenu";
-import { useState } from "react";
 
 const ProjectsContainer = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
 
   @media (max-width: 768px) {
     max-width: 100%;
@@ -26,8 +25,8 @@ const ProjectsSection = styled.section`
 
 const SectionTitle = styled.h2`
   color: var(--text-primary);
-  margin-bottom: var(--space-lg);
-  font-size: 1.5rem;
+  margin-bottom: var(--space-xl);
+  font-size: 1.75rem;
   font-weight: 600;
   position: relative;
 
@@ -47,145 +46,227 @@ const SectionTitle = styled.h2`
   }
 
   @media (max-width: 768px) {
-    font-size: 1.25rem;
-    margin-bottom: var(--space-md);
+    font-size: 1.5rem;
+    margin-bottom: var(--space-lg);
   }
 
   @media (max-width: 480px) {
-    font-size: 1.1rem;
-    margin-bottom: var(--space-sm);
+    font-size: 1.25rem;
+    margin-bottom: var(--space-md);
   }
 `;
 
 const ProjectsGrid = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--space-xl);
   margin-bottom: var(--space-3xl);
 
   @media (max-width: 768px) {
-    gap: var(--space-md);
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
     margin-bottom: var(--space-2xl);
   }
 
   @media (max-width: 480px) {
-    gap: var(--space-sm);
+    gap: var(--space-md);
     margin-bottom: var(--space-xl);
   }
 `;
 
-const ProjectCard = styled.div<{ isExpanded: boolean }>`
+const ProjectCard = styled.div`
   background: var(--bg-surface);
   border: 1px solid var(--bg-surface-hover);
   border-radius: var(--radius-xl);
-  padding: var(--space-lg);
-  cursor: pointer;
+  overflow: hidden;
   transition: all var(--transition-normal);
   backdrop-filter: blur(10px);
-  min-height: 44px;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.05) 0%,
+      rgba(139, 92, 246, 0.05) 100%
+    );
+    opacity: 0;
+    transition: all var(--transition-normal);
+    pointer-events: none;
+  }
 
   &:hover {
-    background: var(--bg-surface-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+
+    &::before {
+      opacity: 1;
+    }
   }
 
   @media (max-width: 768px) {
-    padding: var(--space-md);
-  }
-
-  @media (max-width: 480px) {
-    padding: var(--space-sm);
+    &:hover {
+      transform: translateY(-3px);
+    }
   }
 `;
 
-const ProjectHeader = styled.div<{ isExpanded: boolean }>`
+const ProjectImage = styled.div<{ imageUrl?: string }>`
+  width: 100%;
+  height: 280px;
+  background: ${(props) =>
+    props.imageUrl
+      ? `url(${props.imageUrl}) center/cover`
+      : "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)"};
+  position: relative;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-md);
-  margin-bottom: ${(props) => (props.isExpanded ? "var(--space-md)" : "0")};
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: var(--space-md);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${(props) =>
+      props.imageUrl ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0.1)"};
+    transition: all var(--transition-normal);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.1) 0%,
+      rgba(139, 92, 246, 0.1) 100%
+    );
+    opacity: 0;
+    transition: all var(--transition-normal);
+  }
+
+  span {
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all var(--transition-normal);
+  }
+
+  ${ProjectCard}:hover & {
+    &::before {
+      background: ${(props) =>
+        props.imageUrl ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.2)"};
+    }
+
+    &::after {
+      opacity: 1;
+    }
+
+    span {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   @media (max-width: 768px) {
-    gap: var(--space-sm);
-    margin-bottom: ${(props) => (props.isExpanded ? "var(--space-sm)" : "0")};
+    height: 240px;
   }
 
   @media (max-width: 480px) {
-    gap: var(--space-xs);
-    margin-bottom: ${(props) => (props.isExpanded ? "var(--space-xs)" : "0")};
+    height: 200px;
+  }
+`;
+
+const ProjectContent = styled.div`
+  padding: var(--space-xl);
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    padding: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-md);
   }
 `;
 
 const ProjectTitle = styled.h3`
   color: var(--text-primary);
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0;
-  flex: 1;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 var(--space-md) 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 
   @media (max-width: 768px) {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 `;
 
 const ProjectMeta = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--space-xs);
-  min-width: fit-content;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
 
   @media (max-width: 480px) {
-    gap: 2px;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
   }
 `;
 
 const ProjectYear = styled.span`
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 0.9rem;
-
-  @media (max-width: 480px) {
-    font-size: 0.8rem;
-  }
+  background: var(--primary);
+  color: white;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 500;
 `;
 
 const ProjectTech = styled.span`
-  color: var(--text-tertiary);
-  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
   font-weight: 500;
-
-  @media (max-width: 480px) {
-    font-size: 0.7rem;
-  }
 `;
 
-const ProjectDescription = styled.div<{ isExpanded: boolean }>`
-  max-height: ${(props) => (props.isExpanded ? "200px" : "0")};
-  overflow: hidden;
-  transition: all var(--transition-slow);
-  opacity: ${(props) => (props.isExpanded ? "1" : "0")};
-  transform: translateY(${(props) => (props.isExpanded ? "0" : "-10px")});
+const ProjectDescription = styled.p`
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 var(--space-md) 0;
+  font-size: 0.95rem;
 
-  p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: var(--space-md);
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 
-    @media (max-width: 768px) {
-      font-size: 0.95rem;
-      margin-bottom: var(--space-sm);
-    }
-
-    @media (max-width: 480px) {
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
   }
 `;
 
@@ -194,69 +275,46 @@ const ProjectLink = styled.a`
   align-items: center;
   gap: var(--space-xs);
   color: var(--primary);
-  font-weight: 500;
   text-decoration: none;
-  transition: all var(--transition-fast);
-  min-height: 44px;
-  min-width: 44px;
-
-  &:hover {
-    color: var(--primary-dark);
-    transform: translateX(2px);
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.9rem;
-  }
-`;
-
-const ExpandIcon = styled.div<{ isExpanded: boolean }>`
-  width: 20px;
-  height: 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition-normal);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-lg);
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
   position: relative;
-  transition: transform var(--transition-normal);
-  transform: rotate(${(props) => (props.isExpanded ? "180deg" : "0deg")});
-  min-width: 44px;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    background: var(--text-secondary);
-    transition: background var(--transition-fast);
-  }
+  overflow: hidden;
 
   &::before {
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 2px;
-    transform: translateY(-50%);
-  }
-
-  &::after {
+    content: "";
+    position: absolute;
     top: 0;
-    left: 50%;
-    bottom: 0;
-    width: 2px;
-    transform: translateX(-50%);
-    opacity: ${(props) => (props.isExpanded ? "0" : "1")};
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
   }
 
-  ${ProjectCard}:hover & {
-    &::before,
-    &::after {
-      background: var(--text-primary);
+  &:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: var(--primary);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+
+    &::before {
+      left: 100%;
     }
   }
 
   @media (max-width: 480px) {
-    width: 18px;
-    height: 18px;
+    font-size: 0.9rem;
+    padding: var(--space-xs) var(--space-sm);
   }
 `;
 
@@ -266,6 +324,7 @@ interface ProjectData {
   tech: string;
   url?: string;
   description?: string;
+  imageUrl?: string;
 }
 
 const myProjects: ProjectData[] = [
@@ -303,6 +362,7 @@ const myProjects: ProjectData[] = [
     year: "2019",
     tech: "React, AWS",
     url: "https://podcastchatterbox.netlify.app/",
+    imageUrl: "/assets/podcast-chatterbox.png",
     description:
       "A platform for podcasters to find people that want to be interviewed.",
   },
@@ -311,6 +371,7 @@ const myProjects: ProjectData[] = [
     year: "2021",
     tech: "Vue.js, Strapi",
     url: "https://remoteweb3jobs.netlify.app/",
+    imageUrl: "/assets/web3.png",
     description: "A job board for web3/blockchain jobs.",
   },
   {
@@ -318,6 +379,7 @@ const myProjects: ProjectData[] = [
     year: "2024",
     tech: "React, Next.js, Prisma, Supabase",
     url: "https://bouldermonday.com/",
+    imageUrl: "/assets/boulder-monday.png",
     description: "A social media platform for indoor bouldering.",
   },
   {
@@ -325,6 +387,7 @@ const myProjects: ProjectData[] = [
     year: "2025",
     tech: "Rust, React, Next.js, Prisma, MongoDB",
     url: "https://dailyobservable.com/",
+    imageUrl: "/assets/observable.png",
     description:
       "A newsletter service delivering daily job opportunities based on your preferences.",
   },
@@ -333,6 +396,7 @@ const myProjects: ProjectData[] = [
     year: "2025",
     tech: "React, Next.js, Vercel AI SDK",
     url: "https://devjob-flashcards.vercel.app",
+    imageUrl: "/assets/flashcards.png",
     description:
       "A flashcard app to help developers prepare for technical interviews. It also has a feature for the user to explain a software concept out loud and get feedback from AI.",
   },
@@ -341,6 +405,7 @@ const myProjects: ProjectData[] = [
     year: "2025",
     tech: "React, Next.js, Prisma, MongoDB, Mistral AI",
     url: "https://remotejobmatching.com",
+    imageUrl: "/assets/rjm.png",
     description:
       "A platform that matches job seekers with remote job opportunities based on their skills and preferences. It uses AI to analyze resumes and job descriptions to find the best matches. It also write a cover letter for the user based on their resume and the job description.",
   },
@@ -352,6 +417,7 @@ const clientProjects = [
     year: "2020",
     tech: "React",
     url: "https://artq-pi.vercel.app/",
+    imageUrl: "/assets/artq.png",
     description:
       "An MVP for a social media platform for artists. I worked on the project together with a designer and another developer as part of a hackathon where students come together to assist startup founders work on their venture ideas.",
   },
@@ -360,6 +426,7 @@ const clientProjects = [
     year: "2022",
     tech: "React, Next.js, Payload CMS",
     url: "https://brightvision.com/",
+    imageUrl: "/assets/bv.png",
     description:
       "Content management system for a marketing agency, based in Sweden. I worked together with the company's marketing team to create a custom CMS for their website.",
   },
@@ -375,60 +442,51 @@ const clientProjects = [
     year: "2025",
     tech: "Next.js, Prisma, Stripe",
     url: "https://villy-shop.vercel.app",
+    imageUrl: "/assets/artshop.png",
     description:
       "An multi-lingual artist's homepage and webshop with a custom admin panel to upload new artworks, manage content and customer orders.",
   },
 ];
 
+const renderProjectCard = (project: ProjectData) => (
+  <ProjectCard key={project.title}>
+    <ProjectImage imageUrl={project.imageUrl}>
+      <span>{project.imageUrl ? "" : project.title}</span>
+    </ProjectImage>
+    <ProjectContent>
+      <ProjectTitle>{project.title}</ProjectTitle>
+      <ProjectMeta>
+        <ProjectYear>{project.year}</ProjectYear>
+        <ProjectTech>{project.tech}</ProjectTech>
+      </ProjectMeta>
+      <ProjectDescription>
+        {project.description || "No description available"}
+      </ProjectDescription>
+      {project.url && (
+        <ProjectLink
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit Project →
+        </ProjectLink>
+      )}
+    </ProjectContent>
+  </ProjectCard>
+);
+
+const renderProjectList = (projects: ProjectData[], label: string) => (
+  <ProjectsSection key={label}>
+    <SectionTitle>{label}</SectionTitle>
+    <ProjectsGrid>
+      {projects
+        .sort((a, b) => Number(b.year) - Number(a.year))
+        .map(renderProjectCard)}
+    </ProjectsGrid>
+  </ProjectsSection>
+);
+
 export const Projects = () => {
-  const [expandedProject, setExpandedProject] = useState<string | null>(null);
-
-  const toggleProject = (title: string) => {
-    setExpandedProject(expandedProject === title ? null : title);
-  };
-
-  const renderProjectList = (projects: ProjectData[], label: string) => (
-    <ProjectsSection key={label}>
-      <SectionTitle>{label}</SectionTitle>
-      <ProjectsGrid>
-        {projects
-          .sort((a, b) => Number(b.year) - Number(a.year))
-          .map((project) => (
-            <ProjectCard
-              key={project.title}
-              isExpanded={expandedProject === project.title}
-              onClick={() => toggleProject(project.title)}
-            >
-              <ProjectHeader isExpanded={expandedProject === project.title}>
-                <ProjectTitle>{project.title}</ProjectTitle>
-                <ProjectMeta>
-                  <ProjectYear>{project.year}</ProjectYear>
-                  <ProjectTech>{project.tech}</ProjectTech>
-                </ProjectMeta>
-                <ExpandIcon isExpanded={expandedProject === project.title} />
-              </ProjectHeader>
-
-              <ProjectDescription
-                isExpanded={expandedProject === project.title}
-              >
-                <p>{project.description || "No description available"}</p>
-                {project.url && (
-                  <ProjectLink
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    Visit Project →
-                  </ProjectLink>
-                )}
-              </ProjectDescription>
-            </ProjectCard>
-          ))}
-      </ProjectsGrid>
-    </ProjectsSection>
-  );
-
   return (
     <Layout>
       <ProjectsContainer>

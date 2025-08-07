@@ -130,34 +130,137 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: repeating-linear-gradient(
+  background-image: 
+    /* Primary grain - much stronger */ repeating-linear-gradient(
       0deg,
       transparent,
       transparent 1px,
-      rgba(255, 255, 255, 0.08) 1px,
-      rgba(255, 255, 255, 0.08) 2px
+      rgba(255, 255, 255, 0.4) 1px,
+      rgba(255, 255, 255, 0.4) 2px
     ),
     repeating-linear-gradient(
       90deg,
       transparent,
       transparent 1px,
-      rgba(255, 255, 255, 0.08) 1px,
-      rgba(255, 255, 255, 0.08) 2px
+      rgba(255, 255, 255, 0.4) 1px,
+      rgba(255, 255, 255, 0.4) 2px
     ),
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 2px,
-      rgba(255, 255, 255, 0.04) 2px,
-      rgba(255, 255, 255, 0.04) 4px
-    ),
+    /* Diagonal grain */
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.3) 2px,
+        rgba(255, 255, 255, 0.3) 4px
+      ),
     repeating-linear-gradient(
       -45deg,
       transparent,
       transparent 2px,
-      rgba(255, 255, 255, 0.04) 2px,
-      rgba(255, 255, 255, 0.04) 4px
+      rgba(255, 255, 255, 0.3) 2px,
+      rgba(255, 255, 255, 0.3) 4px
+    ),
+    /* Additional grain layers */
+      repeating-linear-gradient(
+        30deg,
+        transparent,
+        transparent 1px,
+        rgba(255, 255, 255, 0.25) 1px,
+        rgba(255, 255, 255, 0.25) 3px
+      ),
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.25) 1px,
+      rgba(255, 255, 255, 0.25) 3px
+    ),
+    /* Fine grain */
+      repeating-linear-gradient(
+        15deg,
+        transparent,
+        transparent 1px,
+        rgba(255, 255, 255, 0.2) 1px,
+        rgba(255, 255, 255, 0.2) 2px
+      ),
+    repeating-linear-gradient(
+      -15deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.2) 1px,
+      rgba(255, 255, 255, 0.2) 2px
+    ),
+    /* Extra fine grain */
+      repeating-linear-gradient(
+        60deg,
+        transparent,
+        transparent 1px,
+        rgba(255, 255, 255, 0.15) 1px,
+        rgba(255, 255, 255, 0.15) 4px
+      ),
+    repeating-linear-gradient(
+      -60deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.15) 1px,
+      rgba(255, 255, 255, 0.15) 4px
+    ),
+    /* Ultra fine grain */
+      repeating-linear-gradient(
+        75deg,
+        transparent,
+        transparent 1px,
+        rgba(255, 255, 255, 0.1) 1px,
+        rgba(255, 255, 255, 0.1) 3px
+      ),
+    repeating-linear-gradient(
+      -75deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.1) 1px,
+      rgba(255, 255, 255, 0.1) 3px
+    ),
+    /* Random noise dots */
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(255, 255, 255, 0.3) 0px,
+        transparent 1px
+      ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(255, 255, 255, 0.3) 0px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 40% 60%,
+      rgba(255, 255, 255, 0.25) 0px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(255, 255, 255, 0.25) 0px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(255, 255, 255, 0.2) 0px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(255, 255, 255, 0.2) 0px,
+      transparent 1px
     );
+  background-size: 100% 100%, 100% 100%, /* Primary patterns */ 200px 200px,
+    200px 200px, /* Diagonal patterns */ 150px 150px, 150px 150px,
+    /* Additional grain */ 100px 100px, 100px 100px,
+    /* Fine grain */ 300px 300px, 300px 300px,
+    /* Extra fine grain */ 250px 250px, 250px 250px,
+    /* Ultra fine grain */ 50px 50px, 50px 50px, 50px 50px, 50px 50px, 50px 50px; /* Random dots */
+  background-position: 0 0, 0 0, /* Primary patterns */ 0 0, 0 0,
+    /* Diagonal patterns */ 0 0, 0 0, /* Additional grain */ 0 0, 0 0,
+    /* Fine grain */ 0 0, 0 0, /* Extra fine grain */ 0 0, 0 0,
+    /* Ultra fine grain */ 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; /* Random dots */
   pointer-events: none;
   z-index: -1;
 }
