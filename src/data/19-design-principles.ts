@@ -14,13 +14,13 @@ export const designPrinciplesContent = `
       <p>The DRY principle states that "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system."</p>
       <pre><code>// Violating DRY
 function validateEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const regex = /^[^s@]+@[^s@]+.[^s@]+$/;
   return regex.test(email);
 }
 
 function validateUserForm(user) {
   // Duplicating email validation logic
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^s@]+@[^s@]+.[^s@]+$/;
   if (!emailRegex.test(user.email)) {
     return false;
   }
@@ -30,7 +30,7 @@ function validateUserForm(user) {
 
 // Following DRY
 function validateEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const regex = /^[^s@]+@[^s@]+.[^s@]+$/;
   return regex.test(email);
 }
 

@@ -5,6 +5,7 @@ import ThreeParticles from "./components/ThreeParticles";
 import { PathProvider } from "./context/PathContext";
 import { Writing } from "./pages/Writing";
 import { BlogPost } from "./pages/BlogPost";
+import { Contact } from "./pages/Contact";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="projects" element={<Projects />}></Route>
           <Route path="writing" element={<Writing />}></Route>
           <Route path="writing/:slug" element={<BlogPost />} />
+          <Route path="contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </PathProvider>

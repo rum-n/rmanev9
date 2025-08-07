@@ -3,72 +3,163 @@ import { Layout } from "../components/Layout";
 import { NavMenu } from "../components/NavMenu";
 import { useState } from "react";
 
-const TitleBox = styled.div`
-  font-family: "Lato", sans-serif;
-  width: 600px;
-  max-width: 100%;
-  padding: 0 1rem;
+const ProjectsContainer = styled.div`
+  width: 100%;
+  max-width: 800px;
+`;
 
-  @media (max-width: 768px) {
-    width: 100%;
-    padding: 0;
-    margin-top: 1rem;
+const ProjectsSection = styled.section`
+  margin-top: var(--space-2xl);
+`;
+
+const SectionTitle = styled.h2`
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+  font-size: 1.5rem;
+  font-weight: 600;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--secondary) 100%
+    );
+    border-radius: 2px;
   }
 `;
 
-const ProjectsWrapper = styled.ul`
+const ProjectsGrid = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  list-style: none;
-  margin-top: 2rem;
-  padding: 0;
-  height: 600px;
-  overflow-y: auto;
-  scrollbar-color: #8a5858 #000000;
-  max-width: 100%;
-
-  @media (max-width: 768px) {
-    height: 100%;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 1rem;
-  }
+  gap: var(--space-lg);
+  margin-bottom: var(--space-3xl);
 `;
 
-const ProjectLine = styled.li`
+const ProjectCard = styled.div<{ isExpanded: boolean }>`
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-surface-hover);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
   cursor: pointer;
-  transition: 0.2s ease-in-out;
-  margin-bottom: 0.5rem;
-  word-wrap: break-word;
-
-  span {
-    font-size: 2rem;
-
-    @media (max-width: 768px) {
-      font-size: 1.5rem;
-    }
-  }
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(10px);
 
   &:hover {
-    color: #777;
-    transition: 0.2s ease-in-out;
+    background: var(--bg-surface-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
   }
 `;
 
-const ProjectDetails = styled.div<{ isExpanded: boolean }>`
-  max-height: ${(props) => (props.isExpanded ? "500px" : "0")};
+const ProjectHeader = styled.div<{ isExpanded: boolean }>`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: ${(props) => (props.isExpanded ? "var(--space-md)" : "0")};
+`;
+
+const ProjectTitle = styled.h3`
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+`;
+
+const ProjectMeta = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-xs);
+  min-width: fit-content;
+`;
+
+const ProjectYear = styled.span`
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+`;
+
+const ProjectTech = styled.span`
+  color: var(--text-tertiary);
+  font-size: 0.8rem;
+  font-weight: 500;
+`;
+
+const ProjectDescription = styled.div<{ isExpanded: boolean }>`
+  max-height: ${(props) => (props.isExpanded ? "200px" : "0")};
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
-  background-color: #00000082;
-  padding: ${(props) => (props.isExpanded ? "1rem" : "0")};
-  margin-top: 0.5rem;
+  transition: all var(--transition-slow);
   opacity: ${(props) => (props.isExpanded ? "1" : "0")};
   transform: translateY(${(props) => (props.isExpanded ? "0" : "-10px")});
-  visibility: ${(props) => (props.isExpanded ? "visible" : "hidden")};
 
-  > div {
-    opacity: ${(props) => (props.isExpanded ? "1" : "0")};
-    transition: opacity 0.2s ease-in-out;
+  p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+`;
+
+const ProjectLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    color: var(--primary-dark);
+    transform: translateX(2px);
+  }
+`;
+
+const ExpandIcon = styled.div<{ isExpanded: boolean }>`
+  width: 20px;
+  height: 20px;
+  position: relative;
+  transition: transform var(--transition-normal);
+  transform: rotate(${(props) => (props.isExpanded ? "180deg" : "0deg")});
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background: var(--text-secondary);
+    transition: background var(--transition-fast);
+  }
+
+  &::before {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    top: 0;
+    left: 50%;
+    bottom: 0;
+    width: 2px;
+    transform: translateX(-50%);
+    opacity: ${(props) => (props.isExpanded ? "0" : "1")};
+  }
+
+  ${ProjectCard}:hover & {
+    &::before,
+    &::after {
+      background: var(--text-primary);
+    }
   }
 `;
 
@@ -87,7 +178,7 @@ const myProjects: ProjectData[] = [
     tech: "Highcharts, R",
     url: "",
     description:
-      "A data visualization project for analyzing runningrace results and statistics.",
+      "A data visualization project for analyzing running race results and statistics.",
   },
   {
     title: "Gripindoor",
@@ -108,7 +199,7 @@ const myProjects: ProjectData[] = [
     tech: "React, Ghost",
     url: "https://finderskeepers.netlify.app/",
     description:
-      "A platform for freelancers and agencies to browse opportunities and potenatially find new clients.",
+      "A platform for freelancers and agencies to browse opportunities and potentially find new clients.",
   },
   {
     title: "Podcast Chatterbox",
@@ -200,47 +291,54 @@ export const Projects = () => {
   };
 
   const renderProjectList = (projects: ProjectData[], label: string) => (
-    <>
-      <span>{label}</span>
-      {projects
-        .sort((a, b) => Number(b.year) - Number(a.year))
-        .map((project) => (
-          <div key={project.title}>
-            <ProjectLine onClick={() => toggleProject(project.title)}>
-              <span style={{ fontSize: "2rem" }}>{project.title}</span> /{" "}
-              {project.year} / {project.tech}
-            </ProjectLine>
-            <ProjectDetails isExpanded={expandedProject === project.title}>
-              {project.description || "No description available"}
-              {project.url && (
-                <div style={{ marginTop: "1rem" }}>
-                  <a
+    <ProjectsSection key={label}>
+      <SectionTitle>{label}</SectionTitle>
+      <ProjectsGrid>
+        {projects
+          .sort((a, b) => Number(b.year) - Number(a.year))
+          .map((project) => (
+            <ProjectCard
+              key={project.title}
+              isExpanded={expandedProject === project.title}
+              onClick={() => toggleProject(project.title)}
+            >
+              <ProjectHeader isExpanded={expandedProject === project.title}>
+                <ProjectTitle>{project.title}</ProjectTitle>
+                <ProjectMeta>
+                  <ProjectYear>{project.year}</ProjectYear>
+                  <ProjectTech>{project.tech}</ProjectTech>
+                </ProjectMeta>
+                <ExpandIcon isExpanded={expandedProject === project.title} />
+              </ProjectHeader>
+
+              <ProjectDescription
+                isExpanded={expandedProject === project.title}
+              >
+                <p>{project.description || "No description available"}</p>
+                {project.url && (
+                  <ProjectLink
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     Visit Project →
-                  </a>
-                </div>
-              )}
-            </ProjectDetails>
-          </div>
-        ))}
-    </>
+                  </ProjectLink>
+                )}
+              </ProjectDescription>
+            </ProjectCard>
+          ))}
+      </ProjectsGrid>
+    </ProjectsSection>
   );
 
   return (
     <Layout>
-      <TitleBox>
+      <ProjectsContainer>
         <NavMenu menuItem="Projects" />
-        <ProjectsWrapper>
-          {renderProjectList(
-            clientProjects as ProjectData[],
-            "Client projects"
-          )}
-          {renderProjectList(myProjects as ProjectData[], "Personal projects")}
-        </ProjectsWrapper>
-      </TitleBox>
+        {renderProjectList(clientProjects as ProjectData[], "Client Projects")}
+        {renderProjectList(myProjects as ProjectData[], "Personal Projects")}
+      </ProjectsContainer>
     </Layout>
   );
 };
