@@ -6,10 +6,22 @@ import { useState } from "react";
 const ProjectsContainer = styled.div`
   width: 100%;
   max-width: 800px;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 const ProjectsSection = styled.section`
   margin-top: var(--space-2xl);
+
+  @media (max-width: 768px) {
+    margin-top: var(--space-xl);
+  }
+
+  @media (max-width: 480px) {
+    margin-top: var(--space-lg);
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -33,6 +45,16 @@ const SectionTitle = styled.h2`
     );
     border-radius: 2px;
   }
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+    margin-bottom: var(--space-sm);
+  }
 `;
 
 const ProjectsGrid = styled.div`
@@ -40,6 +62,16 @@ const ProjectsGrid = styled.div`
   flex-direction: column;
   gap: var(--space-lg);
   margin-bottom: var(--space-3xl);
+
+  @media (max-width: 768px) {
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+
+  @media (max-width: 480px) {
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+  }
 `;
 
 const ProjectCard = styled.div<{ isExpanded: boolean }>`
@@ -50,11 +82,20 @@ const ProjectCard = styled.div<{ isExpanded: boolean }>`
   cursor: pointer;
   transition: all var(--transition-normal);
   backdrop-filter: blur(10px);
+  min-height: 44px;
 
   &:hover {
     background: var(--bg-surface-hover);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-sm);
   }
 `;
 
@@ -64,6 +105,16 @@ const ProjectHeader = styled.div<{ isExpanded: boolean }>`
   align-items: flex-start;
   gap: var(--space-md);
   margin-bottom: ${(props) => (props.isExpanded ? "var(--space-md)" : "0")};
+
+  @media (max-width: 768px) {
+    gap: var(--space-sm);
+    margin-bottom: ${(props) => (props.isExpanded ? "var(--space-sm)" : "0")};
+  }
+
+  @media (max-width: 480px) {
+    gap: var(--space-xs);
+    margin-bottom: ${(props) => (props.isExpanded ? "var(--space-xs)" : "0")};
+  }
 `;
 
 const ProjectTitle = styled.h3`
@@ -72,6 +123,14 @@ const ProjectTitle = styled.h3`
   font-weight: 600;
   margin: 0;
   flex: 1;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const ProjectMeta = styled.div`
@@ -80,18 +139,30 @@ const ProjectMeta = styled.div`
   align-items: flex-end;
   gap: var(--space-xs);
   min-width: fit-content;
+
+  @media (max-width: 480px) {
+    gap: 2px;
+  }
 `;
 
 const ProjectYear = styled.span`
   color: var(--primary);
   font-weight: 600;
   font-size: 0.9rem;
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const ProjectTech = styled.span`
   color: var(--text-tertiary);
   font-size: 0.8rem;
   font-weight: 500;
+
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const ProjectDescription = styled.div<{ isExpanded: boolean }>`
@@ -105,6 +176,16 @@ const ProjectDescription = styled.div<{ isExpanded: boolean }>`
     color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: var(--space-md);
+
+    @media (max-width: 768px) {
+      font-size: 0.95rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
   }
 `;
 
@@ -116,10 +197,16 @@ const ProjectLink = styled.a`
   font-weight: 500;
   text-decoration: none;
   transition: all var(--transition-fast);
+  min-height: 44px;
+  min-width: 44px;
 
   &:hover {
     color: var(--primary-dark);
     transform: translateX(2px);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
   }
 `;
 
@@ -129,6 +216,11 @@ const ExpandIcon = styled.div<{ isExpanded: boolean }>`
   position: relative;
   transition: transform var(--transition-normal);
   transform: rotate(${(props) => (props.isExpanded ? "180deg" : "0deg")});
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &::before,
   &::after {
@@ -160,6 +252,11 @@ const ExpandIcon = styled.div<{ isExpanded: boolean }>`
     &::after {
       background: var(--text-primary);
     }
+  }
+
+  @media (max-width: 480px) {
+    width: 18px;
+    height: 18px;
   }
 `;
 

@@ -20,6 +20,12 @@ const LayoutContainer = styled.div`
 
   @media (max-width: 768px) {
     padding: var(--space-lg) var(--space-md);
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-md) var(--space-sm);
   }
 `;
 
@@ -27,6 +33,11 @@ const ContentWrapper = styled.div`
   width: 100%;
   max-width: 800px;
   position: relative;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    margin-bottom: var(--space-xl);
+  }
 `;
 
 const SocialLinksContainer = styled.div`
@@ -49,6 +60,12 @@ const SocialLinksContainer = styled.div`
     display: flex;
     justify-content: center;
     gap: var(--space-md);
+    order: 2;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: var(--space-lg);
+    gap: var(--space-sm);
   }
 `;
 
@@ -64,6 +81,11 @@ const SocialLinksList = styled.ul`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    gap: var(--space-sm);
+  }
+
+  @media (max-width: 480px) {
+    gap: var(--space-xs);
   }
 `;
 
@@ -97,6 +119,12 @@ const SocialButton = styled.button`
     height: 44px;
     font-size: 1rem;
   }
+
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
 `;
 
 const SocialTooltip = styled.div`
@@ -115,6 +143,7 @@ const SocialTooltip = styled.div`
   transition: all var(--transition-fast);
   border: 1px solid var(--bg-surface-hover);
   backdrop-filter: blur(10px);
+  z-index: var(--z-tooltip);
 
   ${SocialButton}:hover & {
     opacity: 1;
@@ -122,7 +151,17 @@ const SocialTooltip = styled.div`
   }
 
   @media (max-width: 1024px) {
-    display: none;
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    background: transparent;
+    color: var(--text-secondary);
+    padding: var(--space-xs) 0;
+    border: none;
+    font-size: 0.75rem;
+    text-align: center;
+    margin-top: var(--space-xs);
+    white-space: normal;
   }
 `;
 
@@ -142,6 +181,11 @@ const socialLinks: SocialLink[] = [
     title: "Bluesky",
     url: "https://bsky.app/profile/room-n.bsky.social",
     icon: "☁️",
+  },
+  {
+    title: "X (Twitter)",
+    url: "https://x.com/room_n",
+    icon: "𝕏",
   },
   {
     title: "Medium",

@@ -60,9 +60,9 @@ function ParticlesAnimation() {
 
       // Color - gradient from primary to secondary
       const colorMix = Math.random();
-      colors[i] = 0.39 + colorMix * 0.14; // R: primary to secondary
-      colors[i + 1] = 0.4 + colorMix * 0.16; // G: primary to secondary
-      colors[i + 2] = 0.95 + colorMix * 0.05; // B: primary to secondary
+      colors[i] = 0.23 + colorMix * 0.14; // R: primary to secondary
+      colors[i + 1] = 0.51 + colorMix * 0.16; // G: primary to secondary
+      colors[i + 2] = 0.96 + colorMix * 0.05; // B: primary to secondary
     }
 
     const geometry = new THREE.BufferGeometry();

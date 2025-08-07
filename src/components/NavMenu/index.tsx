@@ -9,6 +9,14 @@ interface NavMenuProps {
 
 const NavContainer = styled.nav`
   margin-bottom: var(--space-2xl);
+
+  @media (max-width: 768px) {
+    margin-bottom: var(--space-xl);
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: var(--space-lg);
+  }
 `;
 
 const NameText = styled.h1`
@@ -24,6 +32,12 @@ const NameText = styled.h1`
 
   @media (max-width: 768px) {
     margin-top: var(--space-lg);
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+
+  @media (max-width: 480px) {
+    margin-top: var(--space-md);
+    font-size: clamp(1.5rem, 7vw, 2rem);
   }
 `;
 
@@ -33,6 +47,16 @@ const SubtitleText = styled.p`
   color: var(--text-secondary);
   font-weight: 500;
   margin-bottom: var(--space-xl);
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: var(--space-md);
+  }
 `;
 
 const MenuList = styled.ul`
@@ -47,6 +71,12 @@ const MenuList = styled.ul`
   @media (max-width: 768px) {
     gap: var(--space-lg);
     flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
   }
 `;
 
@@ -69,6 +99,8 @@ const MenuButton = styled.button<{ isActive: boolean }>`
   transition: all var(--transition-normal);
   cursor: pointer;
   backdrop-filter: ${(props) => (props.isActive ? "blur(10px)" : "none")};
+  min-height: 44px;
+  min-width: 44px;
 
   &:hover {
     background: var(--bg-surface-hover);
@@ -97,6 +129,16 @@ const MenuButton = styled.button<{ isActive: boolean }>`
 
   &:hover::before {
     opacity: 0.1;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+    padding: var(--space-xs);
   }
 `;
 

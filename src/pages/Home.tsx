@@ -6,10 +6,22 @@ import { useNavigate } from "react-router-dom";
 const HomeContainer = styled.div`
   width: 100%;
   max-width: 800px;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 const ContentSection = styled.section`
   margin-top: var(--space-2xl);
+
+  @media (max-width: 768px) {
+    margin-top: var(--space-xl);
+  }
+
+  @media (max-width: 480px) {
+    margin-top: var(--space-lg);
+  }
 `;
 
 const IntroText = styled.p`
@@ -21,6 +33,13 @@ const IntroText = styled.p`
 
   @media (max-width: 768px) {
     font-size: 1.1rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
   }
 `;
 
@@ -41,6 +60,16 @@ const TechStack = styled.div`
   border: 1px solid var(--bg-surface-hover);
   border-radius: var(--radius-xl);
   backdrop-filter: blur(10px);
+
+  @media (max-width: 768px) {
+    padding: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-sm);
+    margin-top: var(--space-md);
+  }
 `;
 
 const TechTitle = styled.h3`
@@ -48,12 +77,21 @@ const TechTitle = styled.h3`
   color: var(--text-primary);
   font-size: 1.1rem;
   font-weight: 600;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: var(--space-sm);
+  }
 `;
 
 const TechList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
+
+  @media (max-width: 480px) {
+    gap: var(--space-xs);
+  }
 `;
 
 const TechTag = styled.span`
@@ -64,6 +102,11 @@ const TechTag = styled.span`
   font-size: 0.875rem;
   font-weight: 500;
   border: 1px solid var(--bg-surface-hover);
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: var(--space-xs);
+  }
 `;
 
 const CallToAction = styled.div`
@@ -78,6 +121,16 @@ const CallToAction = styled.div`
   border-radius: var(--radius-xl);
   text-align: center;
   backdrop-filter: blur(10px);
+
+  @media (max-width: 768px) {
+    padding: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-md);
+    margin-top: var(--space-lg);
+  }
 `;
 
 const CTAButton = styled.button`
@@ -91,10 +144,22 @@ const CTAButton = styled.button`
   cursor: pointer;
   transition: all var(--transition-normal);
   box-shadow: var(--shadow-md);
+  min-height: 44px;
+  min-width: 44px;
 
   &:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.9rem;
   }
 `;
 
@@ -142,9 +207,17 @@ export const Home = () => {
               <TechTag>Node.js</TechTag>
               <TechTag>TypeScript</TechTag>
               <TechTag>Next.js</TechTag>
-              <TechTag>Prisma</TechTag>
+              <TechTag>Tailwind</TechTag>
+              <TechTag>Shadcn</TechTag>
+              <TechTag>Vercel</TechTag>
+              <TechTag>AWS</TechTag>
+              <TechTag>Docker</TechTag>
+              <TechTag>Git</TechTag>
+              <TechTag>GraphQL</TechTag>
               <TechTag>MongoDB</TechTag>
               <TechTag>Supabase</TechTag>
+              <TechTag>Prisma</TechTag>
+              <TechTag>Rust</TechTag>
             </TechList>
           </TechStack>
 

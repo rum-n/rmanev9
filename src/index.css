@@ -1,7 +1,7 @@
 :root {
-  /* Modern color palette */
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
+  /* Modern color palette - New Scheme */
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
   --secondary: #8b5cf6;
   --accent: #06b6d4;
   --success: #10b981;
@@ -21,9 +21,9 @@
   --gray-900: #111827;
 
   /* Background colors */
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --bg-tertiary: #1a1a1a;
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
   --bg-surface: rgba(255, 255, 255, 0.05);
   --bg-surface-hover: rgba(255, 255, 255, 0.1);
 
@@ -75,6 +75,7 @@
   --z-modal: 1050;
   --z-popover: 1060;
   --z-tooltip: 1070;
+  --z-toast: 1080;
 }
 
 * {
@@ -97,10 +98,68 @@ body {
     var(--bg-primary) 0%,
     var(--bg-secondary) 100%
   );
+  background-image: linear-gradient(
+      135deg,
+      var(--bg-primary) 0%,
+      var(--bg-secondary) 100%
+    ),
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(255, 255, 255, 0.05) 0%,
+      transparent 50%
+    );
+  background-size: 100% 100%, 200px 200px, 300px 300px;
+  background-position: 0 0, 0 0, 0 0;
+  background-repeat: no-repeat, repeat, repeat;
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.08) 1px,
+      rgba(255, 255, 255, 0.08) 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.08) 1px,
+      rgba(255, 255, 255, 0.08) 2px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.04) 2px,
+      rgba(255, 255, 255, 0.04) 4px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.04) 2px,
+      rgba(255, 255, 255, 0.04) 4px
+    );
+  pointer-events: none;
+  z-index: -1;
 }
 
 #root {
@@ -210,8 +269,71 @@ button {
   padding: 0 var(--space-md);
 }
 
+/* Mobile Responsive Improvements */
 @media (max-width: 768px) {
   .container {
     padding: 0 var(--space-sm);
+  }
+
+  /* Improve touch targets */
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better spacing on mobile */
+  h1 {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* Prevent content squeezing */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Better container spacing */
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small devices */
+  .container {
+    padding: 0 var(--space-xs);
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
+  h2 {
+    font-size: clamp(1.25rem, 6vw, 1.75rem);
+  }
+
+  h3 {
+    font-size: clamp(1.1rem, 5vw, 1.5rem);
+  }
+
+  /* Ensure proper spacing */
+  body {
+    padding: 0;
+    margin: 0;
   }
 }
