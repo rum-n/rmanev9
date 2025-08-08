@@ -63,6 +63,10 @@ const links: Links[] = [
     url: "https://github.com/rum-n",
   },
   {
+    title: "Twitter",
+    url: "https://x.com/room_n",
+  },
+  {
     title: "Bluesky",
     url: "https://bsky.app/profile/room-n.bsky.social",
   },
@@ -89,17 +93,30 @@ export const Layout = ({ children }: LayoutProps) => {
       setIsMobile(window.innerWidth <= 1300);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <LayoutContainer>
       {children}
-      {location.pathname.includes("/writing/") ? null : <>
-        {!isMobile ? (
-          <LinksBox>
-            <LinksWrapper>
+      {location.pathname.includes("/writing/") ? null : (
+        <>
+          {!isMobile ? (
+            <LinksBox>
+              <LinksWrapper>
+                {(links as Links[]).map((project) => (
+                  <Link
+                    key={project.title}
+                    onClick={() => window.open(project.url || "", "_blank")}
+                  >
+                    {project.title}
+                  </Link>
+                ))}
+              </LinksWrapper>
+            </LinksBox>
+          ) : (
+            <MobileLinksWrapper>
               {(links as Links[]).map((project) => (
                 <Link
                   key={project.title}
@@ -108,19 +125,10 @@ export const Layout = ({ children }: LayoutProps) => {
                   {project.title}
                 </Link>
               ))}
-            </LinksWrapper>
-          </LinksBox>) :
-          <MobileLinksWrapper>
-            {(links as Links[]).map((project) => (
-              <Link
-                key={project.title}
-                onClick={() => window.open(project.url || "", "_blank")}
-              >
-                {project.title}
-              </Link>
-            ))}
-          </MobileLinksWrapper>
-        }
-      </>}
-    </LayoutContainer>);
+            </MobileLinksWrapper>
+          )}
+        </>
+      )}
+    </LayoutContainer>
+  );
 };
