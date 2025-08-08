@@ -1,74 +1,320 @@
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
 import { NavMenu } from "../components/NavMenu";
-import { useState } from "react";
 
-const TitleBox = styled.div`
-  font-family: "Lato", sans-serif;
-  width: 600px;
-  max-width: 100%;
-  padding: 0 1rem;
+const ProjectsContainer = styled.div`
+  width: 100%;
+  max-width: 1200px;
 
   @media (max-width: 768px) {
-    width: 100%;
-    padding: 0;
-    margin-top: 1rem;
+    max-width: 100%;
   }
 `;
 
-const ProjectsWrapper = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  list-style: none;
-  margin-top: 2rem;
-  padding: 0;
-  height: 600px;
-  overflow-y: auto;
-  scrollbar-color: #8a5858 #000000;
-  max-width: 100%;
+const ProjectsSection = styled.section`
+  margin-top: var(--space-2xl);
 
   @media (max-width: 768px) {
-    height: 100%;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 1rem;
+    margin-top: var(--space-xl);
+  }
+
+  @media (max-width: 480px) {
+    margin-top: var(--space-lg);
   }
 `;
 
-const ProjectLine = styled.li`
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-  margin-bottom: 0.5rem;
-  word-wrap: break-word;
+const SectionTitle = styled.h2`
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+  font-size: 1.75rem;
+  font-weight: 600;
+  position: relative;
 
-  span {
-    font-size: 2rem;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--secondary) 100%
+    );
+    border-radius: 2px;
+  }
 
-    @media (max-width: 768px) {
-      font-size: 1.5rem;
-    }
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-md);
+  }
+`;
+
+const ProjectsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--space-xl);
+  margin-bottom: var(--space-3xl);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+  }
+
+  @media (max-width: 480px) {
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+`;
+
+const ProjectCard = styled.div`
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-surface-hover);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(10px);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.05) 0%,
+      rgba(139, 92, 246, 0.05) 100%
+    );
+    opacity: 0;
+    transition: all var(--transition-normal);
+    pointer-events: none;
   }
 
   &:hover {
-    color: #777;
-    transition: 0.2s ease-in-out;
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    &:hover {
+      transform: translateY(-3px);
+    }
   }
 `;
 
-const ProjectDetails = styled.div<{ isExpanded: boolean }>`
-  max-height: ${(props) => (props.isExpanded ? "500px" : "0")};
+const ProjectImage = styled.div<{ imageUrl?: string }>`
+  width: 100%;
+  height: 280px;
+  background: ${(props) =>
+    props.imageUrl
+      ? `url(${props.imageUrl}) center/cover`
+      : "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)"};
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: var(--space-md);
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
-  background-color: #00000082;
-  padding: ${(props) => (props.isExpanded ? "1rem" : "0")};
-  margin-top: 0.5rem;
-  opacity: ${(props) => (props.isExpanded ? "1" : "0")};
-  transform: translateY(${(props) => (props.isExpanded ? "0" : "-10px")});
-  visibility: ${(props) => (props.isExpanded ? "visible" : "hidden")};
+  transition: all var(--transition-normal);
 
-  > div {
-    opacity: ${(props) => (props.isExpanded ? "1" : "0")};
-    transition: opacity 0.2s ease-in-out;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${(props) =>
+      props.imageUrl ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0.1)"};
+    transition: all var(--transition-normal);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.1) 0%,
+      rgba(139, 92, 246, 0.1) 100%
+    );
+    opacity: 0;
+    transition: all var(--transition-normal);
+  }
+
+  span {
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all var(--transition-normal);
+  }
+
+  ${ProjectCard}:hover & {
+    &::before {
+      background: ${(props) =>
+        props.imageUrl ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.2)"};
+    }
+
+    &::after {
+      opacity: 1;
+    }
+
+    span {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    height: 240px;
+  }
+
+  @media (max-width: 480px) {
+    height: 200px;
+  }
+`;
+
+const ProjectContent = styled.div`
+  padding: var(--space-xl);
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    padding: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-md);
+  }
+`;
+
+const ProjectTitle = styled.h3`
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 var(--space-md) 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
+`;
+
+const ProjectMeta = styled.div`
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+`;
+
+const ProjectYear = styled.span`
+  background: var(--primary);
+  color: white;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 500;
+`;
+
+const ProjectTech = styled.span`
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+`;
+
+const ProjectDescription = styled.p`
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 var(--space-md) 0;
+  font-size: 0.95rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+  }
+`;
+
+const ProjectLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition-normal);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-lg);
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+  }
+
+  &:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: var(--primary);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding: var(--space-xs) var(--space-sm);
   }
 `;
 
@@ -78,6 +324,7 @@ interface ProjectData {
   tech: string;
   url?: string;
   description?: string;
+  imageUrl?: string;
 }
 
 const myProjects: ProjectData[] = [
@@ -87,7 +334,7 @@ const myProjects: ProjectData[] = [
     tech: "Highcharts, R",
     url: "",
     description:
-      "A data visualization project for analyzing runningrace results and statistics.",
+      "A data visualization project for analyzing running race results and statistics.",
   },
   {
     title: "Gripindoor",
@@ -108,13 +355,14 @@ const myProjects: ProjectData[] = [
     tech: "React, Ghost",
     url: "https://finderskeepers.netlify.app/",
     description:
-      "A platform for freelancers and agencies to browse opportunities and potenatially find new clients.",
+      "A platform for freelancers and agencies to browse opportunities and potentially find new clients.",
   },
   {
     title: "Podcast Chatterbox",
     year: "2019",
     tech: "React, AWS",
     url: "https://podcastchatterbox.netlify.app/",
+    imageUrl: "/assets/podcast-chatterbox.png",
     description:
       "A platform for podcasters to find people that want to be interviewed.",
   },
@@ -123,6 +371,7 @@ const myProjects: ProjectData[] = [
     year: "2021",
     tech: "Vue.js, Strapi",
     url: "https://remoteweb3jobs.netlify.app/",
+    imageUrl: "/assets/web3.png",
     description: "A job board for web3/blockchain jobs.",
   },
   {
@@ -130,6 +379,7 @@ const myProjects: ProjectData[] = [
     year: "2024",
     tech: "React, Next.js, Prisma, Supabase",
     url: "https://bouldermonday.com/",
+    imageUrl: "/assets/boulder-monday.png",
     description: "A social media platform for indoor bouldering.",
   },
   {
@@ -137,6 +387,7 @@ const myProjects: ProjectData[] = [
     year: "2025",
     tech: "Rust, React, Next.js, Prisma, MongoDB",
     url: "https://dailyobservable.com/",
+    imageUrl: "/assets/observable.png",
     description:
       "A newsletter service delivering daily job opportunities based on your preferences.",
   },
@@ -145,6 +396,7 @@ const myProjects: ProjectData[] = [
     year: "2025",
     tech: "React, Next.js, Vercel AI SDK",
     url: "https://devjob-flashcards.vercel.app",
+    imageUrl: "/assets/flashcards.png",
     description:
       "A flashcard app to help developers prepare for technical interviews. It also has a feature for the user to explain a software concept out loud and get feedback from AI.",
   },
@@ -153,6 +405,7 @@ const myProjects: ProjectData[] = [
     year: "2025",
     tech: "React, Next.js, Prisma, MongoDB, Mistral AI",
     url: "https://remotejobmatching.com",
+    imageUrl: "/assets/rjm.png",
     description:
       "A platform that matches job seekers with remote job opportunities based on their skills and preferences. It uses AI to analyze resumes and job descriptions to find the best matches. It also write a cover letter for the user based on their resume and the job description.",
   },
@@ -164,6 +417,7 @@ const clientProjects = [
     year: "2020",
     tech: "React",
     url: "https://artq-pi.vercel.app/",
+    imageUrl: "/assets/artq.png",
     description:
       "An MVP for a social media platform for artists. I worked on the project together with a designer and another developer as part of a hackathon where students come together to assist startup founders work on their venture ideas.",
   },
@@ -172,6 +426,7 @@ const clientProjects = [
     year: "2022",
     tech: "React, Next.js, Payload CMS",
     url: "https://brightvision.com/",
+    imageUrl: "/assets/bv.png",
     description:
       "Content management system for a marketing agency, based in Sweden. I worked together with the company's marketing team to create a custom CMS for their website.",
   },
@@ -187,60 +442,58 @@ const clientProjects = [
     year: "2025",
     tech: "Next.js, Prisma, Stripe",
     url: "https://villy-shop.vercel.app",
+    imageUrl: "/assets/artshop.png",
     description:
       "An multi-lingual artist's homepage and webshop with a custom admin panel to upload new artworks, manage content and customer orders.",
   },
 ];
 
-export const Projects = () => {
-  const [expandedProject, setExpandedProject] = useState<string | null>(null);
+const renderProjectCard = (project: ProjectData) => (
+  <ProjectCard key={project.title}>
+    <ProjectImage imageUrl={project.imageUrl}>
+      <span>{project.imageUrl ? "" : project.title}</span>
+    </ProjectImage>
+    <ProjectContent>
+      <ProjectTitle>{project.title}</ProjectTitle>
+      <ProjectMeta>
+        <ProjectYear>{project.year}</ProjectYear>
+        <ProjectTech>{project.tech}</ProjectTech>
+      </ProjectMeta>
+      <ProjectDescription>
+        {project.description || "No description available"}
+      </ProjectDescription>
+      {project.url && (
+        <ProjectLink
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit Project →
+        </ProjectLink>
+      )}
+    </ProjectContent>
+  </ProjectCard>
+);
 
-  const toggleProject = (title: string) => {
-    setExpandedProject(expandedProject === title ? null : title);
-  };
-
-  const renderProjectList = (projects: ProjectData[], label: string) => (
-    <>
-      <span>{label}</span>
+const renderProjectList = (projects: ProjectData[], label: string) => (
+  <ProjectsSection key={label}>
+    <SectionTitle>{label}</SectionTitle>
+    <ProjectsGrid>
       {projects
         .sort((a, b) => Number(b.year) - Number(a.year))
-        .map((project) => (
-          <div key={project.title}>
-            <ProjectLine onClick={() => toggleProject(project.title)}>
-              <span style={{ fontSize: "2rem" }}>{project.title}</span> /{" "}
-              {project.year} / {project.tech}
-            </ProjectLine>
-            <ProjectDetails isExpanded={expandedProject === project.title}>
-              {project.description || "No description available"}
-              {project.url && (
-                <div style={{ marginTop: "1rem" }}>
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Visit Project →
-                  </a>
-                </div>
-              )}
-            </ProjectDetails>
-          </div>
-        ))}
-    </>
-  );
+        .map(renderProjectCard)}
+    </ProjectsGrid>
+  </ProjectsSection>
+);
 
+export const Projects = () => {
   return (
     <Layout>
-      <TitleBox>
+      <ProjectsContainer>
         <NavMenu menuItem="Projects" />
-        <ProjectsWrapper>
-          {renderProjectList(
-            clientProjects as ProjectData[],
-            "Client projects"
-          )}
-          {renderProjectList(myProjects as ProjectData[], "Personal projects")}
-        </ProjectsWrapper>
-      </TitleBox>
+        {renderProjectList(clientProjects as ProjectData[], "Client Projects")}
+        {renderProjectList(myProjects as ProjectData[], "Personal Projects")}
+      </ProjectsContainer>
     </Layout>
   );
 };

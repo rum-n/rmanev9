@@ -7,49 +7,151 @@ interface NavMenuProps {
   menuItem: string;
 }
 
+const NavContainer = styled.nav`
+  margin-bottom: var(--space-2xl);
+
+  @media (max-width: 768px) {
+    margin-bottom: var(--space-xl);
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: var(--space-lg);
+  }
+`;
+
 const NameText = styled.h1`
   margin: 0;
   padding: 0;
-  margin-left: -0.3rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-sm);
 
   @media (max-width: 768px) {
-    margin-top: 1rem;
+    margin-top: var(--space-lg);
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+
+  @media (max-width: 480px) {
+    margin-top: var(--space-md);
+    font-size: clamp(1.5rem, 7vw, 2rem);
   }
 `;
 
 const SubtitleText = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.25rem;
   margin: 0;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: var(--space-md);
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: var(--space-md);
+  }
 `;
 
 const MenuList = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: row;
-  padding-left: 1rem;
-  margin-left: -1rem;
-  gap: 2rem;
-`;
+  gap: var(--space-xl);
+  margin: 0;
+  padding: 0;
+  margin-bottom: var(--space-xl);
 
-const MenuItemList = styled.li`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: 0.2s ease-in-out;
+  @media (max-width: 768px) {
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+  }
 
-  &:hover {
-    color: #777;
-    transition: 0.2s ease-in-out;
+  @media (max-width: 480px) {
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
   }
 `;
 
-const MenuDot = styled.div`
-  width: 0.5rem;
-  height: 0.5rem;
-  background: #8a5858;
+const MenuItem = styled.li`
+  position: relative;
+`;
+
+const MenuButton = styled.button<{ isActive: boolean }>`
+  position: relative;
+  background: ${(props) =>
+    props.isActive ? "var(--bg-surface)" : "transparent"};
+  border: 1px solid
+    ${(props) => (props.isActive ? "var(--primary)" : "transparent")};
+  color: ${(props) =>
+    props.isActive ? "var(--text-primary)" : "var(--text-secondary)"};
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  backdrop-filter: ${(props) => (props.isActive ? "blur(10px)" : "none")};
+  min-height: 44px;
+  min-width: 44px;
+
+  &:hover {
+    background: var(--bg-surface-hover);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--secondary) 100%
+    );
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    z-index: -1;
+  }
+
+  &:hover::before {
+    opacity: 0.1;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+    padding: var(--space-xs);
+  }
+`;
+
+const ActiveIndicator = styled.div`
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--primary);
   border-radius: 50%;
-  margin-right: 0.5rem;
-  margin-left: -1rem;
+  box-shadow: 0 0 8px var(--primary);
 `;
 
 const menuItems = [
@@ -65,11 +167,15 @@ const menuItems = [
     title: "Writing",
     url: "/writing",
   },
+  // {
+  //   title: "Contact",
+  //   url: "/contact",
+  // },
 ];
 
 export const NavMenu = ({ menuItem }: NavMenuProps) => {
   const navigate = useNavigate();
-  //@ts-ignore
+  //@ts-expect-error - PathContext type definition needs to be updated
   const { setPath } = useContext(PathContext);
 
   const handleNavigation = (url: string) => {
@@ -78,20 +184,27 @@ export const NavMenu = ({ menuItem }: NavMenuProps) => {
   };
 
   return (
-    <>
+    <NavContainer>
       <MenuList>
         {menuItems.map((item, index) => (
-          <MenuItemList onClick={() => handleNavigation(item.url)} key={index}>
-            {menuItem === item.title ? <MenuDot /> : ""} {item.title}
-          </MenuItemList>
+          <MenuItem key={index}>
+            <MenuButton
+              isActive={menuItem === item.title}
+              onClick={() => handleNavigation(item.url)}
+            >
+              {item.title}
+              {menuItem === item.title && <ActiveIndicator />}
+            </MenuButton>
+          </MenuItem>
         ))}
       </MenuList>
+
       {menuItem === "Home" && (
         <>
           <NameText>Rumen Manev</NameText>
-          <SubtitleText>Fullstack developer</SubtitleText>
+          <SubtitleText>Fullstack Software Engineer</SubtitleText>
         </>
       )}
-    </>
+    </NavContainer>
   );
 };
