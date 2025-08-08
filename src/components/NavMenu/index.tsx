@@ -46,7 +46,7 @@ const SubtitleText = styled.p`
   margin: 0;
   color: var(--text-secondary);
   font-weight: 500;
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-md);
 
   @media (max-width: 768px) {
     font-size: 1.1rem;
@@ -167,10 +167,10 @@ const menuItems = [
     title: "Writing",
     url: "/writing",
   },
-  {
-    title: "Contact",
-    url: "/contact",
-  },
+  // {
+  //   title: "Contact",
+  //   url: "/contact",
+  // },
 ];
 
 export const NavMenu = ({ menuItem }: NavMenuProps) => {
@@ -202,7 +202,7 @@ export const NavMenu = ({ menuItem }: NavMenuProps) => {
       {menuItem === "Home" && (
         <>
           <NameText>Rumen Manev</NameText>
-          <SubtitleText>Fullstack Developer</SubtitleText>
+          <SubtitleText>Fullstack Software Engineer</SubtitleText>
         </>
       )}
     </NavContainer>

@@ -80,40 +80,46 @@ const BlogContent = styled.div`
   line-height: 1.7;
   font-size: 1.1rem;
   color: var(--text-secondary);
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: var(--text-primary);
     font-weight: 600;
     margin-top: var(--space-2xl);
     margin-bottom: var(--space-md);
     line-height: 1.3;
   }
-  
+
   h1 {
     font-size: 1.75rem;
   }
-  
+
   h2 {
     font-size: 1.5rem;
   }
-  
+
   h3 {
     font-size: 1.25rem;
   }
-  
+
   p {
     margin-bottom: var(--space-lg);
   }
-  
-  ul, ol {
+
+  ul,
+  ol {
     margin-bottom: var(--space-lg);
     padding-left: var(--space-xl);
   }
-  
+
   li {
     margin-bottom: var(--space-xs);
   }
-  
+
   pre {
     background: var(--bg-tertiary);
     padding: var(--space-lg);
@@ -124,7 +130,7 @@ const BlogContent = styled.div`
     border: 1px solid var(--bg-surface-hover);
     backdrop-filter: blur(10px);
   }
-  
+
   code {
     font-family: var(--font-mono);
     background: var(--bg-surface);
@@ -133,13 +139,13 @@ const BlogContent = styled.div`
     font-size: 0.9em;
     color: var(--primary);
   }
-  
+
   pre code {
     background: none;
     padding: 0;
     color: var(--text-primary);
   }
-  
+
   blockquote {
     border-left: 4px solid var(--primary);
     padding-left: var(--space-lg);
@@ -147,36 +153,37 @@ const BlogContent = styled.div`
     font-style: italic;
     color: var(--text-secondary);
   }
-  
+
   a {
     color: var(--primary);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: all var(--transition-fast);
-    
+
     &:hover {
       border-bottom-color: var(--primary);
     }
   }
-  
+
   img {
     max-width: 100%;
     height: auto;
     border-radius: var(--radius-lg);
     margin: var(--space-lg) 0;
   }
-  
+
   table {
     width: 100%;
     border-collapse: collapse;
     margin: var(--space-lg) 0;
-    
-    th, td {
+
+    th,
+    td {
       padding: var(--space-sm) var(--space-md);
       text-align: left;
       border-bottom: 1px solid var(--bg-surface-hover);
     }
-    
+
     th {
       background: var(--bg-surface);
       font-weight: 600;
@@ -192,7 +199,7 @@ const NavigationContainer = styled.div`
   padding-top: var(--space-xl);
   border-top: 1px solid var(--bg-surface-hover);
   gap: var(--space-lg);
-  
+
   @media (max-width: 768px) {
     flex-direction: column;
     gap: var(--space-md);
@@ -202,8 +209,9 @@ const NavigationContainer = styled.div`
 const NavigationButton = styled.button<{ disabled: boolean }>`
   background: var(--bg-surface);
   border: 1px solid var(--bg-surface-hover);
-  color: ${props => props.disabled ? 'var(--text-tertiary)' : 'var(--text-secondary)'};
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  color: ${(props) =>
+    props.disabled ? "var(--text-tertiary)" : "var(--text-secondary)"};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   font-size: 0.9rem;
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-lg);
@@ -217,14 +225,14 @@ const NavigationButton = styled.button<{ disabled: boolean }>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
+
   &:hover:not(:disabled) {
     background: var(--bg-surface-hover);
     color: var(--text-primary);
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
   }
-  
+
   &:disabled {
     opacity: 0.5;
   }
@@ -279,18 +287,16 @@ export const BlogPost = () => {
     <Layout>
       <BlogPostContainer>
         <BlogPostSection>
-          <BackButton onClick={handleBack}>
-            ← Back to Writing
-          </BackButton>
-          
+          <BackButton onClick={handleBack}>← Back to Writing</BackButton>
+
           <BlogHeader>
             <BlogTitle>{post.title}</BlogTitle>
             <BlogMeta>
               <BlogDate>
-                {new Date(post.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
                 })}
               </BlogDate>
               <BlogTags>
@@ -300,12 +306,15 @@ export const BlogPost = () => {
               </BlogTags>
             </BlogMeta>
           </BlogHeader>
-          
+
           <BlogContent dangerouslySetInnerHTML={{ __html: post.content }} />
 
           <NavigationContainer>
             {previousPost ? (
-              <NavigationButton onClick={() => handleNavigate(previousPost.slug)}>
+              <NavigationButton
+                onClick={() => handleNavigate(previousPost.slug)}
+                disabled={false}
+              >
                 ← {previousPost.title}
               </NavigationButton>
             ) : (
@@ -313,7 +322,10 @@ export const BlogPost = () => {
             )}
 
             {nextPost && (
-              <NavigationButton onClick={() => handleNavigate(nextPost.slug)}>
+              <NavigationButton
+                onClick={() => handleNavigate(nextPost.slug)}
+                disabled={false}
+              >
                 {nextPost.title} →
               </NavigationButton>
             )}

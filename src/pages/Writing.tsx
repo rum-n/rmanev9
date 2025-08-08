@@ -28,11 +28,11 @@ const SearchInput = styled.input`
   font-size: 1rem;
   transition: all var(--transition-normal);
   backdrop-filter: blur(10px);
-  
+
   &::placeholder {
     color: var(--text-tertiary);
   }
-  
+
   &:focus {
     outline: none;
     border-color: var(--primary);
@@ -51,21 +51,25 @@ const TagsContainer = styled.div`
 const Tag = styled.button<{ isActive: boolean }>`
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-lg);
-  border: 1px solid ${props => props.isActive ? 'var(--primary)' : 'var(--bg-surface-hover)'};
-  background: ${props => props.isActive ? 'var(--primary)' : 'var(--bg-surface)'};
-  color: ${props => props.isActive ? 'white' : 'var(--text-secondary)'};
+  border: 1px solid
+    ${(props) =>
+      props.isActive ? "var(--primary)" : "var(--bg-surface-hover)"};
+  background: ${(props) =>
+    props.isActive ? "var(--primary)" : "var(--bg-surface)"};
+  color: ${(props) => (props.isActive ? "white" : "var(--text-secondary)")};
   cursor: pointer;
   transition: all var(--transition-normal);
   font-size: 0.875rem;
   font-weight: 500;
   backdrop-filter: blur(10px);
-  
+
   &:hover {
-    background: ${props => props.isActive ? 'var(--primary-dark)' : 'var(--bg-surface-hover)'};
+    background: ${(props) =>
+      props.isActive ? "var(--primary-dark)" : "var(--bg-surface-hover)"};
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
   }
-  
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
@@ -86,7 +90,7 @@ const BlogPostCard = styled.div`
   cursor: pointer;
   transition: all var(--transition-normal);
   backdrop-filter: blur(10px);
-  
+
   &:hover {
     background: var(--bg-surface-hover);
     transform: translateY(-2px);
@@ -148,16 +152,18 @@ const PaginationContainer = styled.div`
 const PaginationButton = styled.button<{ disabled: boolean }>`
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-lg);
-  background: ${props => props.disabled ? 'var(--bg-surface)' : 'var(--primary)'};
-  color: ${props => props.disabled ? 'var(--text-tertiary)' : 'white'};
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
-  opacity: ${props => props.disabled ? 0.5 : 1};
+  background: ${(props) =>
+    props.disabled ? "var(--bg-surface)" : "var(--primary)"};
+  color: ${(props) => (props.disabled ? "var(--text-tertiary)" : "white")};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   border: none;
   transition: all var(--transition-normal);
   font-weight: 500;
-  
+
   &:hover:not(:disabled) {
-    background: ${props => props.disabled ? 'var(--bg-surface)' : 'var(--primary-dark)'};
+    background: ${(props) =>
+      props.disabled ? "var(--bg-surface)" : "var(--primary-dark)"};
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
   }
@@ -245,7 +251,7 @@ export const Writing = () => {
               }}
             />
           </SearchContainer>
-          
+
           <TagsContainer>
             {allTags.map((tag) => (
               <Tag
@@ -257,7 +263,7 @@ export const Writing = () => {
               </Tag>
             ))}
           </TagsContainer>
-          
+
           <BlogList>
             {paginatedPosts.length > 0 ? (
               paginatedPosts.map((post) => (
@@ -267,10 +273,10 @@ export const Writing = () => {
                 >
                   <BlogMeta>
                     <BlogDate>
-                      {new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
                       })}
                     </BlogDate>
                     <BlogTags>
@@ -287,12 +293,10 @@ export const Writing = () => {
                 </BlogPostCard>
               ))
             ) : (
-              <NoResults>
-                No posts found matching your criteria.
-              </NoResults>
+              <NoResults>No posts found matching your criteria.</NoResults>
             )}
           </BlogList>
-          
+
           {totalPages > 1 && (
             <PaginationContainer>
               <PaginationButton
@@ -308,7 +312,9 @@ export const Writing = () => {
               </PageInfo>
               <PaginationButton
                 onClick={() =>
-                  setCurrentPage((prev: number) => Math.min(totalPages, prev + 1))
+                  setCurrentPage((prev: number) =>
+                    Math.min(totalPages, prev + 1)
+                  )
                 }
                 disabled={currentPage === totalPages}
               >

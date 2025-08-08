@@ -208,6 +208,7 @@ export const Home = () => {
               <TechTag>TypeScript</TechTag>
               <TechTag>Next.js</TechTag>
               <TechTag>Tailwind</TechTag>
+              <TechTag>Styled Components</TechTag>
               <TechTag>Shadcn</TechTag>
               <TechTag>Vercel</TechTag>
               <TechTag>AWS</TechTag>
@@ -227,7 +228,7 @@ export const Home = () => {
               and if anything catches your eye - reach out!
             </IntroText>
             <CTAButton onClick={handleProjectsClick}>
-              View My Projects →
+              View some projects →
             </CTAButton>
           </CallToAction>
         </ContentSection>
