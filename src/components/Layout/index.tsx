@@ -182,14 +182,6 @@ const GitHubIcon = () => (
   </IconWrapper>
 );
 
-const BlueskyIcon = () => (
-  <IconWrapper>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L19 8l-8 9z" />
-    </svg>
-  </IconWrapper>
-);
-
 const TwitterIcon = () => (
   <IconWrapper>
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -214,14 +206,6 @@ const LinkedInIcon = () => (
   </IconWrapper>
 );
 
-const XingIcon = () => (
-  <IconWrapper>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.5 0h-13C2.5 0 0 2.5 0 5.5v13C0 21.5 2.5 24 5.5 24h13c3 0 5.5-2.5 5.5-5.5v-13C24 2.5 21.5 0 18.5 0zM7.5 16.5l-2.5-3.5 2.5-3.5h2l-2.5 3.5 2.5 3.5H7.5zm9 0l-2.5-3.5 2.5-3.5h2l-2.5 3.5 2.5 3.5h-2z" />
-    </svg>
-  </IconWrapper>
-);
-
 interface SocialLink {
   title: string;
   url: string;
@@ -233,11 +217,6 @@ const socialLinks: SocialLink[] = [
     title: "GitHub",
     url: "https://github.com/rum-n",
     icon: <GitHubIcon />,
-  },
-  {
-    title: "Bluesky",
-    url: "https://bsky.app/profile/room-n.bsky.social",
-    icon: <BlueskyIcon />,
   },
   {
     title: "X (Twitter)",
@@ -253,11 +232,6 @@ const socialLinks: SocialLink[] = [
     title: "LinkedIn",
     url: "https://www.linkedin.com/in/rmanev/",
     icon: <LinkedInIcon />,
-  },
-  {
-    title: "Xing",
-    url: "https://www.xing.com/profile/Rumen_Manev",
-    icon: <XingIcon />,
   },
 ];
 

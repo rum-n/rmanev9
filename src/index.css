@@ -359,7 +359,7 @@ button {
 
 /* Selection */
 ::selection {
-  background: var(--primary);
+  background: var(--gray-700);
   color: white;
 }
 

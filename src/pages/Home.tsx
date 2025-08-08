@@ -44,7 +44,7 @@ const IntroText = styled.p`
 `;
 
 const HighlightText = styled.span`
-  color: var(--text-primary);
+  color: var(--text-primary-dark);
   font-weight: 600;
 `;
 
@@ -228,7 +228,7 @@ export const Home = () => {
               and if anything catches your eye - reach out!
             </IntroText>
             <CTAButton onClick={handleProjectsClick}>
-              View some projects →
+              View my projects →
             </CTAButton>
           </CallToAction>
         </ContentSection>
