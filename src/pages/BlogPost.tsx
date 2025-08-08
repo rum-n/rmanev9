@@ -3,108 +3,243 @@ import styled from "styled-components";
 import { Layout } from "../components/Layout";
 import { blogPosts } from "../data/blogPosts";
 
+const BlogPostContainer = styled.div`
+  width: 100%;
+  max-width: 800px;
+`;
+
+const BlogPostSection = styled.section`
+  margin-top: var(--space-2xl);
+`;
+
+const BackButton = styled.button`
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-surface-hover);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-lg);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(10px);
+  margin-bottom: var(--space-xl);
+
+  &:hover {
+    background: var(--bg-surface-hover);
+    color: var(--text-primary);
+    transform: translateX(-2px);
+    box-shadow: var(--shadow-md);
+  }
+`;
+
+const BlogHeader = styled.div`
+  margin-bottom: var(--space-2xl);
+`;
+
+const BlogTitle = styled.h1`
+  color: var(--text-primary);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 var(--space-md) 0;
+  letter-spacing: -0.02em;
+`;
+
+const BlogMeta = styled.div`
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+`;
+
+const BlogDate = styled.span`
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+`;
+
+const BlogTags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+`;
+
+const BlogTag = styled.span`
+  background: var(--bg-surface-hover);
+  color: var(--text-secondary);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+`;
+
 const BlogContent = styled.div`
-  margin-top: 2rem;
-  line-height: 1.6;
+  line-height: 1.7;
   font-size: 1.1rem;
+  color: var(--text-secondary);
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+    line-height: 1.3;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
 
   h2 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
   }
 
   h3 {
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
   }
 
   p {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-lg);
   }
 
   ul,
   ol {
-    margin-bottom: 1rem;
-    padding-left: 1.5rem;
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-xl);
+  }
+
+  li {
+    margin-bottom: var(--space-xs);
   }
 
   pre {
-    background-color: #2d2d2d;
-    padding: 1rem;
-    border-radius: 4px;
+    background: var(--bg-tertiary);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
     overflow-x: auto;
-    margin: 1rem 0;
-    font-size: 0.8rem;
+    margin: var(--space-lg) 0;
+    font-size: 0.9rem;
+    border: 1px solid var(--bg-surface-hover);
+    backdrop-filter: blur(10px);
   }
 
   code {
-    font-family: monospace;
+    font-family: var(--font-mono);
+    background: var(--bg-surface);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.9em;
+    color: var(--primary);
   }
-`;
 
-const TitleBox = styled.div`
-  font-family: "Lato", sans-serif;
-  width: 600px;
+  pre code {
+    background: none;
+    padding: 0;
+    color: var(--text-primary);
+  }
 
-  @media (max-width: 768px) {
+  blockquote {
+    border-left: 4px solid var(--primary);
+    padding-left: var(--space-lg);
+    margin: var(--space-lg) 0;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      border-bottom-color: var(--primary);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    margin: var(--space-lg) 0;
+  }
+
+  table {
     width: 100%;
-  }
-`;
+    border-collapse: collapse;
+    margin: var(--space-lg) 0;
 
-const BlogDate = styled.span`
-  font-size: 0.9rem;
-  color: #777;
-`;
+    th,
+    td {
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      border-bottom: 1px solid var(--bg-surface-hover);
+    }
 
-const BackButton = styled.button`
-  background: none;
-  border: none;
-  color: #8a5858;
-  cursor: pointer;
-  font-size: 1.2rem;
-  padding: 0;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  &:hover {
-    color: #6d4646;
+    th {
+      background: var(--bg-surface);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
   }
 `;
 
 const NavigationContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #eeeeee81;
-  gap: 2rem;
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--bg-surface-hover);
+  gap: var(--space-lg);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
 `;
 
-const NavigationButton = styled.button`
-  background: none;
-  border: none;
-  color: #8a5858;
-  cursor: pointer;
-  font-size: 1rem;
-  padding: 0.5rem 0;
-  display: block;
-  transition: color 0.2s ease-in-out;
-  max-width: 250px;
+const NavigationButton = styled.button<{ disabled: boolean }>`
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-surface-hover);
+  color: ${(props) =>
+    props.disabled ? "var(--text-tertiary)" : "var(--text-secondary)"};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  font-size: 0.9rem;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(10px);
+  max-width: 300px;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 
-  &:hover {
-    color: #6d4646;
+  &:hover:not(:disabled) {
+    background: var(--bg-surface-hover);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
 
   &:disabled {
-    color: #ccc;
-    cursor: not-allowed;
+    opacity: 0.5;
   }
+`;
+
+const EmptyDiv = styled.div`
+  flex: 1;
 `;
 
 export const BlogPost = () => {
@@ -114,7 +249,18 @@ export const BlogPost = () => {
   const post = blogPosts.find((post) => post.slug === slug);
 
   if (!post) {
-    return <div>Post not found</div>;
+    return (
+      <Layout>
+        <BlogPostContainer>
+          <BlogPostSection>
+            <BackButton onClick={() => navigate("/writing")}>
+              ← Back to Writing
+            </BackButton>
+            <h1>Post not found</h1>
+          </BlogPostSection>
+        </BlogPostContainer>
+      </Layout>
+    );
   }
 
   const currentIndex = blogPosts.findIndex((p) => p.slug === slug);
@@ -139,28 +285,53 @@ export const BlogPost = () => {
 
   return (
     <Layout>
-      <TitleBox>
-        <BackButton onClick={handleBack}>← Back</BackButton>
-        <h1>{post.title}</h1>
-        <BlogDate>{new Date(post.date).toLocaleDateString()}</BlogDate>
-        <BlogContent dangerouslySetInnerHTML={{ __html: post.content }} />
+      <BlogPostContainer>
+        <BlogPostSection>
+          <BackButton onClick={handleBack}>← Back to Writing</BackButton>
 
-        <NavigationContainer>
-          {previousPost ? (
-            <NavigationButton onClick={() => handleNavigate(previousPost.slug)}>
-              ← Previous: {previousPost.title}
-            </NavigationButton>
-          ) : (
-            <div></div>
-          )}
+          <BlogHeader>
+            <BlogTitle>{post.title}</BlogTitle>
+            <BlogMeta>
+              <BlogDate>
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </BlogDate>
+              <BlogTags>
+                {post.tags.map((tag) => (
+                  <BlogTag key={tag}>{tag}</BlogTag>
+                ))}
+              </BlogTags>
+            </BlogMeta>
+          </BlogHeader>
 
-          {nextPost && (
-            <NavigationButton onClick={() => handleNavigate(nextPost.slug)}>
-              Next: {nextPost.title} →
-            </NavigationButton>
-          )}
-        </NavigationContainer>
-      </TitleBox>
+          <BlogContent dangerouslySetInnerHTML={{ __html: post.content }} />
+
+          <NavigationContainer>
+            {previousPost ? (
+              <NavigationButton
+                onClick={() => handleNavigate(previousPost.slug)}
+                disabled={false}
+              >
+                ← {previousPost.title}
+              </NavigationButton>
+            ) : (
+              <EmptyDiv />
+            )}
+
+            {nextPost && (
+              <NavigationButton
+                onClick={() => handleNavigate(nextPost.slug)}
+                disabled={false}
+              >
+                {nextPost.title} →
+              </NavigationButton>
+            )}
+          </NavigationContainer>
+        </BlogPostSection>
+      </BlogPostContainer>
     </Layout>
   );
 };

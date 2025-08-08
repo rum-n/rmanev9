@@ -51,7 +51,7 @@ Content-Security-Policy: default-src 'self'; script-src 'self' https://trusted-c
       <p>Validate user input on both client and server sides.</p>
       <pre><code>function validateInput(input) {
   // Remove potentially dangerous characters or patterns
-  return input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+  return input.replace(/<script.*?</script>/gi, '');
 }
 
 // Better approach: whitelist validation

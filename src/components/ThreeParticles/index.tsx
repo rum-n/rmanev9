@@ -2,115 +2,164 @@ import * as THREE from "three";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const WaveWrapper = styled.div`
-  position: absolute;
-  z-index: -10;
+const ParticlesWrapper = styled.div`
+  position: fixed;
+  z-index: -1;
   top: 0;
   left: 0;
-  width: 50vw;
-  overflow: hidden;
-  @media (max-width: 768px) {
-    /* background-color: #000000; */
-  }
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.6;
 
+  @media (max-width: 768px) {
+    opacity: 0.3;
+  }
 `;
 
-function ConfinedWaveAnimation() {
+function ParticlesAnimation() {
   const refContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const refContainerElement = refContainer.current;
     const scene = new THREE.Scene();
 
     const sizes = {
-      width: window.innerWidth * 0.5,
+      width: window.innerWidth,
       height: window.innerHeight,
     };
 
-    const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      sizes.width / sizes.height,
+      0.1,
+      100
+    );
     camera.position.z = 5;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+    });
     renderer.setSize(sizes.width, sizes.height);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    if (refContainer.current) {
-      refContainer.current.appendChild(renderer.domElement);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    if (refContainerElement) {
+      refContainerElement.appendChild(renderer.domElement);
     }
 
-    // Create a plane with vertical lines only
-    const widthSegments = 50;
-    const heightSegments = 50;
-    const geometry = new THREE.PlaneGeometry(5, 10, widthSegments, heightSegments);
-    const lineVertices: number[] = [];
-    const { array: vertices } = geometry.attributes.position;
+    // Create particles
+    const particlesCount = 200;
+    const positions = new Float32Array(particlesCount * 3);
+    const colors = new Float32Array(particlesCount * 3);
 
-    // Extract only vertical line segments from the plane geometry
-    for (let y = 0; y < heightSegments; y++) {
-      for (let x = 0; x <= widthSegments; x++) {
-        const i = y * (widthSegments + 1) + x;
-        const j = (y + 1) * (widthSegments + 1) + x;
+    for (let i = 0; i < particlesCount * 3; i += 3) {
+      // Position
+      positions[i] = (Math.random() - 0.5) * 10;
+      positions[i + 1] = (Math.random() - 0.5) * 10;
+      positions[i + 2] = (Math.random() - 0.5) * 10;
 
-        lineVertices.push(vertices[i * 3], vertices[i * 3 + 1], vertices[i * 3 + 2]);
-        lineVertices.push(vertices[j * 3], vertices[j * 3 + 1], vertices[j * 3 + 2]);
-      }
+      // Color - gradient from primary to secondary
+      const colorMix = Math.random();
+      colors[i] = 0.23 + colorMix * 0.14; // R: primary to secondary
+      colors[i + 1] = 0.51 + colorMix * 0.16; // G: primary to secondary
+      colors[i + 2] = 0.96 + colorMix * 0.05; // B: primary to secondary
     }
 
-    const lineGeometry = new THREE.BufferGeometry();
-    lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(lineVertices, 3));
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
-    // Shader for smooth wave displacement on vertical lines
+    // Shader material for animated particles
     const material = new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0.0 },
+        uSize: { value: 30 * window.devicePixelRatio },
       },
       vertexShader: `
         uniform float uTime;
+        uniform float uSize;
+        
+        attribute vec3 color;
+        varying vec3 vColor;
+        
         void main() {
-          vec3 pos = position;
-          pos.z += 3.2 * sin(pos.x * 2.5 + uTime) + 0.15 * sin(pos.y * 2.9 + uTime * 1.7);
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+          vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+          
+          // Rotate
+          float angle = uTime * 0.2;
+          modelPosition.xz *= mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+          
+          // Wave
+          modelPosition.y += sin(modelPosition.x * 2.0 + uTime) * 0.3;
+          modelPosition.y += sin(modelPosition.z * 1.5 + uTime * 0.8) * 0.2;
+          
+          vec4 viewPosition = viewMatrix * modelPosition;
+          vec4 projectedPosition = projectionMatrix * viewPosition;
+          
+          gl_Position = projectedPosition;
+          gl_PointSize = uSize;
+          
+          vColor = color;
         }
       `,
       fragmentShader: `
+        varying vec3 vColor;
+        
         void main() {
-          gl_FragColor = vec4(1.0, 1.0, 1.0, 0.4);
+          // Disc pattern
+          float strength = distance(gl_PointCoord, vec2(0.5));
+          strength = 1.0 - strength;
+          strength = pow(strength, 3.0);
+          
+          // Mix colors
+          vec3 color = mix(vColor, vec3(1.0), 0.3);
+          
+          gl_FragColor = vec4(color, strength * 0.8);
         }
       `,
       transparent: true,
-      opacity: 0.4,
-      wireframe: false,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
     });
 
-    const verticalLines = new THREE.LineSegments(lineGeometry, material);
-    verticalLines.position.x = -2;
-    scene.add(verticalLines);
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
 
-    // Animate the shader's time uniform
-    const animateWave = () => {
-      material.uniforms.uTime.value += 0.002;
+    // Animate
+    const animate = () => {
+      material.uniforms.uTime.value += 0.01;
       renderer.render(scene, camera);
-      requestAnimationFrame(animateWave);
+      requestAnimationFrame(animate);
     };
 
-    animateWave();
+    animate();
 
     // Handle resizing
-    window.addEventListener("resize", () => {
-      sizes.width = window.innerWidth * 0.5;
+    const handleResize = () => {
+      sizes.width = window.innerWidth;
       sizes.height = window.innerHeight;
 
       camera.aspect = sizes.width / sizes.height;
       camera.updateProjectionMatrix();
       renderer.setSize(sizes.width, sizes.height);
-    });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      material.uniforms.uSize.value = 30 * window.devicePixelRatio;
+    };
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      if (refContainer.current) {
-        refContainer.current.removeChild(renderer.domElement);
+      window.removeEventListener("resize", handleResize);
+      if (refContainerElement && renderer.domElement) {
+        refContainerElement.removeChild(renderer.domElement);
       }
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
     };
   }, []);
 
-  return <WaveWrapper ref={refContainer}></WaveWrapper>;
+  return <ParticlesWrapper ref={refContainer}></ParticlesWrapper>;
 }
 
-export default ConfinedWaveAnimation;
+export default ParticlesAnimation;
