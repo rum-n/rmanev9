@@ -63,11 +63,11 @@ const FormInput = styled.input`
   color: var(--text-primary);
   font-size: 1rem;
   transition: all var(--transition-normal);
-  
+
   &::placeholder {
     color: var(--text-tertiary);
   }
-  
+
   &:focus {
     outline: none;
     border-color: var(--primary);
@@ -88,11 +88,11 @@ const FormTextarea = styled.textarea`
   resize: vertical;
   min-height: 120px;
   transition: all var(--transition-normal);
-  
+
   &::placeholder {
     color: var(--text-tertiary);
   }
-  
+
   &:focus {
     outline: none;
     border-color: var(--primary);
@@ -102,28 +102,25 @@ const FormTextarea = styled.textarea`
 `;
 
 const SubmitButton = styled.button<{ disabled: boolean }>`
-  background: ${props => props.disabled ? 'var(--bg-surface)' : 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)'};
-  color: ${props => props.disabled ? 'var(--text-tertiary)' : 'white'};
+  background: ${(props) =>
+    props.disabled
+      ? "var(--bg-surface)"
+      : "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)"};
+  color: ${(props) => (props.disabled ? "var(--text-tertiary)" : "white")};
   border: none;
   padding: var(--space-md) var(--space-xl);
   border-radius: var(--radius-lg);
   font-weight: 600;
   font-size: 1rem;
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   transition: all var(--transition-normal);
-  box-shadow: ${props => props.disabled ? 'none' : 'var(--shadow-md)'};
-  opacity: ${props => props.disabled ? 0.5 : 1};
-  
+  box-shadow: ${(props) => (props.disabled ? "none" : "var(--shadow-md)")};
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+
   &:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
   }
-`;
-
-const ErrorMessage = styled.div`
-  color: var(--error);
-  font-size: 0.875rem;
-  margin-top: var(--space-xs);
 `;
 
 const SuccessMessage = styled.div`
@@ -197,15 +194,16 @@ export const Contact = () => {
     <Layout>
       <ContactContainer>
         <NavMenu menuItem="Contact" />
-        
+
         <ContactSection>
           <ContactHeader>
             <ContactTitle>Get in Touch</ContactTitle>
             <ContactDescription>
-              Have a project in mind or just want to say hello? I'd love to hear from you!
+              Have a project in mind or just want to say hello? I'd love to hear
+              from you!
             </ContactDescription>
           </ContactHeader>
-          
+
           <ContactForm onSubmit={handleSubmit}>
             <FormGroup>
               <FormLabel htmlFor="email">Email Address</FormLabel>
@@ -220,10 +218,9 @@ export const Contact = () => {
                 prefix="Email"
                 field="email"
                 errors={state.errors}
-                component={ErrorMessage}
               />
             </FormGroup>
-            
+
             <FormGroup>
               <FormLabel htmlFor="message">Message</FormLabel>
               <FormTextarea
@@ -238,20 +235,19 @@ export const Contact = () => {
                 prefix="Message"
                 field="message"
                 errors={state.errors}
-                component={ErrorMessage}
               />
             </FormGroup>
-            
+
             <SubmitButton type="submit" disabled={btnDisabled()}>
-              {state.submitting ? 'Sending...' : 'Send Message'}
+              {state.submitting ? "Sending..." : "Send Message"}
             </SubmitButton>
           </ContactForm>
-          
+
           <ContactInfo>
             <ContactInfoTitle>Other Ways to Connect</ContactInfoTitle>
             <ContactInfoText>
-              You can also reach me through LinkedIn, GitHub, or Medium. 
-              I'm always open to discussing new opportunities and collaborations.
+              You can also reach me through LinkedIn, GitHub, or Medium. I'm
+              always open to discussing new opportunities and collaborations.
             </ContactInfoText>
           </ContactInfo>
         </ContactSection>
