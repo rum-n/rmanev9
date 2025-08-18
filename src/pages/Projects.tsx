@@ -383,6 +383,24 @@ const myProjects: ProjectData[] = [
     description: "A social media platform for indoor bouldering.",
   },
   {
+    title: "Remote Job Matching",
+    year: "2025",
+    tech: "React, Next.js, Prisma, MongoDB, Mistral AI",
+    url: "https://remotejobmatching.com",
+    imageUrl: "/assets/rjm.png",
+    description:
+      "A platform that matches job seekers with remote job opportunities based on their skills and preferences. It uses AI to analyze resumes and job descriptions to find the best matches. It also write a cover letter for the user based on their resume and the job description.",
+  },
+  {
+    title: "Dokument Chat",
+    year: "2025",
+    tech: "React, Next.js, Prisma, MongoDB, Qdrant, Mistral AI",
+    url: "https://dokument.chat",
+    imageUrl: "/assets/dokchat.png",
+    description:
+      "A platform that allows users to chat with their documents using AI.",
+  },
+  {
     title: "Daily Observable",
     year: "2025",
     tech: "Rust, React, Next.js, Prisma, MongoDB",
@@ -395,19 +413,10 @@ const myProjects: ProjectData[] = [
     title: "Devjob Flashcards",
     year: "2025",
     tech: "React, Next.js, Vercel AI SDK",
-    url: "https://devjob-flashcards.vercel.app",
+    url: "https://devjobflashcards.com",
     imageUrl: "/assets/flashcards.png",
     description:
       "A flashcard app to help developers prepare for technical interviews. It also has a feature for the user to explain a software concept out loud and get feedback from AI.",
-  },
-  {
-    title: "Remote Job Matching",
-    year: "2025",
-    tech: "React, Next.js, Prisma, MongoDB, Mistral AI",
-    url: "https://remotejobmatching.com",
-    imageUrl: "/assets/rjm.png",
-    description:
-      "A platform that matches job seekers with remote job opportunities based on their skills and preferences. It uses AI to analyze resumes and job descriptions to find the best matches. It also write a cover letter for the user based on their resume and the job description.",
   },
 ];
 
@@ -450,6 +459,7 @@ const clientProjects = [
 
 const renderProjectCard = (project: ProjectData) => (
   <ProjectCard key={project.title}>
+    ,
     <ProjectImage imageUrl={project.imageUrl}>
       <span>{project.imageUrl ? "" : project.title}</span>
     </ProjectImage>
