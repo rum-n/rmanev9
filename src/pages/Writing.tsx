@@ -22,12 +22,11 @@ const SearchInput = styled.input`
   width: 100%;
   padding: var(--space-md) var(--space-lg);
   border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   background: var(--bg-surface);
   color: var(--text-primary);
   font-size: 1rem;
   transition: all var(--transition-normal);
-  backdrop-filter: blur(10px);
 
   &::placeholder {
     color: var(--text-tertiary);
@@ -36,7 +35,6 @@ const SearchInput = styled.input`
   &:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
     background: var(--bg-surface-hover);
   }
 `;
@@ -50,7 +48,7 @@ const TagsContainer = styled.div`
 
 const Tag = styled.button<{ isActive: boolean }>`
   padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   border: 1px solid
     ${(props) =>
       props.isActive ? "var(--primary)" : "var(--bg-surface-hover)"};
@@ -61,18 +59,15 @@ const Tag = styled.button<{ isActive: boolean }>`
   transition: all var(--transition-normal);
   font-size: 0.875rem;
   font-weight: 500;
-  backdrop-filter: blur(10px);
 
   &:hover {
     background: ${(props) =>
       props.isActive ? "var(--primary-dark)" : "var(--bg-surface-hover)"};
     transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
   }
 `;
 
@@ -85,16 +80,14 @@ const BlogList = styled.div`
 const BlogPostCard = styled.div`
   background: var(--bg-surface);
   border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-md);
   padding: var(--space-xl);
   cursor: pointer;
   transition: all var(--transition-normal);
-  backdrop-filter: blur(10px);
 
   &:hover {
     background: var(--bg-surface-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-1px);
   }
 `;
 
@@ -151,7 +144,7 @@ const PaginationContainer = styled.div`
 
 const PaginationButton = styled.button<{ disabled: boolean }>`
   padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   background: ${(props) =>
     props.disabled ? "var(--bg-surface)" : "var(--primary)"};
   color: ${(props) => (props.disabled ? "var(--text-tertiary)" : "white")};
@@ -165,7 +158,6 @@ const PaginationButton = styled.button<{ disabled: boolean }>`
     background: ${(props) =>
       props.disabled ? "var(--bg-surface)" : "var(--primary-dark)"};
     transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
   }
 `;
 

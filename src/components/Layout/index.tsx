@@ -12,11 +12,7 @@ const LayoutContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: var(--space-2xl) var(--space-xl);
-  background: linear-gradient(
-    135deg,
-    var(--bg-primary) 0%,
-    var(--bg-secondary) 100%
-  );
+  background: var(--bg-primary);
 
   @media (max-width: 768px) {
     padding: var(--space-lg) var(--space-md);
@@ -99,19 +95,17 @@ const SocialButton = styled.button`
   justify-content: center;
   width: 48px;
   height: 48px;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   background: var(--bg-surface);
   border: 1px solid var(--bg-surface-hover);
   color: var(--text-secondary);
   font-size: 1.1rem;
   transition: all var(--transition-normal);
-  backdrop-filter: blur(10px);
 
   &:hover {
     background: var(--bg-surface-hover);
     color: var(--text-primary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-1px);
   }
 
   @media (max-width: 768px) {
@@ -142,7 +136,6 @@ const SocialTooltip = styled.div`
   visibility: hidden;
   transition: all var(--transition-fast);
   border: 1px solid var(--bg-surface-hover);
-  backdrop-filter: blur(10px);
   z-index: var(--z-tooltip);
 
   ${SocialButton}:hover & {

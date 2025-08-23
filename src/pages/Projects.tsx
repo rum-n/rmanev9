@@ -37,11 +37,7 @@ const SectionTitle = styled.h2`
     left: 0;
     width: 40px;
     height: 3px;
-    background: linear-gradient(
-      135deg,
-      var(--primary) 0%,
-      var(--secondary) 100%
-    );
+    background: var(--primary);
     border-radius: 2px;
   }
 
@@ -77,41 +73,18 @@ const ProjectsGrid = styled.div`
 const ProjectCard = styled.div`
   background: var(--bg-surface);
   border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-md);
   overflow: hidden;
   transition: all var(--transition-normal);
-  backdrop-filter: blur(10px);
   position: relative;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(59, 130, 246, 0.05) 0%,
-      rgba(139, 92, 246, 0.05) 100%
-    );
-    opacity: 0;
-    transition: all var(--transition-normal);
-    pointer-events: none;
-  }
-
   &:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-xl);
-
-    &::before {
-      opacity: 1;
-    }
+    transform: translateY(-2px);
   }
 
   @media (max-width: 768px) {
     &:hover {
-      transform: translateY(-3px);
+      transform: translateY(-1px);
     }
   }
 `;
@@ -120,9 +93,7 @@ const ProjectImage = styled.div<{ imageUrl?: string }>`
   width: 100%;
   height: 280px;
   background: ${(props) =>
-    props.imageUrl
-      ? `url(${props.imageUrl}) center/cover`
-      : "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)"};
+    props.imageUrl ? `url(${props.imageUrl}) center/cover` : "var(--primary)"};
   position: relative;
   display: flex;
   align-items: center;
@@ -147,22 +118,6 @@ const ProjectImage = styled.div<{ imageUrl?: string }>`
     transition: all var(--transition-normal);
   }
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(59, 130, 246, 0.1) 0%,
-      rgba(139, 92, 246, 0.1) 100%
-    );
-    opacity: 0;
-    transition: all var(--transition-normal);
-  }
-
   span {
     position: relative;
     z-index: 1;
@@ -175,10 +130,6 @@ const ProjectImage = styled.div<{ imageUrl?: string }>`
     &::before {
       background: ${(props) =>
         props.imageUrl ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.2)"};
-    }
-
-    &::after {
-      opacity: 1;
     }
 
     span {
@@ -244,7 +195,7 @@ const ProjectYear = styled.span`
   background: var(--primary);
   color: white;
   padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   font-size: 0.8rem;
   font-weight: 500;
 `;
@@ -280,36 +231,14 @@ const ProjectLink = styled.a`
   font-size: 0.95rem;
   transition: all var(--transition-normal);
   padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-lg);
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-  }
+  border-radius: var(--radius-md);
+  background: var(--bg-surface-hover);
+  border: 1px solid var(--bg-surface-hover);
 
   &:hover {
-    background: rgba(59, 130, 246, 0.2);
+    background: var(--bg-surface);
     border-color: var(--primary);
-    transform: translateX(4px);
-    box-shadow: var(--shadow-md);
-
-    &::before {
-      left: 100%;
-    }
+    transform: translateX(2px);
   }
 
   @media (max-width: 480px) {
@@ -459,7 +388,6 @@ const clientProjects = [
 
 const renderProjectCard = (project: ProjectData) => (
   <ProjectCard key={project.title}>
-    ,
     <ProjectImage imageUrl={project.imageUrl}>
       <span>{project.imageUrl ? "" : project.title}</span>
     </ProjectImage>

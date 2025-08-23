@@ -22,10 +22,7 @@ const NavContainer = styled.nav`
 const NameText = styled.h1`
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
   font-weight: 800;
   letter-spacing: -0.02em;
   margin-bottom: var(--space-sm);
@@ -93,12 +90,11 @@ const MenuButton = styled.button<{ isActive: boolean }>`
   color: ${(props) =>
     props.isActive ? "var(--text-primary)" : "var(--text-secondary)"};
   padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   font-weight: 500;
   font-size: 0.95rem;
   transition: all var(--transition-normal);
   cursor: pointer;
-  backdrop-filter: ${(props) => (props.isActive ? "blur(10px)" : "none")};
   min-height: 44px;
   min-width: 44px;
 
@@ -106,29 +102,6 @@ const MenuButton = styled.button<{ isActive: boolean }>`
     background: var(--bg-surface-hover);
     color: var(--text-primary);
     transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: var(--radius-lg);
-    background: linear-gradient(
-      135deg,
-      var(--primary) 0%,
-      var(--secondary) 100%
-    );
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-    z-index: -1;
-  }
-
-  &:hover::before {
-    opacity: 0.1;
   }
 
   @media (max-width: 768px) {
@@ -151,7 +124,6 @@ const ActiveIndicator = styled.div`
   height: 4px;
   background: var(--primary);
   border-radius: 50%;
-  box-shadow: 0 0 8px var(--primary);
 `;
 
 const menuItems = [

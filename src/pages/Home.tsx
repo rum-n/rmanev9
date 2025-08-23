@@ -58,8 +58,7 @@ const TechStack = styled.div`
   padding: var(--space-lg);
   background: var(--bg-surface);
   border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-xl);
-  backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
 
   @media (max-width: 768px) {
     padding: var(--space-md);
@@ -98,7 +97,7 @@ const TechTag = styled.span`
   background: var(--bg-surface-hover);
   color: var(--text-secondary);
   padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 500;
   border: 1px solid var(--bg-surface-hover);
@@ -112,15 +111,10 @@ const TechTag = styled.span`
 const CallToAction = styled.div`
   margin-top: var(--space-2xl);
   padding: var(--space-xl);
-  background: linear-gradient(
-    135deg,
-    var(--bg-surface) 0%,
-    var(--bg-surface-hover) 100%
-  );
+  background: var(--bg-surface);
   border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-md);
   text-align: center;
-  backdrop-filter: blur(10px);
 
   @media (max-width: 768px) {
     padding: var(--space-lg);
@@ -134,22 +128,21 @@ const CallToAction = styled.div`
 `;
 
 const CTAButton = styled.button`
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  background: var(--primary);
   color: white;
   border: none;
   padding: var(--space-md) var(--space-xl);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
   transition: all var(--transition-normal);
-  box-shadow: var(--shadow-md);
   min-height: 44px;
   min-width: 44px;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    background: var(--primary-dark);
+    transform: translateY(-1px);
   }
 
   @media (max-width: 768px) {
@@ -205,6 +198,7 @@ export const Home = () => {
               <TechTag>React</TechTag>
               <TechTag>React Native</TechTag>
               <TechTag>Node.js</TechTag>
+              <TechTag>JavaScript</TechTag>
               <TechTag>TypeScript</TechTag>
               <TechTag>Next.js</TechTag>
               <TechTag>Tailwind</TechTag>
