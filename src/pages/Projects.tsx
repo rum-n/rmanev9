@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Layout } from "../components/Layout";
-import { NavMenu } from "../components/NavMenu";
+import { WindowFrame } from "../components/WindowFrame";
 
 const ProjectsContainer = styled.div`
   width: 100%;
@@ -424,14 +423,20 @@ const renderProjectList = (projects: ProjectData[], label: string) => (
   </ProjectsSection>
 );
 
+const folderIcon = `data:image/svg+xml;base64,${btoa(`
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <rect x="1" y="4" width="14" height="10" fill="#ffff80" stroke="#808080" stroke-width="1"/>
+  <rect x="1" y="2" width="6" height="3" fill="#ffff80" stroke="#808080" stroke-width="1"/>
+</svg>
+`)}`;
+
 export const Projects = () => {
   return (
-    <Layout>
+    <WindowFrame title="Projects - Windows Explorer" icon={folderIcon}>
       <ProjectsContainer>
-        <NavMenu menuItem="Projects" />
         {renderProjectList(clientProjects as ProjectData[], "Client Projects")}
         {renderProjectList(myProjects as ProjectData[], "Personal Projects")}
       </ProjectsContainer>
-    </Layout>
+    </WindowFrame>
   );
 };
