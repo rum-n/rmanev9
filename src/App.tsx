@@ -1,4 +1,3 @@
-import { Home } from "./pages/Home";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Projects } from "./pages/Projects";
 import { PathProvider } from "./context/PathContext";

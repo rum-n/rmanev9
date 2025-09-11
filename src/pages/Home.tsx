@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Layout } from "../components/Layout";
-import { NavMenu } from "../components/NavMenu";
+import { WindowFrame } from "../components/WindowFrame";
 import { useNavigate } from "react-router-dom";
 
 const HomeContainer = styled.div`
@@ -156,6 +155,15 @@ const CTAButton = styled.button`
   }
 `;
 
+const computerIcon = `data:image/svg+xml;base64,${btoa(`
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <rect x="2" y="3" width="12" height="8" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
+  <rect x="3" y="4" width="10" height="6" fill="#000080"/>
+  <rect x="6" y="11" width="4" height="2" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
+  <rect x="4" y="13" width="8" height="1" fill="#808080"/>
+</svg>
+`)}`;
+
 export const Home = () => {
   const navigate = useNavigate();
 
@@ -164,11 +172,21 @@ export const Home = () => {
   };
 
   return (
-    <Layout>
+    <WindowFrame title="My Computer - System Properties" icon={computerIcon}>
       <HomeContainer>
-        <NavMenu menuItem="Home" />
-
         <ContentSection>
+          <IntroText>
+            <strong>System Information:</strong>
+          </IntroText>
+
+          <IntroText>
+            <strong>Name:</strong> Rumen Manev
+          </IntroText>
+
+          <IntroText>
+            <strong>Type:</strong> Fullstack Software Engineer
+          </IntroText>
+
           <IntroText>
             I used to do{" "}
             <HighlightText>
@@ -193,7 +211,7 @@ export const Home = () => {
           </IntroText>
 
           <TechStack>
-            <TechTitle>Current Tech Stack</TechTitle>
+            <TechTitle>Installed Technologies</TechTitle>
             <TechList>
               <TechTag>React</TechTag>
               <TechTag>React Native</TechTag>
@@ -227,6 +245,6 @@ export const Home = () => {
           </CallToAction>
         </ContentSection>
       </HomeContainer>
-    </Layout>
+    </WindowFrame>
   );
 };

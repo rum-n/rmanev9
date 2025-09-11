@@ -1,321 +1,243 @@
-import styled from "styled-components";
-import { Layout } from "../components/Layout";
-import { NavMenu } from "../components/NavMenu";
-import { blogPosts } from "../data/blogPosts";
-import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
+import styled from "styled-components";
+import { WindowFrame } from "../components/WindowFrame";
+import { blogPosts } from "../data/blogPosts";
 
-const WritingContainer = styled.div`
-  width: 100%;
-  max-width: 800px;
+const DirectoryContainer = styled.div`
+  background: white;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  height: 100%;
 `;
 
-const WritingSection = styled.section`
-  margin-top: var(--space-2xl);
-`;
-
-const SearchContainer = styled.div`
-  margin-bottom: var(--space-xl);
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  padding: var(--space-md) var(--space-lg);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-md);
-  background: var(--bg-surface);
-  color: var(--text-primary);
-  font-size: 1rem;
-  transition: all var(--transition-normal);
-
-  &::placeholder {
-    color: var(--text-tertiary);
-  }
-
-  &:focus {
-    outline: none;
-    border-color: var(--primary);
-    background: var(--bg-surface-hover);
-  }
-`;
-
-const TagsContainer = styled.div`
-  margin: var(--space-xl) 0;
+const DirectoryHeader = styled.div`
+  background: var(--win-gray);
+  border-bottom: 1px solid var(--win-gray-dark);
+  padding: 4px 8px;
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
 `;
 
-const Tag = styled.button<{ isActive: boolean }>`
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md);
-  border: 1px solid
-    ${(props) =>
-      props.isActive ? "var(--primary)" : "var(--bg-surface-hover)"};
-  background: ${(props) =>
-    props.isActive ? "var(--primary)" : "var(--bg-surface)"};
-  color: ${(props) => (props.isActive ? "white" : "var(--text-secondary)")};
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  font-size: 0.875rem;
-  font-weight: 500;
-
-  &:hover {
-    background: ${(props) =>
-      props.isActive ? "var(--primary-dark)" : "var(--bg-surface-hover)"};
-    transform: translateY(-1px);
-  }
-
-  &:focus {
-    outline: none;
-  }
+const DirectoryPath = styled.div`
+  background: white;
+  border: 2px inset var(--win-gray);
+  padding: 2px 4px;
+  flex: 1;
 `;
 
-const BlogList = styled.div`
+const FileList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+  padding: 8px;
+  height: calc(100% - 40px);
+  overflow-y: auto;
+`;
+
+const FileItem = styled.div<{ selected?: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-`;
-
-const BlogPostCard = styled.div`
-  background: var(--bg-surface);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-md);
-  padding: var(--space-xl);
+  align-items: center;
+  padding: 8px 4px;
   cursor: pointer;
-  transition: all var(--transition-normal);
+  user-select: none;
+  background: ${(props) =>
+    props.selected ? "rgba(0, 0, 255, 0.3)" : "transparent"};
+  border: ${(props) =>
+    props.selected ? "1px dotted var(--win-blue)" : "1px solid transparent"};
 
   &:hover {
-    background: var(--bg-surface-hover);
-    transform: translateY(-1px);
-  }
-`;
-
-const BlogTitle = styled.h2`
-  font-size: 1.5rem;
-  margin: 0 0 var(--space-sm) 0;
-  color: var(--text-primary);
-  font-weight: 600;
-  line-height: 1.3;
-`;
-
-const BlogMeta = styled.div`
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin-bottom: var(--space-md);
-`;
-
-const BlogDate = styled.span`
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
-  font-weight: 500;
-`;
-
-const BlogTags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-`;
-
-const BlogTag = styled.span`
-  background: var(--bg-surface-hover);
-  color: var(--text-secondary);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  font-weight: 500;
-`;
-
-const BlogExcerpt = styled.p`
-  margin: 0;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  font-size: 0.95rem;
-`;
-
-const PaginationContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-md);
-  margin-top: var(--space-2xl);
-`;
-
-const PaginationButton = styled.button<{ disabled: boolean }>`
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md);
-  background: ${(props) =>
-    props.disabled ? "var(--bg-surface)" : "var(--primary)"};
-  color: ${(props) => (props.disabled ? "var(--text-tertiary)" : "white")};
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-  border: none;
-  transition: all var(--transition-normal);
-  font-weight: 500;
-
-  &:hover:not(:disabled) {
     background: ${(props) =>
-      props.disabled ? "var(--bg-surface)" : "var(--primary-dark)"};
-    transform: translateY(-1px);
+      props.selected ? "rgba(0, 0, 255, 0.3)" : "rgba(0, 0, 255, 0.1)"};
   }
 `;
 
-const PageInfo = styled.span`
-  color: var(--text-tertiary);
-  font-size: 0.875rem;
-  font-weight: 500;
+const FileIcon = styled.div`
+  width: 32px;
+  height: 32px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 4px;
 `;
 
-const NoResults = styled.div`
+const FileName = styled.div`
   text-align: center;
-  padding: var(--space-2xl);
-  color: var(--text-tertiary);
-  font-size: 1.1rem;
+  word-wrap: break-word;
+  line-height: 1.2;
+  max-width: 100px;
+  font-size: 11px;
 `;
 
-const POSTS_PER_PAGE = 10;
+const NotepadWindow = styled.div`
+  position: fixed;
+  top: 80px;
+  left: 100px;
+  right: 100px;
+  bottom: 120px;
+  background: var(--window-bg);
+  border: 2px outset var(--win-gray);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  font-family: "MS Sans Serif", sans-serif;
+  z-index: 200;
+`;
+
+const NotepadTitleBar = styled.div`
+  height: 18px;
+  background: linear-gradient(90deg, #0000ff 0%, #8080ff 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: move;
+  user-select: none;
+`;
+
+const NotepadContent = styled.div`
+  flex: 1;
+  background: white;
+  border: 2px inset var(--win-gray);
+  margin: 2px;
+  overflow: auto;
+  padding: 8px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+`;
+
+const CloseButton = styled.button`
+  width: 16px;
+  height: 14px;
+  border: 1px outset var(--win-gray);
+  background: var(--win-gray);
+  color: var(--win-black);
+  font-size: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+
+  &:hover {
+    background: var(--win-gray-light);
+  }
+
+  &:active {
+    border: 1px inset var(--win-gray);
+  }
+`;
+
+// Text file icon
+const textFileIcon = `data:image/svg+xml;base64,${btoa(`
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <rect x="4" y="2" width="20" height="26" fill="white" stroke="#808080" stroke-width="1"/>
+  <rect x="6" y="4" width="16" height="22" fill="#ffffff"/>
+  <line x1="8" y1="8" x2="20" y2="8" stroke="#000000" stroke-width="1"/>
+  <line x1="8" y1="12" x2="18" y2="12" stroke="#000000" stroke-width="1"/>
+  <line x1="8" y1="16" x2="20" y2="16" stroke="#000000" stroke-width="1"/>
+  <line x1="8" y1="20" x2="16" y2="20" stroke="#000000" stroke-width="1"/>
+</svg>
+`)}`;
+
+const notepadIcon = `data:image/svg+xml;base64,${btoa(`
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <rect x="2" y="1" width="10" height="13" fill="white" stroke="#808080" stroke-width="1"/>
+  <rect x="3" y="2" width="8" height="11" fill="#ffffff"/>
+  <line x1="4" y1="4" x2="10" y2="4" stroke="#000000" stroke-width="1"/>
+  <line x1="4" y1="6" x2="9" y2="6" stroke="#000000" stroke-width="1"/>
+  <line x1="4" y1="8" x2="10" y2="8" stroke="#000000" stroke-width="1"/>
+</svg>
+`)}`;
 
 export const Writing = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
+  const [openFile, setOpenFile] = useState<(typeof blogPosts)[0] | null>(null);
 
-  const [selectedTags, setSelectedTags] = useState<string[]>(
-    location.state?.selectedTags || []
-  );
-  const [currentPage, setCurrentPage] = useState(
-    location.state?.currentPage || 1
-  );
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const allTags = Array.from(
-    new Set(blogPosts.flatMap((post) => post.tags))
-  ).sort();
-
-  const filteredPosts = blogPosts.filter((post) => {
-    const matchesTags =
-      selectedTags.length === 0 ||
-      selectedTags.some((tag) => post.tags.includes(tag));
-
-    const searchContent = (post.title + post.excerpt).toLowerCase();
-    const matchesSearch =
-      searchTerm === "" || searchContent.includes(searchTerm.toLowerCase());
-
-    return matchesTags && matchesSearch;
-  });
-
-  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
-  const paginatedPosts = filteredPosts.slice(
-    (currentPage - 1) * POSTS_PER_PAGE,
-    currentPage * POSTS_PER_PAGE
-  );
-
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
-    setCurrentPage(1);
+  const handleFileClick = (post: (typeof blogPosts)[0]) => {
+    setSelectedFile(post.id);
   };
 
-  const handlePostClick = (slug: string) => {
-    navigate(`/writing/${slug}`, {
-      state: {
-        currentPage,
-        selectedTags,
-      },
-    });
+  const handleFileDoubleClick = (post: (typeof blogPosts)[0]) => {
+    setOpenFile(post);
+  };
+
+  const closeNotepad = () => {
+    setOpenFile(null);
+  };
+
+  const formatFileName = (title: string) => {
+    return title.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase() + ".txt";
   };
 
   return (
-    <Layout>
-      <WritingContainer>
-        <NavMenu menuItem="Writing" />
-
-        <WritingSection>
-          <SearchContainer>
-            <SearchInput
-              type="text"
-              placeholder="Search for a topic..."
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-                setCurrentPage(1);
-              }}
-            />
-          </SearchContainer>
-
-          <TagsContainer>
-            {allTags.map((tag) => (
-              <Tag
-                key={tag}
-                isActive={selectedTags.includes(tag)}
-                onClick={() => toggleTag(tag)}
+    <>
+      <WindowFrame
+        title="Text Files - Windows Explorer"
+        icon={notepadIcon}
+        showMenuBar={false}
+      >
+        <DirectoryContainer>
+          <DirectoryHeader>
+            Address:
+            <DirectoryPath>C:\My Documents\Blog Posts</DirectoryPath>
+          </DirectoryHeader>
+          <FileList>
+            {blogPosts.map((post) => (
+              <FileItem
+                key={post.id}
+                selected={selectedFile === post.id}
+                onClick={() => handleFileClick(post)}
+                onDoubleClick={() => handleFileDoubleClick(post)}
               >
-                {tag}
-              </Tag>
+                <FileIcon style={{ backgroundImage: `url(${textFileIcon})` }} />
+                <FileName>{formatFileName(post.title)}</FileName>
+              </FileItem>
             ))}
-          </TagsContainer>
+          </FileList>
+        </DirectoryContainer>
+      </WindowFrame>
 
-          <BlogList>
-            {paginatedPosts.length > 0 ? (
-              paginatedPosts.map((post) => (
-                <BlogPostCard
-                  key={post.id}
-                  onClick={() => handlePostClick(post.slug)}
-                >
-                  <BlogMeta>
-                    <BlogDate>
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </BlogDate>
-                    <BlogTags>
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <BlogTag key={tag}>{tag}</BlogTag>
-                      ))}
-                      {post.tags.length > 3 && (
-                        <BlogTag>+{post.tags.length - 3}</BlogTag>
-                      )}
-                    </BlogTags>
-                  </BlogMeta>
-                  <BlogTitle>{post.title}</BlogTitle>
-                  <BlogExcerpt>{post.excerpt}</BlogExcerpt>
-                </BlogPostCard>
-              ))
-            ) : (
-              <NoResults>No posts found matching your criteria.</NoResults>
-            )}
-          </BlogList>
-
-          {totalPages > 1 && (
-            <PaginationContainer>
-              <PaginationButton
-                onClick={() =>
-                  setCurrentPage((prev: number) => Math.max(1, prev - 1))
-                }
-                disabled={currentPage === 1}
-              >
-                Previous
-              </PaginationButton>
-              <PageInfo>
-                Page {currentPage} of {totalPages}
-              </PageInfo>
-              <PaginationButton
-                onClick={() =>
-                  setCurrentPage((prev: number) =>
-                    Math.min(totalPages, prev + 1)
-                  )
-                }
-                disabled={currentPage === totalPages}
-              >
-                Next
-              </PaginationButton>
-            </PaginationContainer>
-          )}
-        </WritingSection>
-      </WritingContainer>
-    </Layout>
+      {openFile && (
+        <NotepadWindow>
+          <NotepadTitleBar>
+            <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              <div
+                style={{
+                  width: "16px",
+                  height: "16px",
+                  backgroundImage: `url(${notepadIcon})`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                }}
+              />
+              {formatFileName(openFile.title)} - Notepad
+            </div>
+            <CloseButton onClick={closeNotepad}>×</CloseButton>
+          </NotepadTitleBar>
+          <NotepadContent>
+            {openFile.title}
+            Date:{" "}
+            {new Date(openFile.date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+            Tags: {openFile.tags.join(", ")}
+            {openFile.excerpt}
+            ---
+            {openFile.content}
+          </NotepadContent>
+        </NotepadWindow>
+      )}
+    </>
   );
 };

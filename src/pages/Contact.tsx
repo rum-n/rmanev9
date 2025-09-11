@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Layout } from "../components/Layout";
-import { NavMenu } from "../components/NavMenu";
+import { WindowFrame } from "../components/WindowFrame";
 import { useForm, ValidationError } from "@formspree/react";
 import { useState } from "react";
 
@@ -155,13 +154,22 @@ const ContactInfoText = styled.p`
   margin: 0;
 `;
 
+const mailIcon = `data:image/svg+xml;base64,${btoa(`
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <rect x="1" y="3" width="14" height="10" fill="white" stroke="#808080" stroke-width="1"/>
+  <polygon points="1,3 8,8 15,3" fill="none" stroke="#808080" stroke-width="1"/>
+  <line x1="1" y1="13" x2="6" y2="8" stroke="#808080" stroke-width="1"/>
+  <line x1="15" y1="13" x2="10" y2="8" stroke="#808080" stroke-width="1"/>
+</svg>
+`)}`;
+
 export const Contact = () => {
   const [state, handleSubmit] = useForm("xvodgbdk");
   const [value, setValue] = useState("");
 
   if (state.succeeded) {
     return (
-      <Layout>
+      <WindowFrame title="Mail - Message Sent" icon={mailIcon}>
         <ContactContainer>
           <ContactSection>
             <ContactHeader>
@@ -175,7 +183,7 @@ export const Contact = () => {
             </SuccessMessage>
           </ContactSection>
         </ContactContainer>
-      </Layout>
+      </WindowFrame>
     );
   }
 
@@ -191,10 +199,8 @@ export const Contact = () => {
   };
 
   return (
-    <Layout>
+    <WindowFrame title="Mail - New Message" icon={mailIcon}>
       <ContactContainer>
-        <NavMenu menuItem="Contact" />
-
         <ContactSection>
           <ContactHeader>
             <ContactTitle>Get in Touch</ContactTitle>
@@ -252,6 +258,6 @@ export const Contact = () => {
           </ContactInfo>
         </ContactSection>
       </ContactContainer>
-    </Layout>
+    </WindowFrame>
   );
 };

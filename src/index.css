@@ -21,7 +21,7 @@
   --button-bg: #c0c0c0;
   --button-border: #808080;
   --button-border-light: #e0e0e0;
-  --desktop-bg: linear-gradient(135deg, #008080 0%, #004040 100%);
+  --desktop-bg: #008080;
 
   /* Legacy variables for compatibility */
   --primary: #008080;
