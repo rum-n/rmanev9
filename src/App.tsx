@@ -2,17 +2,17 @@ import { Home } from "./pages/Home";
 import { BlogPost } from "./pages/BlogPost";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PathProvider } from "./context/PathContext";
-import { VersionProvider } from "./context/VersionContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   return (
-    <VersionProvider>
+    <ThemeProvider>
       <PathProvider>
         <BrowserRouter>
           <AppContent />
         </BrowserRouter>
       </PathProvider>
-    </VersionProvider>
+    </ThemeProvider>
   );
 }
 

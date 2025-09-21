@@ -7,6 +7,9 @@ import { useState, useMemo } from "react";
 const HomeContainer = styled.div`
   width: 100%;
   padding: var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -43,11 +46,6 @@ const IntroText = styled.p`
   margin-bottom: var(--space-md);
 `;
 
-const HighlightText = styled.span`
-  color: var(--primary);
-  font-weight: 600;
-`;
-
 const TechList = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -81,13 +79,23 @@ const ProjectItem = styled.div`
 `;
 
 const ProjectTitle = styled.h3`
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   color: var(--text-primary);
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 var(--space-xs) 0;
+`;
+
+const ProjectTitleLink = styled.a`
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: color var(--transition-normal);
+
+  &:hover {
+    color: var(--primary);
+  }
 `;
 
 const ProjectMeta = styled.div`
@@ -355,6 +363,7 @@ export const Home = () => {
       description:
         "A platform that matches job seekers with remote job opportunities using AI to analyze resumes and job descriptions.",
       tags: ["personal"],
+      url: "https://remotejobmatching.com",
     },
     {
       title: "Dokument Chat",
@@ -363,6 +372,7 @@ export const Home = () => {
       description:
         "A platform that allows users to chat with their documents using AI.",
       tags: ["personal"],
+      url: "https://dokument.chat",
     },
     {
       title: "Daily Observable",
@@ -371,6 +381,7 @@ export const Home = () => {
       description:
         "A newsletter service delivering daily job opportunities based on your preferences.",
       tags: ["personal"],
+      url: "https://dailyobservable.com/",
     },
     {
       title: "Devjob Flashcards",
@@ -379,6 +390,7 @@ export const Home = () => {
       description:
         "A flashcard app to help developers prepare for technical interviews with AI feedback.",
       tags: ["personal"],
+      url: "https://devjobflashcards.com",
     },
     {
       title: "Boulder Monday",
@@ -386,6 +398,7 @@ export const Home = () => {
       tech: "React, Next.js, Prisma, Supabase",
       description: "A social media platform for indoor bouldering.",
       tags: ["personal"],
+      url: "https://bouldermonday.com/",
     },
     {
       title: "Web3 Gigs",
@@ -393,6 +406,7 @@ export const Home = () => {
       tech: "Vue.js, Strapi",
       description: "A job board for web3/blockchain jobs.",
       tags: ["personal"],
+      url: "https://remoteweb3jobs.netlify.app/",
     },
     {
       title: "Podcast Chatterbox",
@@ -401,6 +415,7 @@ export const Home = () => {
       description:
         "A platform for podcasters to connect with their audience through interactive features.",
       tags: ["personal"],
+      url: "https://podcastchatterbox.netlify.app/",
     },
     {
       title: "Finders/Keepers",
@@ -409,6 +424,7 @@ export const Home = () => {
       description:
         "A platform for freelancers and agencies to browse opportunities and potentially find new clients.",
       tags: ["personal"],
+      url: "https://finderskeepers.netlify.app/",
     },
     {
       title: "React Vault",
@@ -440,6 +456,7 @@ export const Home = () => {
       description:
         "An e-commerce platform for artists to sell their work online with integrated payment processing.",
       tags: ["client"],
+      url: "https://villy-shop.vercel.app",
     },
     {
       title: "Brightvision",
@@ -448,6 +465,7 @@ export const Home = () => {
       description:
         "A corporate website with content management system for a business consulting company.",
       tags: ["client"],
+      url: "https://brightvision.com/",
     },
     {
       title: "Dave's Family NFT",
@@ -463,6 +481,7 @@ export const Home = () => {
       description:
         "A web application for art enthusiasts to discover and explore artworks.",
       tags: ["client"],
+      url: "https://artq-pi.vercel.app/",
     },
   ];
 
@@ -484,23 +503,18 @@ export const Home = () => {
         <SectionBox>
           <SectionTitle>Rumen</SectionTitle>
           <IntroText>
-            I used to do{" "}
-            <HighlightText>
-              sales, business development and project management
-            </HighlightText>
-            . It taught me valuable skills, but it wasn't for me.
+            I used to do sales, business development and project management. It
+            taught me valuable skills, but it wasn't for me.
           </IntroText>
           <IntroText>
-            In <HighlightText>2020</HighlightText> I started working as a junior
-            frontend developer. It felt like I finally found the missing piece.
-            Since then I've worked both
-            <HighlightText> full-time and freelance</HighlightText>, both{" "}
-            <HighlightText>remote and on-site</HighlightText>.
+            In 2020 I started working as a junior frontend developer. It felt
+            like I finally found the missing piece. Since then I've worked both
+            full-time and freelance, both remote and on-site.
           </IntroText>
           <IntroText>
-            Currently I'm working <HighlightText>full stack</HighlightText> with
-            React, React Native and Node.js. I'm aiming to get better at it
-            every day and expand into different functions and technologies.
+            Currently I'm working full stack with React, React Native and
+            Node.js. I'm aiming to get better at it every day and expand into
+            different functions and technologies.
           </IntroText>
           <TechList>
             <TechTag>React</TechTag>
@@ -518,26 +532,38 @@ export const Home = () => {
         <SectionBox>
           <SectionTitle>Projects</SectionTitle>
           <ProjectList>
-            {projects.map((project, index) => (
-              <ProjectItem key={index}>
-                <ProjectTitle>
-                  {project.title}
-                  <ProjectMeta>
-                    <ProjectYear>{project.year}</ProjectYear>
-                    <ProjectTech>{project.tech}</ProjectTech>
-                  </ProjectMeta>
-                </ProjectTitle>
-                <ProjectTags>
-                  {project.tags.map((tag) => (
-                    <ProjectTag key={tag} type={tag as "personal" | "client"}>
-                      {tag}
-                    </ProjectTag>
-                  ))}
-                </ProjectTags>
+            {projects
+              .sort((a, b) => Number(b.year) - Number(a.year))
+              .map((project, index) => (
+                <ProjectItem key={index}>
+                  <ProjectTitle>
+                    {project.url ? (
+                      <ProjectTitleLink
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {project.title}
+                      </ProjectTitleLink>
+                    ) : (
+                      project.title
+                    )}
+                    <ProjectMeta>
+                      <ProjectYear>{project.year}</ProjectYear>
+                      <ProjectTech>{project.tech}</ProjectTech>
+                    </ProjectMeta>
+                  </ProjectTitle>
+                  <ProjectTags>
+                    {project.tags.map((tag) => (
+                      <ProjectTag key={tag} type={tag as "personal" | "client"}>
+                        {tag}
+                      </ProjectTag>
+                    ))}
+                  </ProjectTags>
 
-                <ProjectDescription>{project.description}</ProjectDescription>
-              </ProjectItem>
-            ))}
+                  <ProjectDescription>{project.description}</ProjectDescription>
+                </ProjectItem>
+              ))}
           </ProjectList>
         </SectionBox>
 

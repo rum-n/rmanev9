@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { VersionSelector } from "../VersionSelector";
+import { ThemeToggle } from "../ThemeToggle";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -8,7 +8,6 @@ type LayoutProps = {
 const LayoutContainer = styled.div`
   position: relative;
   width: 100%;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   padding: var(--space-2xl) var(--space-xl);
@@ -27,7 +26,7 @@ const LayoutContainer = styled.div`
 
 const ContentWrapper = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   position: relative;
 
   @media (max-width: 768px) {
@@ -39,7 +38,7 @@ const ContentWrapper = styled.div`
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <LayoutContainer>
-      <VersionSelector />
+      <ThemeToggle />
       <ContentWrapper>{children}</ContentWrapper>
     </LayoutContainer>
   );

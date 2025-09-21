@@ -1,19 +1,19 @@
 :root {
-  /* Warm Modern Color Palette */
-  --primary: #f59e0b;
-  --primary-dark: #d97706;
-  --secondary: #8b5cf6;
-  --accent: #06b6d4;
+  /* Forest Green & Emerald Color Palette */
+  --primary: #059669;
+  --primary-dark: #047857;
+  --secondary: #10b981;
+  --accent: #84cc16;
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
 
   /* Accent colors */
-  --accent-blue: #3b82f6;
+  --accent-blue: #0ea5e9;
   --accent-purple: #8b5cf6;
   --accent-teal: #06b6d4;
   --accent-orange: #f59e0b;
-  --accent-blue-dark: #2563eb;
+  --accent-blue-dark: #0284c7;
   --accent-purple-dark: #7c3aed;
   --accent-teal-dark: #0891b2;
   --accent-orange-dark: #d97706;
@@ -30,17 +30,17 @@
   --gray-800: #292524;
   --gray-900: #1c1917;
 
-  /* Background colors - simplified */
-  --bg-primary: #1c1917;
-  --bg-secondary: #292524;
-  --bg-tertiary: #44403c;
-  --bg-surface: rgba(255, 255, 255, 0.03);
-  --bg-surface-hover: rgba(255, 255, 255, 0.06);
+  /* Theme-specific variables - Light theme (default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-surface: rgba(0, 0, 0, 0.03);
+  --bg-surface-hover: rgba(0, 0, 0, 0.06);
 
-  /* Text colors */
-  --text-primary: #fafaf9;
-  --text-secondary: #d6d3d1;
-  --text-tertiary: #a8a29e;
+  /* Text colors - Light theme */
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
 
   /* Typography */
   --font-sans: "GeistMono", "JetBrains Mono", "Fira Code", "Monaco",
@@ -282,4 +282,18 @@ button {
     padding: 0;
     margin: 0;
   }
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg-primary: #1c1917;
+  --bg-secondary: #292524;
+  --bg-tertiary: #44403c;
+  --bg-surface: rgba(255, 255, 255, 0.03);
+  --bg-surface-hover: rgba(255, 255, 255, 0.06);
+
+  /* Text colors - Dark theme */
+  --text-primary: #fafaf9;
+  --text-secondary: #d6d3d1;
+  --text-tertiary: #a8a29e;
 }
