@@ -6,6 +6,19 @@ import { blogPosts } from "../data/blogPosts";
 const BlogPostContainer = styled.div`
   width: 100%;
   max-width: 800px;
+  overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
 `;
 
 const BlogPostSection = styled.section`
@@ -46,6 +59,9 @@ const BlogTitle = styled.h1`
   line-height: 1.2;
   margin: 0 0 var(--space-md) 0;
   letter-spacing: -0.02em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 `;
 
 const BlogMeta = styled.div`

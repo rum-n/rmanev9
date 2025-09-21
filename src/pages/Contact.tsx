@@ -7,6 +7,19 @@ import { useState } from "react";
 const ContactContainer = styled.div`
   width: 100%;
   max-width: 800px;
+  overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
 `;
 
 const ContactSection = styled.section`
@@ -40,6 +53,22 @@ const ContactForm = styled.form`
   padding: var(--space-2xl);
   backdrop-filter: blur(10px);
   max-width: 500px;
+  width: 100%;
+  overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    width: 100%;
+    padding: var(--space-xl);
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+    width: 100%;
+    padding: var(--space-lg);
+    overflow-x: hidden;
+  }
 `;
 
 const FormGroup = styled.div`

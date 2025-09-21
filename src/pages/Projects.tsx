@@ -5,9 +5,18 @@ import { NavMenu } from "../components/NavMenu";
 const ProjectsContainer = styled.div`
   width: 100%;
   max-width: 1200px;
+  overflow-x: hidden;
 
   @media (max-width: 768px) {
     max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
   }
 `;
 
@@ -57,16 +66,26 @@ const ProjectsGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: var(--space-xl);
   margin-bottom: var(--space-3xl);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
     margin-bottom: var(--space-2xl);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   @media (max-width: 480px) {
+    grid-template-columns: 1fr;
     gap: var(--space-md);
     margin-bottom: var(--space-xl);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 `;
 
@@ -77,15 +96,24 @@ const ProjectCard = styled.div`
   overflow: hidden;
   transition: all var(--transition-normal);
   position: relative;
+  width: 100%;
+  max-width: 100%;
 
   &:hover {
     transform: translateY(-2px);
   }
 
   @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
     &:hover {
       transform: translateY(-1px);
     }
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    max-width: 100%;
   }
 `;
 

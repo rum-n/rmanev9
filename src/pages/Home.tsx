@@ -6,15 +6,27 @@ import { useState, useMemo } from "react";
 
 const HomeContainer = styled.div`
   width: 100%;
+  max-width: 100%;
   padding: var(--space-lg);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-lg);
+  overflow-x: hidden;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: var(--space-md);
     padding: var(--space-md);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-sm);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 `;
 
@@ -24,9 +36,22 @@ const SectionBox = styled.div`
   border: 1px solid var(--bg-surface-hover);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 
   @media (max-width: 768px) {
     padding: var(--space-md);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-sm);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 `;
 
