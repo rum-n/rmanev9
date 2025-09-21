@@ -1,18 +1,18 @@
 import { Home } from "./pages/Home";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Projects } from "./pages/Projects";
-import { PathProvider } from "./context/PathContext";
-import { Writing } from "./pages/Writing";
 import { BlogPost } from "./pages/BlogPost";
-import { Contact } from "./pages/Contact";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { PathProvider } from "./context/PathContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   return (
-    <PathProvider>
-      <BrowserRouter>
-        <AppContent />
-      </BrowserRouter>
-    </PathProvider>
+    <ThemeProvider>
+      <PathProvider>
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
+      </PathProvider>
+    </ThemeProvider>
   );
 }
 
@@ -20,10 +20,8 @@ const AppContent = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="projects" element={<Projects />}></Route>
-      <Route path="writing" element={<Writing />}></Route>
-      <Route path="writing/:slug" element={<BlogPost />} />
-      <Route path="contact" element={<Contact />} />
+      <Route path="/writing/:slug" element={<BlogPost />} />
+      <Route path="*" element={<Home />} />
     </Routes>
   );
 };
