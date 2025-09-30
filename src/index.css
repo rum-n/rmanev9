@@ -1,7 +1,7 @@
 :root {
   /* Forest Green & Emerald Color Palette */
-  --primary: #059669;
-  --primary-dark: #047857;
+  --primary: #60a5fa;
+  --primary-dark: #3b82f6;
   --secondary: #10b981;
   --accent: #84cc16;
   --success: #10b981;
@@ -108,6 +108,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   max-width: 100vw;
+}
+
+body::before {
+  content: ". . . . . . . . . . . . . . . . . . . .\A. . . . . . . . . . . . . . . . . . . .\A. . . . . . . . . . . . . . . . . . . .\A. . . . . . . . . . . . . . . . . . . .";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  color: var(--gray-500);
+  opacity: 0.9;
+  white-space: pre;
+  font-size: 12px;
+  text-align: center;
 }
 
 #root {

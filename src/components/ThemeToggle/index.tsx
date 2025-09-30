@@ -41,7 +41,6 @@ export const ThemeToggle: React.FC = () => {
     <ToggleContainer>
       <ToggleButton onClick={toggleTheme}>
         <ThemeIcon>{theme === "light" ? "🌙" : "☀️"}</ThemeIcon>
-        {theme === "light" ? "Dark" : "Light"}
       </ToggleButton>
     </ToggleContainer>
   );

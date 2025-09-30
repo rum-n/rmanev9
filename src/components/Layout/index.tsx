@@ -7,12 +7,12 @@ type LayoutProps = {
 
 const LayoutContainer = styled.div`
   position: relative;
+  z-index: 0;
   width: 100%;
   max-width: 100vw;
   display: flex;
   justify-content: center;
   padding: var(--space-2xl) var(--space-xl);
-  background: var(--bg-primary);
   overflow-x: hidden;
 
   @media (max-width: 768px) {
@@ -32,7 +32,7 @@ const LayoutContainer = styled.div`
 
 const ContentWrapper = styled.div`
   width: 100%;
-  max-width: 1200px;
+  max-width: 800px;
   position: relative;
   overflow-x: hidden;
 

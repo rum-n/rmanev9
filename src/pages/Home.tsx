@@ -3,13 +3,17 @@ import { Layout } from "../components/Layout";
 import { blogPosts } from "../data/blogPosts";
 import { useNavigate } from "react-router-dom";
 import { useState, useMemo } from "react";
+import { GitHubIcon } from "../components/Icons/GitHub";
+import { LinkedInIcon } from "../components/Icons/LinkedIn";
+import { XIcon } from "../components/Icons/X";
+import { MediumIcon } from "../components/Icons/Medium";
 
 const HomeContainer = styled.div`
   width: 100%;
   max-width: 100%;
   padding: var(--space-lg);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-lg);
   overflow-x: hidden;
 
@@ -32,9 +36,6 @@ const HomeContainer = styled.div`
 
 const SectionBox = styled.div`
   margin-bottom: var(--space-lg);
-  background: var(--bg-primary);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-md);
   padding: var(--space-lg);
   width: 100%;
   max-width: 100%;
@@ -75,7 +76,7 @@ const TechList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
-  margin-top: var(--space-md);
+  margin-top: var(--space-lg);
 `;
 
 const TechTag = styled.span`
@@ -91,15 +92,11 @@ const ProjectList = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  max-height: 400px;
   overflow-y: auto;
 `;
 
 const ProjectItem = styled.div`
   padding: var(--space-sm);
-  background: var(--bg-surface-hover);
-  border-radius: var(--radius-sm);
-  // border-left: 2px solid var(--primary);
   margin-bottom: var(--space-sm);
 `;
 
@@ -160,34 +157,33 @@ const ProjectTag = styled.span<{ type: "personal" | "client" }>`
   border-radius: var(--radius-sm);
   font-size: 0.7rem;
   font-weight: 500;
-  border: 1px solid
-    ${(props) =>
-      props.type === "personal" ? "var(--secondary)" : "var(--accent)"};
-  color: white;
+  background-color: var(--gray-200);
+  color: var(--primary);
 `;
 
 const SocialLinks = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--space-md);
 `;
 
 const SocialLink = styled.a`
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-sm);
+  justify-content: center;
+  width: 44px;
+  height: 44px;
   background: var(--bg-surface-hover);
   border-radius: var(--radius-sm);
   text-decoration: none;
   color: var(--text-secondary);
   transition: all var(--transition-normal);
-  font-size: 0.9rem;
+  font-size: 1.5rem;
 
   &:hover {
     background: var(--primary);
     color: white;
-    transform: translateX(2px);
+    transform: translateY(-2px);
   }
 `;
 
@@ -241,8 +237,7 @@ const BlogList = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  max-height: 300px;
-  overflow-y: auto;
+  overflow-x: hidden;
   margin-bottom: var(--space-md);
 `;
 
@@ -511,14 +506,14 @@ export const Home = () => {
   ];
 
   const socialLinks = [
-    { name: "GitHub", url: "https://github.com/rum-n", icon: "🐙" },
+    { name: "GitHub", url: "https://github.com/rum-n", icon: <GitHubIcon /> },
     {
       name: "LinkedIn",
       url: "https://www.linkedin.com/in/rmanev/",
-      icon: "💼",
+      icon: <LinkedInIcon />,
     },
-    { name: "X (Twitter)", url: "https://x.com/room_n", icon: "🐦" },
-    { name: "Medium", url: "https://room-n.medium.com/", icon: "📝" },
+    { name: "X (Twitter)", url: "https://x.com/room_n", icon: <XIcon /> },
+    { name: "Medium", url: "https://room-n.medium.com/", icon: <MediumIcon /> },
   ];
 
   return (
@@ -544,7 +539,10 @@ export const Home = () => {
           <TechList>
             <TechTag>React</TechTag>
             <TechTag>React Native</TechTag>
+            <TechTag>Angular</TechTag>
+            <TechTag>Vue</TechTag>
             <TechTag>Node.js</TechTag>
+            <TechTag>Nest.js</TechTag>
             <TechTag>TypeScript</TechTag>
             <TechTag>Next.js</TechTag>
             <TechTag>MongoDB</TechTag>
@@ -686,8 +684,9 @@ export const Home = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={link.name}
               >
-                <span>{link.name}</span>
+                {link.icon}
               </SocialLink>
             ))}
           </SocialLinks>
