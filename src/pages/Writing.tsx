@@ -8,6 +8,19 @@ import { useState } from "react";
 const WritingContainer = styled.div`
   width: 100%;
   max-width: 800px;
+  overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
 `;
 
 const WritingSection = styled.section`
@@ -20,6 +33,7 @@ const SearchContainer = styled.div`
 
 const SearchInput = styled.input`
   width: 100%;
+  max-width: 100%;
   padding: var(--space-md) var(--space-lg);
   border: 1px solid var(--bg-surface-hover);
   border-radius: var(--radius-md);
@@ -27,6 +41,7 @@ const SearchInput = styled.input`
   color: var(--text-primary);
   font-size: 1rem;
   transition: all var(--transition-normal);
+  box-sizing: border-box;
 
   &::placeholder {
     color: var(--text-tertiary);
@@ -37,6 +52,18 @@ const SearchInput = styled.input`
     border-color: var(--primary);
     background: var(--bg-surface-hover);
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-sm);
+  }
 `;
 
 const TagsContainer = styled.div`
@@ -44,6 +71,21 @@ const TagsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 `;
 
 const Tag = styled.button<{ isActive: boolean }>`
