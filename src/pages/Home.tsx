@@ -7,6 +7,8 @@ import { GitHubIcon } from "../components/Icons/GitHub";
 import { LinkedInIcon } from "../components/Icons/LinkedIn";
 import { XIcon } from "../components/Icons/X";
 import { MediumIcon } from "../components/Icons/Medium";
+import AsciiLineAnimation from "../components/AsciiLineAnimation";
+import CircleAnimation from "../components/CircleAnimation";
 
 const HomeContainer = styled.div`
   width: 100%;
@@ -34,6 +36,34 @@ const HomeContainer = styled.div`
   }
 `;
 
+const AnimationContainer = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  font-size: 1.2rem;
+`;
+
+const AnimationContainer2 = styled.div`
+  position: absolute;
+  top: 800px;
+  right: 0px;
+  z-index: 100;
+  font-size: 1.2rem;
+
+  @media (max-width: 768px) {
+    top: 600px;
+    left: 20px;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    top: 500px;
+    left: 10px;
+    font-size: 0.8rem;
+  }
+`;
+
 const SectionBox = styled.div`
   margin-bottom: var(--space-lg);
   padding: var(--space-lg);
@@ -58,11 +88,11 @@ const SectionBox = styled.div`
 
 const SectionTitle = styled.h2`
   color: var(--text-primary);
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  width: fit-content;
   margin: 0 0 var(--space-md) 0;
   padding-bottom: var(--space-xs);
-  border-bottom: 1px solid var(--bg-surface-hover);
+  border-bottom: 1px dashed #c3baab;
 `;
 
 const IntroText = styled.p`
@@ -86,6 +116,7 @@ const TechTag = styled.span`
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 500;
+  border: 1px solid var(--bg-surface-hover);
 `;
 
 const ProjectList = styled.div`
@@ -103,7 +134,7 @@ const ProjectItem = styled.div`
 const ProjectTitle = styled.h3`
   align-items: center;
   color: var(--text-primary);
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin: 0 0 var(--space-xs) 0;
 `;
@@ -111,12 +142,12 @@ const ProjectTitle = styled.h3`
 const ProjectTitleLink = styled.a`
   color: var(--text-primary);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   transition: color var(--transition-normal);
 
   &:hover {
-    color: var(--primary);
+    color: #c3baab;
   }
 `;
 
@@ -124,24 +155,23 @@ const ProjectMeta = styled.div`
   display: flex;
   gap: var(--space-sm);
   margin-bottom: var(--space-xs);
+  margin-top: var(--space-sm);
+  font-size: 1rem;
 `;
 
 const ProjectYear = styled.span`
   color: white;
   padding: 2px 4px;
   border-radius: var(--radius-sm);
-  font-size: 0.7rem;
-  font-weight: 500;
 `;
 
 const ProjectTech = styled.span`
   color: var(--text-tertiary);
-  font-size: 0.8rem;
 `;
 
 const ProjectDescription = styled.p`
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   line-height: 1.4;
   margin: 0;
 `;
@@ -153,9 +183,8 @@ const ProjectTags = styled.div`
 `;
 
 const ProjectTag = styled.span<{ type: "personal" | "client" }>`
-  padding: 2px 6px;
+  padding: 2px 0px;
   border-radius: var(--radius-sm);
-  font-size: 0.7rem;
   font-weight: 500;
   background-color: var(--gray-200);
   color: var(--primary);
@@ -517,181 +546,217 @@ export const Home = () => {
   ];
 
   return (
-    <Layout>
-      <HomeContainer>
-        {/* Rumen Section */}
-        <SectionBox>
-          <SectionTitle>Rumen</SectionTitle>
-          <IntroText>
-            I used to do sales, business development and project management. It
-            taught me valuable skills, but it wasn't for me.
-          </IntroText>
-          <IntroText>
-            In 2020 I started working as a junior frontend developer. It felt
-            like I finally found the missing piece. Since then I've worked both
-            full-time and freelance, both remote and on-site.
-          </IntroText>
-          <IntroText>
-            Currently I'm working full stack with React, React Native and
-            Node.js. I'm aiming to get better at it every day and expand into
-            different functions and technologies.
-          </IntroText>
-          <TechList>
-            <TechTag>React</TechTag>
-            <TechTag>React Native</TechTag>
-            <TechTag>Angular</TechTag>
-            <TechTag>Vue</TechTag>
-            <TechTag>Node.js</TechTag>
-            <TechTag>Nest.js</TechTag>
-            <TechTag>TypeScript</TechTag>
-            <TechTag>Next.js</TechTag>
-            <TechTag>MongoDB</TechTag>
-            <TechTag>Prisma</TechTag>
-            <TechTag>Rust</TechTag>
-          </TechList>
-        </SectionBox>
+    <>
+      <Layout>
+        <AnimationContainer>
+          <AsciiLineAnimation />
+          <AsciiLineAnimation />
+          <AsciiLineAnimation />
+          <AsciiLineAnimation />
+          <AsciiLineAnimation />
+          <AsciiLineAnimation />
+          <AsciiLineAnimation />
+        </AnimationContainer>
+        <HomeContainer>
+          {/* Rumen Section */}
+          <SectionBox>
+            <SectionTitle>Rumen</SectionTitle>
+            <IntroText>
+              I used to do sales, business development and project management.
+              It taught me valuable skills, but it wasn't for me.
+            </IntroText>
+            <IntroText>
+              In 2020 I started working as a junior frontend developer. It felt
+              like I finally found the missing piece. Since then I've worked
+              both full-time and freelance, both remote and on-site.
+            </IntroText>
+            <IntroText>
+              Currently I'm working full stack with React, React Native and
+              Node.js. I'm aiming to get better at it every day and expand into
+              different functions and technologies.
+            </IntroText>
+            <TechList>
+              <TechTag>React</TechTag>
+              <TechTag>React Native</TechTag>
+              <TechTag>Angular</TechTag>
+              <TechTag>Vue</TechTag>
+              <TechTag>Node.js</TechTag>
+              <TechTag>Nest.js</TechTag>
+              <TechTag>TypeScript</TechTag>
+              <TechTag>Next.js</TechTag>
+              <TechTag>MongoDB</TechTag>
+              <TechTag>Prisma</TechTag>
+              <TechTag>Rust</TechTag>
+            </TechList>
+          </SectionBox>
 
-        {/* Projects Section */}
-        <SectionBox>
-          <SectionTitle>Projects</SectionTitle>
-          <ProjectList>
-            {projects
-              .sort((a, b) => Number(b.year) - Number(a.year))
-              .map((project, index) => (
-                <ProjectItem key={index}>
-                  <ProjectTitle>
-                    {project.url ? (
-                      <ProjectTitleLink
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {project.title}
-                      </ProjectTitleLink>
-                    ) : (
-                      project.title
-                    )}
-                    <ProjectMeta>
-                      <ProjectYear>{project.year}</ProjectYear>
-                      <ProjectTech>{project.tech}</ProjectTech>
-                    </ProjectMeta>
-                  </ProjectTitle>
-                  <ProjectTags>
-                    {project.tags.map((tag) => (
-                      <ProjectTag key={tag} type={tag as "personal" | "client"}>
-                        {tag}
-                      </ProjectTag>
-                    ))}
-                  </ProjectTags>
+          {/* Projects Section */}
+          <AnimationContainer2>
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+            <CircleAnimation />
+          </AnimationContainer2>
+          <SectionBox>
+            <SectionTitle>Projects</SectionTitle>
+            <ProjectList>
+              {projects
+                .sort((a, b) => Number(b.year) - Number(a.year))
+                .map((project, index) => (
+                  <ProjectItem key={index}>
+                    <ProjectTitle>
+                      {project.url ? (
+                        <ProjectTitleLink
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {project.title}
+                        </ProjectTitleLink>
+                      ) : (
+                        project.title
+                      )}
+                      <ProjectMeta>
+                        <ProjectTags>
+                          {project.tags.map((tag) => (
+                            <ProjectTag
+                              key={tag}
+                              type={tag as "personal" | "client"}
+                            >
+                              {tag}
+                            </ProjectTag>
+                          ))}
+                        </ProjectTags>{" "}
+                        /<ProjectYear>{project.year}</ProjectYear> /
+                        <ProjectTech>{project.tech}</ProjectTech>
+                      </ProjectMeta>
+                    </ProjectTitle>
 
-                  <ProjectDescription>{project.description}</ProjectDescription>
-                </ProjectItem>
-              ))}
-          </ProjectList>
-        </SectionBox>
+                    <ProjectDescription>
+                      {project.description}
+                    </ProjectDescription>
+                  </ProjectItem>
+                ))}
+            </ProjectList>
+          </SectionBox>
 
-        {/* Writing Section */}
-        <SectionBox>
-          <SectionTitle>Writing</SectionTitle>
+          {/* Writing Section */}
+          <SectionBox>
+            <SectionTitle>Writing</SectionTitle>
 
-          <SearchContainer>
-            <SearchInput
-              type="text"
-              placeholder="Search posts..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </SearchContainer>
+            <SearchContainer>
+              <SearchInput
+                type="text"
+                placeholder="Search posts..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+            </SearchContainer>
 
-          <TagsContainer>
-            <TagsList>
-              {allTags.map((tag) => (
-                <TagButton
-                  key={tag}
-                  active={selectedTag === tag}
-                  onClick={() => handleTagClick(tag)}
-                >
-                  {tag}
-                </TagButton>
-              ))}
-            </TagsList>
-          </TagsContainer>
-
-          <BlogList>
-            {paginatedPosts.map((post) => (
-              <BlogItem
-                key={post.id}
-                onClick={() => handleBlogPostClick(post.slug)}
-              >
-                <BlogTitle>{post.title}</BlogTitle>
-                <BlogMeta>
-                  <BlogDate>
-                    {new Date(post.date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </BlogDate>
-                  <BlogTags>
-                    {post.tags.map((tag) => (
-                      <BlogTag key={tag}>{tag}</BlogTag>
-                    ))}
-                  </BlogTags>
-                </BlogMeta>
-                <BlogExcerpt>{post.excerpt}</BlogExcerpt>
-              </BlogItem>
-            ))}
-          </BlogList>
-
-          {totalPages > 1 && (
-            <PaginationContainer>
-              <PaginationButton
-                onClick={() => setCurrentPage(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                ←
-              </PaginationButton>
-
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                (page) => (
-                  <PaginationButton
-                    key={page}
-                    active={currentPage === page}
-                    onClick={() => setCurrentPage(page)}
+            <TagsContainer>
+              <TagsList>
+                {allTags.map((tag) => (
+                  <TagButton
+                    key={tag}
+                    active={selectedTag === tag}
+                    onClick={() => handleTagClick(tag)}
                   >
-                    {page}
-                  </PaginationButton>
-                )
-              )}
+                    {tag}
+                  </TagButton>
+                ))}
+              </TagsList>
+            </TagsContainer>
 
-              <PaginationButton
-                onClick={() => setCurrentPage(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              >
-                →
-              </PaginationButton>
-            </PaginationContainer>
-          )}
-        </SectionBox>
+            <BlogList>
+              {paginatedPosts.map((post) => (
+                <BlogItem
+                  key={post.id}
+                  onClick={() => handleBlogPostClick(post.slug)}
+                >
+                  <BlogTitle>{post.title}</BlogTitle>
+                  <BlogMeta>
+                    <BlogDate>
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </BlogDate>
+                    <BlogTags>
+                      {post.tags.map((tag) => (
+                        <BlogTag key={tag}>{tag}</BlogTag>
+                      ))}
+                    </BlogTags>
+                  </BlogMeta>
+                  <BlogExcerpt>{post.excerpt}</BlogExcerpt>
+                </BlogItem>
+              ))}
+            </BlogList>
 
-        {/* Social Links Section */}
-        <SectionBox>
-          <SectionTitle>Social Links</SectionTitle>
-          <SocialLinks>
-            {socialLinks.map((link, index) => (
-              <SocialLink
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={link.name}
-              >
-                {link.icon}
-              </SocialLink>
-            ))}
-          </SocialLinks>
-        </SectionBox>
-      </HomeContainer>
-    </Layout>
+            {totalPages > 1 && (
+              <PaginationContainer>
+                <PaginationButton
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  ←
+                </PaginationButton>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (page) => (
+                    <PaginationButton
+                      key={page}
+                      active={currentPage === page}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {page}
+                    </PaginationButton>
+                  )
+                )}
+
+                <PaginationButton
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  →
+                </PaginationButton>
+              </PaginationContainer>
+            )}
+          </SectionBox>
+
+          {/* Social Links Section */}
+          <SectionBox>
+            <SectionTitle>Social Links</SectionTitle>
+            <SocialLinks>
+              {socialLinks.map((link, index) => (
+                <SocialLink
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.name}
+                >
+                  {link.icon}
+                </SocialLink>
+              ))}
+            </SocialLinks>
+          </SectionBox>
+        </HomeContainer>
+      </Layout>
+    </>
   );
 };
