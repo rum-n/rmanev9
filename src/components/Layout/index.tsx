@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { ThemeToggle } from "../ThemeToggle";
+import { Header } from "../Header";
+import { Footer } from "../Footer";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -12,11 +13,12 @@ const LayoutContainer = styled.div`
   max-width: 100vw;
   display: flex;
   justify-content: center;
-  padding: var(--space-2xl) var(--space-xl);
   overflow-x: hidden;
 
   @media (max-width: 768px) {
     padding: var(--space-lg) var(--space-md);
+    padding-top: calc(var(--space-lg) + 50px);
+    padding-bottom: calc(var(--space-lg) + 50px);
     flex-direction: column;
     align-items: center;
     width: 100%;
@@ -25,6 +27,8 @@ const LayoutContainer = styled.div`
 
   @media (max-width: 480px) {
     padding: var(--space-md) var(--space-sm);
+    padding-top: calc(var(--space-md) + 40px);
+    padding-bottom: calc(var(--space-md) + 40px);
     width: 100%;
     max-width: 100vw;
   }
@@ -32,7 +36,7 @@ const LayoutContainer = styled.div`
 
 const ContentWrapper = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   position: relative;
   overflow-x: hidden;
 
@@ -52,9 +56,12 @@ const ContentWrapper = styled.div`
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
-    <LayoutContainer>
-      <ThemeToggle />
-      <ContentWrapper>{children}</ContentWrapper>
-    </LayoutContainer>
+    <>
+      <Header />
+      <LayoutContainer>
+        <ContentWrapper>{children}</ContentWrapper>
+      </LayoutContainer>
+      <Footer />
+    </>
   );
 };

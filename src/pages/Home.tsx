@@ -7,25 +7,38 @@ import { GitHubIcon } from "../components/Icons/GitHub";
 import { LinkedInIcon } from "../components/Icons/LinkedIn";
 import { XIcon } from "../components/Icons/X";
 import { MediumIcon } from "../components/Icons/Medium";
-import AsciiLineAnimation from "../components/AsciiLineAnimation";
-import CircleAnimation from "../components/CircleAnimation";
+import { ColorPicker } from "../components/ColorPicker";
 
 const HomeContainer = styled.div`
   width: 100%;
   max-width: 100%;
   padding: var(--space-lg);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  grid-template-rows: auto auto auto auto auto;
   gap: var(--space-lg);
   overflow-x: hidden;
 
+  /* Grid layout for desktop */
+  @media (min-width: 769px) {
+    grid-template-areas:
+      "rumen projects"
+      "social projects"
+      "writing projects"
+      "color projects"
+      "none projects";
+    min-height: auto;
+  }
+
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-md);
     padding: var(--space-md);
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
+    min-height: auto;
   }
 
   @media (max-width: 480px) {
@@ -36,46 +49,31 @@ const HomeContainer = styled.div`
   }
 `;
 
-const AnimationContainer = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
-  font-size: 1.2rem;
-`;
-
-const AnimationContainer2 = styled.div`
-  position: absolute;
-  top: 800px;
-  right: 0px;
-  z-index: 100;
-  font-size: 1.2rem;
-
-  @media (max-width: 768px) {
-    top: 600px;
-    left: 20px;
-    font-size: 1rem;
-  }
-
-  @media (max-width: 480px) {
-    top: 500px;
-    left: 10px;
-    font-size: 0.8rem;
-  }
-`;
-
-const SectionBox = styled.div`
+const SectionBox = styled.div<{ gridArea?: string }>`
   margin-bottom: var(--space-lg);
   padding: var(--space-lg);
-  width: 100%;
-  max-width: 100%;
   overflow-x: hidden;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--bg-surface-hover);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-normal);
+
+  /* Grid area assignment for desktop */
+  @media (min-width: 769px) {
+    grid-area: ${(props) => props.gridArea};
+    margin-bottom: 0;
+  }
 
   @media (max-width: 768px) {
     padding: var(--space-md);
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
   }
 
   @media (max-width: 480px) {
@@ -88,7 +86,7 @@ const SectionBox = styled.div`
 
 const SectionTitle = styled.h2`
   color: var(--text-primary);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   width: fit-content;
   margin: 0 0 var(--space-md) 0;
   padding-bottom: var(--space-xs);
@@ -134,7 +132,7 @@ const ProjectItem = styled.div`
 const ProjectTitle = styled.h3`
   align-items: center;
   color: var(--text-primary);
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
   margin: 0 0 var(--space-xs) 0;
 `;
@@ -142,7 +140,7 @@ const ProjectTitle = styled.h3`
 const ProjectTitleLink = styled.a`
   color: var(--text-primary);
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
   transition: color var(--transition-normal);
 
@@ -156,7 +154,7 @@ const ProjectMeta = styled.div`
   gap: var(--space-sm);
   margin-bottom: var(--space-xs);
   margin-top: var(--space-sm);
-  font-size: 1rem;
+  font-size: 0.8rem;
 `;
 
 const ProjectYear = styled.span`
@@ -171,7 +169,7 @@ const ProjectTech = styled.span`
 
 const ProjectDescription = styled.p`
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   line-height: 1.4;
   margin: 0;
 `;
@@ -193,26 +191,30 @@ const ProjectTag = styled.span<{ type: "personal" | "client" }>`
 const SocialLinks = styled.div`
   display: flex;
   flex-direction: row;
-  gap: var(--space-md);
+  gap: var(--space-lg);
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 `;
 
 const SocialLink = styled.a`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  background: var(--bg-surface-hover);
-  border-radius: var(--radius-sm);
   text-decoration: none;
   color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
   transition: all var(--transition-normal);
-  font-size: 1.5rem;
 
   &:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-2px);
+    color: var(--text-primary);
+    transform: translateY(-1px);
   }
 `;
 
@@ -548,18 +550,9 @@ export const Home = () => {
   return (
     <>
       <Layout>
-        <AnimationContainer>
-          <AsciiLineAnimation />
-          <AsciiLineAnimation />
-          <AsciiLineAnimation />
-          <AsciiLineAnimation />
-          <AsciiLineAnimation />
-          <AsciiLineAnimation />
-          <AsciiLineAnimation />
-        </AnimationContainer>
         <HomeContainer>
           {/* Rumen Section */}
-          <SectionBox>
+          <SectionBox gridArea="rumen">
             <SectionTitle>Rumen</SectionTitle>
             <IntroText>
               I used to do sales, business development and project management.
@@ -591,27 +584,7 @@ export const Home = () => {
           </SectionBox>
 
           {/* Projects Section */}
-          <AnimationContainer2>
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-            <CircleAnimation />
-          </AnimationContainer2>
-          <SectionBox>
+          <SectionBox gridArea="projects">
             <SectionTitle>Projects</SectionTitle>
             <ProjectList>
               {projects
@@ -654,8 +627,26 @@ export const Home = () => {
             </ProjectList>
           </SectionBox>
 
+          {/* Social Links Section */}
+          <SectionBox gridArea="social">
+            <SectionTitle>Social Links</SectionTitle>
+            <SocialLinks>
+              {socialLinks.map((link, index) => (
+                <SocialLink
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.name}
+                >
+                  {link.name}
+                </SocialLink>
+              ))}
+            </SocialLinks>
+          </SectionBox>
+
           {/* Writing Section */}
-          <SectionBox>
+          <SectionBox gridArea="writing">
             <SectionTitle>Writing</SectionTitle>
 
             <SearchContainer>
@@ -738,22 +729,10 @@ export const Home = () => {
             )}
           </SectionBox>
 
-          {/* Social Links Section */}
-          <SectionBox>
-            <SectionTitle>Social Links</SectionTitle>
-            <SocialLinks>
-              {socialLinks.map((link, index) => (
-                <SocialLink
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.name}
-                >
-                  {link.icon}
-                </SocialLink>
-              ))}
-            </SocialLinks>
+          {/* Color Picker Section */}
+          <SectionBox gridArea="color">
+            <SectionTitle>Change Text Color</SectionTitle>
+            <ColorPicker />
           </SectionBox>
         </HomeContainer>
       </Layout>

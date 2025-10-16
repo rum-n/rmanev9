@@ -3,15 +3,18 @@ import { BlogPost } from "./pages/BlogPost";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PathProvider } from "./context/PathContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { ColorProvider } from "./context/ColorContext";
 
 function App() {
   return (
     <ThemeProvider>
-      <PathProvider>
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
-      </PathProvider>
+      <ColorProvider>
+        <PathProvider>
+          <BrowserRouter>
+            <AppContent />
+          </BrowserRouter>
+        </PathProvider>
+      </ColorProvider>
     </ThemeProvider>
   );
 }
