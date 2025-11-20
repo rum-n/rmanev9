@@ -408,9 +408,18 @@ export const Home = () => {
   const projects = [
     // Personal Projects
     {
+      title: "DepHound",
+      year: "2025",
+      tech: "React, Vite, Rust, PostgreSQL, Tailwind CSS, Railway",
+      description:
+        "A platform that helps developers secure and manage their software dependencies.",
+      tags: ["personal"],
+      url: "https://dephound.com",
+    },
+    {
       title: "Remote Job Matching",
       year: "2025",
-      tech: "React, Next.js, Prisma, MongoDB, Mistral AI",
+      tech: "React, Next.js, Prisma, MongoDB, Mistral AI, Railway",
       description:
         "A platform that matches job seekers with remote job opportunities using AI to analyze resumes and job descriptions.",
       tags: ["personal"],
