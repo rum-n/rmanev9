@@ -1,36 +1,36 @@
 {
-  "name": "rmanev9",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
   "dependencies": {
-    "@formspree/react": "^2.5.1",
-    "@tweenjs/tween.js": "^21.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.0",
-    "styled-components": "^6.1.1",
-    "three": "^0.158.0",
+    "@formspree/react": "^3.0.0",
+    "@tweenjs/tween.js": "^25.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.5",
+    "styled-components": "^6.1.19",
+    "three": "^0.181.0",
     "tween.js": "^16.6.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@types/three": "^0.158.3",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@types/three": "^0.181.0",
     "@types/tween.js": "^18.6.1",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "@vitejs/plugin-react": "^4.2.0",
-    "eslint": "^8.53.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.4",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0"
-  }
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
+    "@vitejs/plugin-react": "^5.1.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.0"
+  },
+  "name": "rmanev9",
+  "private": true,
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "type": "module",
+  "version": "0.0.0"
 }
