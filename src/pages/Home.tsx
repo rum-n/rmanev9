@@ -653,6 +653,15 @@ export const Home = () => {
               ))}
             </SocialLinks>
           </SectionBox>
+          <iframe
+            src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=6056970"
+            style={{
+              border: "none",
+              width: "100%",
+              height: "100px",
+              marginTop: "var(--space-md)",
+            }}
+          ></iframe>
 
           {/* Writing Section */}
           <SectionBox gridArea="writing">
