@@ -4,7 +4,7 @@ import { blogPosts } from "../data/blogPosts";
 import { useNavigate } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { GitHubIcon } from "../components/Icons/GitHub";
-import { LinkedInIcon } from "../components/Icons/LinkedIn";
+// import { LinkedInIcon } from "../components/Icons/LinkedIn";
 import { XIcon } from "../components/Icons/X";
 import { MediumIcon } from "../components/Icons/Medium";
 import { ColorPicker } from "../components/ColorPicker";
@@ -547,11 +547,11 @@ export const Home = () => {
 
   const socialLinks = [
     { name: "GitHub", url: "https://github.com/rum-n", icon: <GitHubIcon /> },
-    {
-      name: "LinkedIn",
-      url: "https://www.linkedin.com/in/rmanev/",
-      icon: <LinkedInIcon />,
-    },
+    // {
+    //   name: "LinkedIn",
+    //   url: "https://www.linkedin.com/in/rmanev/",
+    //   icon: <LinkedInIcon />,
+    // },
     { name: "X (Twitter)", url: "https://x.com/room_n", icon: <XIcon /> },
     { name: "Medium", url: "https://room-n.medium.com/", icon: <MediumIcon /> },
   ];
