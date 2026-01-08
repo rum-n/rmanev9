@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Header } from "../Header";
-import { Footer } from "../Footer";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -61,7 +60,6 @@ export const Layout = ({ children }: LayoutProps) => {
       <LayoutContainer>
         <ContentWrapper>{children}</ContentWrapper>
       </LayoutContainer>
-      <Footer />
     </>
   );
 };

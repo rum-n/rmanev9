@@ -29,12 +29,11 @@ const NavContainer = styled.nav`
 `;
 
 const NameText = styled.h1`
-  margin: 0;
-  padding: 0;
   color: var(--primary);
   font-weight: 800;
   letter-spacing: -0.02em;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
+  font-size: clamp(2rem, 5vw, 3rem);
 
   @media (max-width: 768px) {
     margin-top: var(--space-lg);
@@ -44,24 +43,6 @@ const NameText = styled.h1`
   @media (max-width: 480px) {
     margin-top: var(--space-md);
     font-size: clamp(1.5rem, 7vw, 2rem);
-  }
-`;
-
-const SubtitleText = styled.p`
-  font-size: 1.25rem;
-  margin: 0;
-  color: var(--text-secondary);
-  font-weight: 500;
-  margin-bottom: var(--space-md);
-
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-    margin-bottom: var(--space-lg);
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1rem;
-    margin-bottom: var(--space-md);
   }
 `;
 
@@ -194,8 +175,8 @@ export const NavMenu = ({ menuItem }: NavMenuProps) => {
 
       {menuItem === "Home" && (
         <>
-          <NameText>Rumen Manev</NameText>
-          <SubtitleText>Fullstack Software Engineer</SubtitleText>
+          <NameText>Hi there! I'm Rumen.</NameText>
+          {/* <SubtitleText>Fullstack Software Engineer</SubtitleText> */}
         </>
       )}
     </NavContainer>

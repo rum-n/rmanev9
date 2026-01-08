@@ -1,39 +1,28 @@
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
-import { blogPosts } from "../data/blogPosts";
-import { projects } from "../data/projects";
-import { useNavigate } from "react-router-dom";
-import { useState, useMemo } from "react";
+import { NavMenu } from "../components/NavMenu";
 import { GitHubIcon } from "../components/Icons/GitHub";
 // import { LinkedInIcon } from "../components/Icons/LinkedIn";
 import { XIcon } from "../components/Icons/X";
 import { MediumIcon } from "../components/Icons/Medium";
-import { ColorPicker } from "../components/ColorPicker";
 
 const HomeContainer = styled.div`
   width: 100%;
   max-width: 100%;
-  padding: var(--space-lg);
   display: grid;
-  grid-template-columns: 2fr 2fr;
-  grid-template-rows: auto auto auto auto auto;
+  grid-template-columns: minmax(0, 1fr) 220px;
   gap: var(--space-lg);
   overflow-x: hidden;
 
   /* Grid layout for desktop */
   @media (min-width: 769px) {
-    grid-template-areas:
-      "rumen projects"
-      "social projects"
-      "writing projects"
-      "color projects"
-      "none projects";
+    grid-template-areas: "about sidebar";
     min-height: auto;
   }
 
   @media (max-width: 768px) {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: var(--space-md);
     padding: var(--space-md);
     width: 100%;
@@ -50,38 +39,29 @@ const HomeContainer = styled.div`
   }
 `;
 
-const SectionBox = styled.div<{ gridArea?: string }>`
-  margin-bottom: var(--space-lg);
-  padding: var(--space-lg);
+const AboutContainer = styled.div`
+  grid-area: about;
+  padding: 0;
   overflow-x: hidden;
-  background: var(--bg-surface);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--bg-surface-hover);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all var(--transition-normal);
+  width: 80%;
+  margin-top: 80px;
+`;
 
-  /* Grid area assignment for desktop */
-  @media (min-width: 769px) {
-    grid-area: ${(props) => props.gridArea};
-    margin-bottom: 0;
-  }
+const Sidebar = styled.aside`
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: var(--space-md);
 
   @media (max-width: 768px) {
-    padding: var(--space-md);
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-  }
-
-  @media (max-width: 480px) {
-    padding: var(--space-sm);
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
+    padding-left: 0;
+    align-items: stretch;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: var(--space-lg);
   }
 `;
 
@@ -118,505 +98,119 @@ const TechTag = styled.span`
   border: 1px solid var(--bg-surface-hover);
 `;
 
-const ProjectList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  overflow-y: auto;
-`;
-
-const ProjectItem = styled.div`
-  padding: var(--space-sm);
-  margin-bottom: var(--space-sm);
-`;
-
-const ProjectTitle = styled.h3`
-  align-items: center;
-  color: var(--text-primary);
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 0 var(--space-xs) 0;
-`;
-
-const ProjectTitleLink = styled.a`
-  color: var(--text-primary);
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: color var(--transition-normal);
-
-  &:hover {
-    color: #c3baab;
-  }
-`;
-
-const ProjectMeta = styled.div`
-  display: flex;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-xs);
-  margin-top: var(--space-sm);
-  font-size: 0.8rem;
-`;
-
-const ProjectYear = styled.span`
-  color: white;
-  padding: 2px 4px;
-  border-radius: var(--radius-sm);
-`;
-
-const ProjectTech = styled.span`
-  color: var(--text-tertiary);
-`;
-
-const ProjectDescription = styled.p`
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  line-height: 1.4;
-  margin: 0;
-`;
-
-const ProjectTags = styled.div`
-  display: flex;
-  gap: var(--space-xs);
-  margin-bottom: var(--space-xs);
-`;
-
-const ProjectTag = styled.span<{ type: "personal" | "client" }>`
-  padding: 2px 0px;
-  border-radius: var(--radius-sm);
-  font-weight: 500;
-  background-color: var(--gray-200);
-  color: var(--primary);
-`;
-
 const SocialLinks = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: var(--space-lg);
+  flex-direction: column;
+  gap: var(--space-sm);
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-md);
   }
 
   @media (max-width: 480px) {
-    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-sm);
   }
 `;
 
 const SocialLink = styled.a`
-  display: flex;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
   text-decoration: none;
   color: var(--text-secondary);
   font-size: 0.9rem;
   font-weight: 500;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
   transition: all var(--transition-normal);
+
+  /* Allow links to grow/shrink on small screens */
+  @media (max-width: 768px) {
+    flex: 1 1 120px;
+    justify-content: center;
+    padding: 8px 6px;
+  }
+
+  @media (max-width: 480px) {
+    flex: 1 1 90px;
+    font-size: 0.85rem;
+    padding: 6px 6px;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 
   &:hover {
     color: var(--text-primary);
-    transform: translateY(-1px);
-  }
-`;
-
-const SearchContainer = styled.div`
-  margin-bottom: var(--space-md);
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  padding: var(--space-sm);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-sm);
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-size: 0.9rem;
-
-  &:focus {
-    outline: none;
-    border-color: var(--primary);
-  }
-`;
-
-const TagsContainer = styled.div`
-  margin-bottom: var(--space-md);
-`;
-
-const TagsList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-`;
-
-const TagButton = styled.button<{ active: boolean }>`
-  padding: 4px 8px;
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-sm);
-  background: ${(props) =>
-    props.active ? "var(--primary)" : "var(--bg-primary)"};
-  color: ${(props) => (props.active ? "white" : "var(--text-secondary)")};
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: all var(--transition-normal);
-
-  &:hover {
-    background: var(--primary);
-    color: white;
-  }
-`;
-
-const BlogList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  overflow-x: hidden;
-  margin-bottom: var(--space-md);
-`;
-
-const BlogItem = styled.div`
-  padding: var(--space-sm);
-  background: var(--bg-surface-hover);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all var(--transition-normal);
-
-  &:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateX(2px);
-  }
-`;
-
-const BlogTitle = styled.h3`
-  color: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin: 0 0 var(--space-xs) 0;
-`;
-
-const BlogMeta = styled.div`
-  display: flex;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-xs);
-`;
-
-const BlogDate = styled.span`
-  color: inherit;
-  opacity: 0.8;
-  font-size: 0.7rem;
-`;
-
-const BlogTags = styled.div`
-  display: flex;
-  gap: var(--space-xs);
-  flex-wrap: wrap;
-`;
-
-const BlogTag = styled.span`
-  background: rgba(255, 255, 255, 0.2);
-  color: inherit;
-  padding: 2px 4px;
-  border-radius: var(--radius-sm);
-  font-size: 0.65rem;
-`;
-
-const BlogExcerpt = styled.p`
-  color: inherit;
-  opacity: 0.9;
-  font-size: 0.8rem;
-  line-height: 1.3;
-  margin: 0;
-`;
-
-const PaginationContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-sm);
-`;
-
-const PaginationButton = styled.button<{ active?: boolean }>`
-  padding: var(--space-xs) var(--space-sm);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-sm);
-  background: ${(props) =>
-    props.active ? "var(--primary)" : "var(--bg-primary)"};
-  color: ${(props) => (props.active ? "white" : "var(--text-secondary)")};
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all var(--transition-normal);
-
-  &:hover {
-    background: var(--primary);
-    color: white;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+    transform: translateX(4px);
   }
 `;
 
 export const Home = () => {
-  const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5;
-
-  // Get all unique tags from blog posts
-  const allTags = useMemo(() => {
-    const tags = new Set<string>();
-    blogPosts.forEach((post) => {
-      post.tags.forEach((tag) => tags.add(tag));
-    });
-    return Array.from(tags).sort();
-  }, []);
-
-  // Filter and search blog posts
-  const filteredPosts = useMemo(() => {
-    return blogPosts.filter((post) => {
-      const matchesSearch =
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesTag = !selectedTag || post.tags.includes(selectedTag);
-      return matchesSearch && matchesTag;
-    });
-  }, [searchTerm, selectedTag]);
-
-  // Paginate filtered posts
-  const paginatedPosts = useMemo(() => {
-    const startIndex = (currentPage - 1) * postsPerPage;
-    return filteredPosts.slice(startIndex, startIndex + postsPerPage);
-  }, [filteredPosts, currentPage, postsPerPage]);
-
-  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-
-  const handleBlogPostClick = (slug: string) => {
-    navigate(`/writing/${slug}`);
-  };
-
-  const handleTagClick = (tag: string) => {
-    setSelectedTag(selectedTag === tag ? null : tag);
-    setCurrentPage(1);
-  };
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    setCurrentPage(1);
-  };
-
-
-
   const socialLinks = [
     { name: "GitHub", url: "https://github.com/rum-n", icon: <GitHubIcon /> },
-    // {
-    //   name: "LinkedIn",
-    //   url: "https://www.linkedin.com/in/rmanev/",
-    //   icon: <LinkedInIcon />,
-    // },
     { name: "X (Twitter)", url: "https://x.com/room_n", icon: <XIcon /> },
     { name: "Medium", url: "https://room-n.medium.com/", icon: <MediumIcon /> },
   ];
 
   return (
-    <>
-      <Layout>
-        <HomeContainer>
-          {/* Rumen Section */}
-          <SectionBox gridArea="rumen">
-            <SectionTitle>Rumen</SectionTitle>
-            <IntroText>
-              I used to do sales, business development and project management.
-              It taught me valuable skills, but it wasn't for me.
-            </IntroText>
-            <IntroText>
-              In 2020 I started working as a junior frontend developer. It felt
-              like I finally found the missing piece. Since then I've worked
-              both full-time and freelance, both remote and on-site.
-            </IntroText>
-            <IntroText>
-              Currently I'm working full stack with React, React Native and
-              Node.js. I'm aiming to get better at it every day and expand into
-              different functions and technologies.
-            </IntroText>
-            <TechList>
-              <TechTag>React</TechTag>
-              <TechTag>React Native</TechTag>
-              <TechTag>Angular</TechTag>
-              <TechTag>Vue</TechTag>
-              <TechTag>Node.js</TechTag>
-              <TechTag>Nest.js</TechTag>
-              <TechTag>TypeScript</TechTag>
-              <TechTag>Next.js</TechTag>
-              <TechTag>MongoDB</TechTag>
-              <TechTag>Prisma</TechTag>
-              <TechTag>Rust</TechTag>
-            </TechList>
-          </SectionBox>
+    <Layout>
+      <NavMenu menuItem="Home" />
 
-          {/* Projects Section */}
-          <SectionBox gridArea="projects">
-            <SectionTitle>Projects</SectionTitle>
-            <ProjectList>
-              {projects
-                .sort((a, b) => Number(b.year) - Number(a.year))
-                .map((project, index) => (
-                  <ProjectItem key={index}>
-                    <ProjectTitle>
-                      {project.url ? (
-                        <ProjectTitleLink
-                          href={project.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {project.title}
-                        </ProjectTitleLink>
-                      ) : (
-                        project.title
-                      )}
-                      <ProjectMeta>
-                        <ProjectTags>
-                          {project.tags.map((tag) => (
-                            <ProjectTag
-                              key={tag}
-                              type={tag as "personal" | "client"}
-                            >
-                              {tag}
-                            </ProjectTag>
-                          ))}
-                        </ProjectTags>{" "}
-                        /<ProjectYear>{project.year}</ProjectYear> /
-                        <ProjectTech>{project.tech}</ProjectTech>
-                      </ProjectMeta>
-                    </ProjectTitle>
+      <HomeContainer>
+        <AboutContainer>
+          <IntroText>
+            I used to do sales, business development and project management. It
+            taught me valuable skills, but it wasn't for me.
+          </IntroText>
+          <IntroText>
+            In 2020 I started working as a junior frontend developer. It felt
+            like I finally found the missing piece. Since then I've worked both
+            full-time and freelance, both remote and on-site.
+          </IntroText>
+          <IntroText>
+            Currently I'm working full stack with React, React Native and
+            Node.js. I'm aiming to get better at it every day and expand into
+            different functions and technologies.
+          </IntroText>
 
-                    <ProjectDescription>
-                      {project.description}
-                    </ProjectDescription>
-                  </ProjectItem>
-                ))}
-            </ProjectList>
-          </SectionBox>
+          <TechList>
+            <TechTag>React</TechTag>
+            <TechTag>React Native</TechTag>
+            <TechTag>Node.js</TechTag>
+            <TechTag>TypeScript</TechTag>
+            <TechTag>Next.js</TechTag>
+            <TechTag>Rust</TechTag>
+          </TechList>
+        </AboutContainer>
 
-          {/* Social Links Section */}
-          <SectionBox gridArea="social">
-            <SectionTitle>Social Links</SectionTitle>
-            <SocialLinks>
-              {socialLinks.map((link, index) => (
-                <SocialLink
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.name}
-                >
-                  {link.name}
-                </SocialLink>
-              ))}
-            </SocialLinks>
-          </SectionBox>
-          <iframe
-            src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=6056970"
-            style={{
-              border: "none",
-              width: "100%",
-              height: "100px",
-              marginTop: "var(--space-md)",
-            }}
-          ></iframe>
-
-          {/* Writing Section */}
-          <SectionBox gridArea="writing">
-            <SectionTitle>Writing</SectionTitle>
-
-            <SearchContainer>
-              <SearchInput
-                type="text"
-                placeholder="Search posts..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-              />
-            </SearchContainer>
-
-            <TagsContainer>
-              <TagsList>
-                {allTags.map((tag) => (
-                  <TagButton
-                    key={tag}
-                    active={selectedTag === tag}
-                    onClick={() => handleTagClick(tag)}
-                  >
-                    {tag}
-                  </TagButton>
-                ))}
-              </TagsList>
-            </TagsContainer>
-
-            <BlogList>
-              {paginatedPosts.map((post) => (
-                <BlogItem
-                  key={post.id}
-                  onClick={() => handleBlogPostClick(post.slug)}
-                >
-                  <BlogTitle>{post.title}</BlogTitle>
-                  <BlogMeta>
-                    <BlogDate>
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </BlogDate>
-                    <BlogTags>
-                      {post.tags.map((tag) => (
-                        <BlogTag key={tag}>{tag}</BlogTag>
-                      ))}
-                    </BlogTags>
-                  </BlogMeta>
-                  <BlogExcerpt>{post.excerpt}</BlogExcerpt>
-                </BlogItem>
-              ))}
-            </BlogList>
-
-            {totalPages > 1 && (
-              <PaginationContainer>
-                <PaginationButton
-                  onClick={() => setCurrentPage(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  ←
-                </PaginationButton>
-
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (page) => (
-                    <PaginationButton
-                      key={page}
-                      active={currentPage === page}
-                      onClick={() => setCurrentPage(page)}
-                    >
-                      {page}
-                    </PaginationButton>
-                  )
-                )}
-
-                <PaginationButton
-                  onClick={() => setCurrentPage(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                >
-                  →
-                </PaginationButton>
-              </PaginationContainer>
-            )}
-          </SectionBox>
-
-          {/* Color Picker Section */}
-          <SectionBox gridArea="color">
-            <SectionTitle>Change Text Color</SectionTitle>
-            <ColorPicker />
-          </SectionBox>
-        </HomeContainer>
-      </Layout>
-    </>
+        <Sidebar>
+          <SectionTitle>Connect</SectionTitle>
+          <SocialLinks>
+            {socialLinks.map((link, index) => (
+              <SocialLink
+                key={index}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.name}
+              >
+                {link.icon}
+                <span>{link.name}</span>
+              </SocialLink>
+            ))}
+          </SocialLinks>
+        </Sidebar>
+      </HomeContainer>
+    </Layout>
   );
 };
