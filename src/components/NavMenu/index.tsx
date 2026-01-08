@@ -11,20 +11,17 @@ const NavContainer = styled.nav`
   // margin-bottom: var(--space-2xl);
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
 
   @media (max-width: 768px) {
     margin-bottom: var(--space-xl);
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
   }
 
   @media (max-width: 480px) {
     margin-bottom: var(--space-lg);
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
   }
 `;
 
@@ -56,7 +53,6 @@ const MenuList = styled.ul`
   margin-bottom: var(--space-xl);
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
 
   @media (max-width: 768px) {
     gap: var(--space-lg);
@@ -64,7 +60,6 @@ const MenuList = styled.ul`
     margin-bottom: var(--space-lg);
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
   }
 
   @media (max-width: 480px) {
@@ -72,7 +67,6 @@ const MenuList = styled.ul`
     margin-bottom: var(--space-md);
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
     flex-wrap: wrap;
   }
 `;

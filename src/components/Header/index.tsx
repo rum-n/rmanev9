@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import AsciiLineAnimation from "../AsciiLineAnimation";
+import { ThemeToggle } from "../ThemeToggle";
 
 const HeaderContainer = styled.header``;
 
@@ -28,6 +29,7 @@ const AnimationContainer = styled.div`
 export const Header: React.FC = () => {
   return (
     <HeaderContainer>
+      <ThemeToggle />
       <AnimationContainer>
         <AsciiLineAnimation />
         <AsciiLineAnimation />
