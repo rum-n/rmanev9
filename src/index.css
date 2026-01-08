@@ -1,6 +1,7 @@
 :root {
   --bg-primary: #c3baab;
   --text-primary: #2b2014;
+  --text-secondary: #89918f;
   --bg-surface-hover: rgba(0, 0, 0, 0.04);
   --font-sans: "GeistMono", "JetBrains Mono", "Fira Code", "Monaco",
     "Cascadia Code", monospace;

@@ -8,7 +8,7 @@ interface NavMenuProps {
 }
 
 const NavContainer = styled.nav`
-  margin-bottom: var(--space-2xl);
+  // margin-bottom: var(--space-2xl);
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
