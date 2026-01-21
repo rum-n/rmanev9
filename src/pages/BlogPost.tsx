@@ -1,262 +1,6 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import styled from "styled-components";
 import { Layout } from "../components/Layout";
 import { blogPosts } from "../data/blogPosts";
-
-const BlogPostContainer = styled.div`
-  width: 100%;
-  max-width: 800px;
-  overflow-x: hidden;
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 100%;
-    width: 100%;
-    overflow-x: hidden;
-  }
-`;
-
-const BlogPostSection = styled.section`
-  margin-top: var(--space-2xl);
-`;
-
-const BackButton = styled.button`
-  background: var(--bg-surface);
-  border: 1px solid var(--bg-surface-hover);
-  color: var(--text-secondary);
-  cursor: pointer;
-  font-size: 1rem;
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-lg);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  transition: all var(--transition-normal);
-  backdrop-filter: blur(10px);
-  margin-bottom: var(--space-xl);
-
-  &:hover {
-    background: var(--bg-surface-hover);
-    color: var(--text-primary);
-    transform: translateX(-2px);
-    box-shadow: var(--shadow-md);
-  }
-`;
-
-const BlogHeader = styled.div`
-  margin-bottom: var(--space-2xl);
-`;
-
-const BlogTitle = styled.h1`
-  color: var(--text-primary);
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0 0 var(--space-md) 0;
-  letter-spacing: -0.02em;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  max-width: 100%;
-`;
-
-const BlogMeta = styled.div`
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin-bottom: var(--space-lg);
-`;
-
-const BlogDate = styled.span`
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
-  font-weight: 500;
-`;
-
-const BlogTags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-`;
-
-const BlogTag = styled.span`
-  background: var(--bg-surface-hover);
-  color: var(--text-secondary);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  font-weight: 500;
-`;
-
-const BlogContent = styled.div`
-  line-height: 1.7;
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: var(--text-primary);
-    font-weight: 600;
-    margin-top: var(--space-2xl);
-    margin-bottom: var(--space-md);
-    line-height: 1.3;
-  }
-
-  h1 {
-    font-size: 1.75rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  h3 {
-    font-size: 1.25rem;
-  }
-
-  p {
-    margin-bottom: var(--space-lg);
-  }
-
-  ul,
-  ol {
-    margin-bottom: var(--space-lg);
-    padding-left: var(--space-xl);
-  }
-
-  li {
-    margin-bottom: var(--space-xs);
-  }
-
-  pre {
-    background: var(--bg-tertiary);
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    overflow-x: auto;
-    margin: var(--space-lg) 0;
-    font-size: 0.9rem;
-    border: 1px solid var(--bg-surface-hover);
-    backdrop-filter: blur(10px);
-  }
-
-  code {
-    font-family: var(--font-mono);
-    background: var(--bg-surface);
-    padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--radius-sm);
-    font-size: 0.9em;
-    color: var(--primary);
-  }
-
-  pre code {
-    background: none;
-    padding: 0;
-    color: var(--text-primary);
-  }
-
-  blockquote {
-    border-left: 4px solid var(--primary);
-    padding-left: var(--space-lg);
-    margin: var(--space-lg) 0;
-    font-style: italic;
-    color: var(--text-secondary);
-  }
-
-  a {
-    color: var(--primary);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: all var(--transition-fast);
-
-    &:hover {
-      border-bottom-color: var(--primary);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--radius-lg);
-    margin: var(--space-lg) 0;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: var(--space-lg) 0;
-
-    th,
-    td {
-      padding: var(--space-sm) var(--space-md);
-      text-align: left;
-      border-bottom: 1px solid var(--bg-surface-hover);
-    }
-
-    th {
-      background: var(--bg-surface);
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-  }
-`;
-
-const NavigationContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: var(--space-3xl);
-  padding-top: var(--space-xl);
-  border-top: 1px solid var(--bg-surface-hover);
-  gap: var(--space-lg);
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: var(--space-md);
-  }
-`;
-
-const NavigationButton = styled.button<{ disabled: boolean }>`
-  background: var(--bg-surface);
-  border: 1px solid var(--bg-surface-hover);
-  color: ${(props) =>
-    props.disabled ? "var(--text-tertiary)" : "var(--text-secondary)"};
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  font-size: 0.9rem;
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  transition: all var(--transition-normal);
-  backdrop-filter: blur(10px);
-  max-width: 300px;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  &:hover:not(:disabled) {
-    background: var(--bg-surface-hover);
-    color: var(--text-primary);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
-`;
-
-const EmptyDiv = styled.div`
-  flex: 1;
-`;
 
 export const BlogPost = () => {
   const { slug } = useParams();
@@ -267,23 +11,26 @@ export const BlogPost = () => {
   if (!post) {
     return (
       <Layout>
-        <BlogPostContainer>
-          <BlogPostSection>
-            <BackButton onClick={() => navigate("/writing")}>
-              ← Back to Writing
-            </BackButton>
-            <h1>Post not found</h1>
-          </BlogPostSection>
-        </BlogPostContainer>
+        <div className="w-full flex justify-center">
+          <div className="w-full max-w-3xl overflow-x-hidden px-md md:px-0">
+            <section className="mt-6xl">
+              <button
+                onClick={() => navigate("/writing")}
+                className="bg-surface border border-surface-hover text-secondary cursor-pointer text-base px-md py-sm rounded-lg inline-flex items-center gap-xs transition-all duration-normal backdrop-blur-sm mb-xl hover:bg-surface-hover hover:text-primary hover:-translate-x-0.5 hover:shadow-md"
+              >
+                ← Back to Writing
+              </button>
+              <h1>Post not found</h1>
+            </section>
+          </div>
+        </div>
       </Layout>
     );
   }
 
   const currentIndex = blogPosts.findIndex((p) => p.slug === slug);
-
   const hasPrevious = currentIndex > 0;
   const hasNext = currentIndex < blogPosts.length - 1;
-
   const previousPost = hasPrevious ? blogPosts[currentIndex - 1] : null;
   const nextPost = hasNext ? blogPosts[currentIndex + 1] : null;
 
@@ -301,53 +48,144 @@ export const BlogPost = () => {
 
   return (
     <Layout>
-      <BlogPostContainer>
-        <BlogPostSection>
-          <BackButton onClick={handleBack}>← Back to Writing</BackButton>
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-3xl overflow-x-hidden px-md md:px-0">
+          <section className="mt-6xl">
+            <button
+              onClick={handleBack}
+              className="bg-surface border border-surface-hover text-secondary cursor-pointer text-base px-md py-sm rounded-lg inline-flex items-center gap-xs transition-all duration-normal backdrop-blur-sm mb-xl hover:bg-surface-hover hover:text-primary hover:-translate-x-0.5 hover:shadow-md"
+            >
+              ← Back to Writing
+            </button>
 
-          <BlogHeader>
-            <BlogTitle>{post.title}</BlogTitle>
-            <BlogMeta>
-              <BlogDate>
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </BlogDate>
-              <BlogTags>
-                {post.tags.map((tag) => (
-                  <BlogTag key={tag}>{tag}</BlogTag>
-                ))}
-              </BlogTags>
-            </BlogMeta>
-          </BlogHeader>
+            <div className="mb-6xl">
+              <h1 className="text-primary text-2xl md:text-3xl font-bold leading-tight m-0 mb-md tracking-tight break-words max-w-full">
+                {post.title}
+              </h1>
+              <div className="flex items-center gap-md mb-lg">
+                <span className="text-sm text-tertiary font-medium">
+                  {new Date(post.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+                <div className="flex flex-wrap gap-xs">
+                  {post.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="bg-surface-hover text-secondary px-sm py-xs rounded text-0.75rem font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
 
-          <BlogContent dangerouslySetInnerHTML={{ __html: post.content }} />
+            <div className="leading-relaxed text-base md:text-lg text-secondary prose prose-invert max-w-none">
+              <style>{`
+              .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+                color: var(--text-primary);
+                font-weight: 600;
+                margin-top: 3rem;
+                margin-bottom: 1rem;
+                line-height: 1.3;
+              }
+              .prose h1 { font-size: 1.75rem; }
+              .prose h2 { font-size: 1.5rem; }
+              .prose h3 { font-size: 1.25rem; }
+              .prose p { margin-bottom: 1.5rem; }
+              .prose ul, .prose ol { margin-bottom: 1.5rem; padding-left: 2rem; }
+              .prose li { margin-bottom: 0.25rem; }
+              .prose pre {
+                background: #0f1724;
+                padding: 1.5rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+                margin: 1.5rem 0;
+                font-size: 0.9rem;
+                border: 1px solid rgba(255, 255, 255, 0.03);
+                backdrop-filter: blur(10px);
+              }
+              .prose code {
+                font-family: monospace;
+                background: var(--bg-surface);
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.25rem;
+                font-size: 0.9em;
+                color: var(--primary);
+              }
+              .prose pre code {
+                background: none;
+                padding: 0;
+                color: var(--text-primary);
+              }
+              .prose blockquote {
+                border-left: 4px solid var(--primary);
+                padding-left: 1.5rem;
+                margin: 1.5rem 0;
+                font-style: italic;
+                color: var(--text-secondary);
+              }
+              .prose a {
+                color: var(--primary);
+                text-decoration: none;
+                border-bottom: 1px solid transparent;
+                transition: all 150ms ease;
+              }
+              .prose a:hover {
+                border-bottom-color: var(--primary);
+              }
+              .prose img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 0.5rem;
+                margin: 1.5rem 0;
+              }
+              .prose table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 1.5rem 0;
+              }
+              .prose th, .prose td {
+                padding: 0.5rem 1rem;
+                text-align: left;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+              }
+              .prose th {
+                background: var(--bg-surface);
+                font-weight: 600;
+                color: var(--text-primary);
+              }
+            `}</style>
+              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            </div>
 
-          <NavigationContainer>
-            {previousPost ? (
-              <NavigationButton
-                onClick={() => handleNavigate(previousPost.slug)}
-                disabled={false}
-              >
-                ← {previousPost.title}
-              </NavigationButton>
-            ) : (
-              <EmptyDiv />
-            )}
+            <div className="flex justify-between items-center pt-xl border-t border-surface-hover gap-lg flex-wrap mb-xl">
+              {previousPost ? (
+                <button
+                  onClick={() => handleNavigate(previousPost.slug)}
+                  className="bg-surface border border-surface-hover text-secondary cursor-pointer text-sm px-md py-sm rounded-lg inline-flex items-center gap-xs transition-all duration-normal backdrop-blur-sm flex-1 min-w-0 text-left hover:bg-surface-hover hover:text-primary hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  ← <span className="truncate">{previousPost.title}</span>
+                </button>
+              ) : (
+                <div className="flex-1" />
+              )}
 
-            {nextPost && (
-              <NavigationButton
-                onClick={() => handleNavigate(nextPost.slug)}
-                disabled={false}
-              >
-                {nextPost.title} →
-              </NavigationButton>
-            )}
-          </NavigationContainer>
-        </BlogPostSection>
-      </BlogPostContainer>
+              {nextPost && (
+                <button
+                  onClick={() => handleNavigate(nextPost.slug)}
+                  className="bg-surface border border-surface-hover text-secondary cursor-pointer text-sm px-md py-sm rounded-lg inline-flex items-center gap-xs transition-all duration-normal backdrop-blur-sm flex-1 min-w-0 text-left hover:bg-surface-hover hover:text-primary hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <span className="truncate">{nextPost.title}</span> →
+                </button>
+              )}
+            </div>
+          </section>
+        </div>
+      </div>
     </Layout>
   );
 };

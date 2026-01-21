@@ -1,188 +1,6 @@
-import styled from "styled-components";
 import { Layout } from "../components/Layout";
-import { NavMenu } from "../components/NavMenu";
 import { useForm, ValidationError } from "@formspree/react";
 import { useState } from "react";
-
-const ContactContainer = styled.div`
-  width: 100%;
-  max-width: 800px;
-  overflow-x: hidden;
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 100%;
-    width: 100%;
-    overflow-x: hidden;
-  }
-`;
-
-const ContactSection = styled.section`
-  margin-top: var(--space-2xl);
-`;
-
-const ContactHeader = styled.div`
-  margin-bottom: var(--space-2xl);
-`;
-
-const ContactTitle = styled.h1`
-  color: var(--text-primary);
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0 0 var(--space-md) 0;
-  letter-spacing: -0.02em;
-`;
-
-const ContactDescription = styled.p`
-  color: var(--text-secondary);
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin: 0;
-`;
-
-const ContactForm = styled.form`
-  background: var(--bg-surface);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-xl);
-  padding: var(--space-2xl);
-  backdrop-filter: blur(10px);
-  max-width: 500px;
-  width: 100%;
-  overflow-x: hidden;
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-    width: 100%;
-    padding: var(--space-xl);
-    overflow-x: hidden;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 100%;
-    width: 100%;
-    padding: var(--space-lg);
-    overflow-x: hidden;
-  }
-`;
-
-const FormGroup = styled.div`
-  margin-bottom: var(--space-lg);
-`;
-
-const FormLabel = styled.label`
-  display: block;
-  color: var(--text-primary);
-  font-weight: 500;
-  margin-bottom: var(--space-sm);
-  font-size: 0.9rem;
-`;
-
-const FormInput = styled.input`
-  width: 100%;
-  padding: var(--space-md) var(--space-lg);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-lg);
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  font-size: 1rem;
-  transition: all var(--transition-normal);
-
-  &::placeholder {
-    color: var(--text-tertiary);
-  }
-
-  &:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-    background: var(--bg-tertiary);
-  }
-`;
-
-const FormTextarea = styled.textarea`
-  width: 100%;
-  padding: var(--space-md) var(--space-lg);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-lg);
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  font-size: 1rem;
-  font-family: inherit;
-  resize: vertical;
-  min-height: 120px;
-  transition: all var(--transition-normal);
-
-  &::placeholder {
-    color: var(--text-tertiary);
-  }
-
-  &:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-    background: var(--bg-tertiary);
-  }
-`;
-
-const SubmitButton = styled.button<{ disabled: boolean }>`
-  background: ${(props) =>
-    props.disabled
-      ? "var(--bg-surface)"
-      : "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)"};
-  color: ${(props) => (props.disabled ? "var(--text-tertiary)" : "white")};
-  border: none;
-  padding: var(--space-md) var(--space-xl);
-  border-radius: var(--radius-lg);
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  transition: all var(--transition-normal);
-  box-shadow: ${(props) => (props.disabled ? "none" : "var(--shadow-md)")};
-  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-
-  &:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-`;
-
-const SuccessMessage = styled.div`
-  background: var(--success);
-  color: white;
-  padding: var(--space-lg);
-  border-radius: var(--radius-lg);
-  text-align: center;
-  font-weight: 500;
-  margin-top: var(--space-lg);
-`;
-
-const ContactInfo = styled.div`
-  margin-top: var(--space-2xl);
-  padding: var(--space-xl);
-  background: var(--bg-surface);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-xl);
-  backdrop-filter: blur(10px);
-`;
-
-const ContactInfoTitle = styled.h3`
-  color: var(--text-primary);
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0 0 var(--space-md) 0;
-`;
-
-const ContactInfoText = styled.p`
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin: 0;
-`;
 
 export const Contact = () => {
   const [state, handleSubmit] = useForm("xvodgbdk");
@@ -191,19 +9,21 @@ export const Contact = () => {
   if (state.succeeded) {
     return (
       <Layout>
-        <ContactContainer>
-          <ContactSection>
-            <ContactHeader>
-              <ContactTitle>Thanks for reaching out!</ContactTitle>
-              <ContactDescription>
+        <div className="w-full max-w-2xl overflow-x-hidden md:max-w-full sm:max-w-full">
+          <section className="mt-6xl">
+            <div className="mb-6xl">
+              <h1 className="text-primary text-2xl md:text-xl font-bold leading-tight m-0 mb-md tracking-tight">
+                Thanks for reaching out!
+              </h1>
+              <p className="text-secondary text-lg leading-normal m-0">
                 I'll get back to you as soon as possible.
-              </ContactDescription>
-            </ContactHeader>
-            <SuccessMessage>
+              </p>
+            </div>
+            <div className="bg-green-600 text-white px-lg py-lg rounded-lg text-center font-medium mt-lg">
               Your message has been sent successfully!
-            </SuccessMessage>
-          </ContactSection>
-        </ContactContainer>
+            </div>
+          </section>
+        </div>
       </Layout>
     );
   }
@@ -221,66 +41,91 @@ export const Contact = () => {
 
   return (
     <Layout>
-      <ContactContainer>
-        <NavMenu menuItem="Contact" />
-
-        <ContactSection>
-          <ContactHeader>
-            <ContactTitle>Get in Touch</ContactTitle>
-            <ContactDescription>
+      <div className="w-full max-w-2xl overflow-x-hidden md:max-w-full sm:max-w-full">
+        <section className="mt-6xl">
+          <div className="mb-6xl">
+            <h1 className="text-primary text-2xl md:text-xl font-bold leading-tight m-0 mb-md tracking-tight">
+              Get in Touch
+            </h1>
+            <p className="text-secondary text-lg leading-normal m-0">
               Have a project in mind or just want to say hello? I'd love to hear
               from you!
-            </ContactDescription>
-          </ContactHeader>
+            </p>
+          </div>
 
-          <ContactForm onSubmit={handleSubmit}>
-            <FormGroup>
-              <FormLabel htmlFor="email">Email Address</FormLabel>
-              <FormInput
+          <form
+            onSubmit={handleSubmit}
+            className="bg-surface border border-surface-hover rounded-2xl px-6xl py-6xl backdrop-blur-sm max-w-md w-full overflow-x-hidden md:max-w-full md:w-full md:px-xl md:py-xl sm:max-w-full sm:w-full sm:px-lg sm:py-lg"
+          >
+            <div className="mb-lg">
+              <label
+                htmlFor="email"
+                className="block text-primary font-medium mb-sm text-sm"
+              >
+                Email Address
+              </label>
+              <input
                 placeholder="your.email@example.com"
                 id="email"
                 type="email"
                 name="email"
                 required
+                className="w-full px-lg py-md border border-surface-hover rounded-lg bg-secondary text-primary text-base transition-all duration-normal placeholder:text-tertiary focus:outline-none focus:border-blue-600 focus:shadow-lg focus:bg-slate-800"
               />
               <ValidationError
                 prefix="Email"
                 field="email"
                 errors={state.errors}
               />
-            </FormGroup>
+            </div>
 
-            <FormGroup>
-              <FormLabel htmlFor="message">Message</FormLabel>
-              <FormTextarea
+            <div className="mb-lg">
+              <label
+                htmlFor="message"
+                className="block text-primary font-medium mb-sm text-sm"
+              >
+                Message
+              </label>
+              <textarea
                 placeholder="Tell me about your project or just say hello..."
                 id="message"
                 name="message"
                 value={value}
                 onChange={handleChange}
                 required
+                className="w-full px-lg py-md border border-surface-hover rounded-lg bg-secondary text-primary text-base font-inherit resize-vertical min-h-30 transition-all duration-normal placeholder:text-tertiary focus:outline-none focus:border-blue-600 focus:shadow-lg focus:bg-slate-800"
               />
               <ValidationError
                 prefix="Message"
                 field="message"
                 errors={state.errors}
               />
-            </FormGroup>
+            </div>
 
-            <SubmitButton type="submit" disabled={btnDisabled()}>
+            <button
+              type="submit"
+              disabled={btnDisabled()}
+              className={`${
+                btnDisabled()
+                  ? "bg-surface text-tertiary opacity-50 cursor-not-allowed"
+                  : "bg-gradient-to-br from-blue-600 to-blue-500 text-white shadow-md hover:-translate-y-0.5 hover:shadow-lg"
+              } px-xl py-md rounded-lg font-semibold text-base transition-all duration-normal`}
+            >
               {state.submitting ? "Sending..." : "Send Message"}
-            </SubmitButton>
-          </ContactForm>
+            </button>
+          </form>
 
-          <ContactInfo>
-            <ContactInfoTitle>Other Ways to Connect</ContactInfoTitle>
-            <ContactInfoText>
+          <div className="mt-6xl px-xl py-xl bg-surface border border-surface-hover rounded-2xl backdrop-blur-sm">
+            <h3 className="text-primary text-xl font-semibold m-0 mb-md">
+              Other Ways to Connect
+            </h3>
+            <p className="text-secondary leading-normal m-0">
               You can also reach me through LinkedIn, GitHub, or Medium. I'm
               always open to discussing new opportunities and collaborations.
-            </ContactInfoText>
-          </ContactInfo>
-        </ContactSection>
-      </ContactContainer>
+            </p>
+          </div>
+        </section>
+      </div>
     </Layout>
   );
 };

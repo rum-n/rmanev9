@@ -1,220 +1,7 @@
-import styled from "styled-components";
 import { Layout } from "../components/Layout";
-import { NavMenu } from "../components/NavMenu";
 import { blogPosts } from "../data/blogPosts";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
-
-const WritingContainer = styled.div`
-  width: 100%;
-  max-width: 800px;
-  overflow-x: hidden;
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 100%;
-    width: 100%;
-    overflow-x: hidden;
-  }
-`;
-
-const WritingSection = styled.section`
-  margin-top: var(--space-2xl);
-`;
-
-const SearchContainer = styled.div`
-  margin-bottom: var(--space-xl);
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  max-width: 100%;
-  padding: var(--space-md) var(--space-lg);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-md);
-  background: var(--bg-surface);
-  color: var(--text-primary);
-  font-size: 1rem;
-  transition: all var(--transition-normal);
-  box-sizing: border-box;
-
-  &::placeholder {
-    color: var(--text-tertiary);
-  }
-
-  &:focus {
-    outline: none;
-    border-color: var(--primary);
-    background: var(--bg-surface-hover);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    max-width: 100%;
-    padding: var(--space-sm) var(--space-md);
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
-    max-width: 100%;
-    padding: var(--space-sm);
-  }
-`;
-
-const TagsContainer = styled.div`
-  margin: var(--space-xl) 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-`;
-
-const Tag = styled.button<{ isActive: boolean }>`
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md);
-  border: 1px solid
-    ${(props) =>
-      props.isActive ? "var(--primary)" : "var(--bg-surface-hover)"};
-  background: ${(props) =>
-    props.isActive ? "var(--primary)" : "var(--bg-surface)"};
-  color: ${(props) => (props.isActive ? "white" : "var(--text-secondary)")};
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  font-size: 0.875rem;
-  font-weight: 500;
-
-  &:hover {
-    background: ${(props) =>
-      props.isActive ? "var(--primary-dark)" : "var(--bg-surface-hover)"};
-    transform: translateY(-1px);
-  }
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-const BlogList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-`;
-
-const BlogPostCard = styled.div`
-  background: var(--bg-surface);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-md);
-  padding: var(--space-xl);
-  cursor: pointer;
-  transition: all var(--transition-normal);
-
-  &:hover {
-    background: var(--bg-surface-hover);
-    transform: translateY(-1px);
-  }
-`;
-
-const BlogTitle = styled.h2`
-  font-size: 1.5rem;
-  margin: 0 0 var(--space-sm) 0;
-  color: var(--text-primary);
-  font-weight: 600;
-  line-height: 1.3;
-`;
-
-const BlogMeta = styled.div`
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin-bottom: var(--space-md);
-`;
-
-const BlogDate = styled.span`
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
-  font-weight: 500;
-`;
-
-const BlogTags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-`;
-
-const BlogTag = styled.span`
-  background: var(--bg-surface-hover);
-  color: var(--text-secondary);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  font-weight: 500;
-`;
-
-const BlogExcerpt = styled.p`
-  margin: 0;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  font-size: 0.95rem;
-`;
-
-const PaginationContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-md);
-  margin-top: var(--space-2xl);
-`;
-
-const PaginationButton = styled.button<{ disabled: boolean }>`
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md);
-  background: ${(props) =>
-    props.disabled ? "var(--bg-surface)" : "var(--primary)"};
-  color: ${(props) => (props.disabled ? "var(--text-tertiary)" : "white")};
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-  border: none;
-  transition: all var(--transition-normal);
-  font-weight: 500;
-
-  &:hover:not(:disabled) {
-    background: ${(props) =>
-      props.disabled ? "var(--bg-surface)" : "var(--primary-dark)"};
-    transform: translateY(-1px);
-  }
-`;
-
-const PageInfo = styled.span`
-  color: var(--text-tertiary);
-  font-size: 0.875rem;
-  font-weight: 500;
-`;
-
-const NoResults = styled.div`
-  text-align: center;
-  padding: var(--space-2xl);
-  color: var(--text-tertiary);
-  font-size: 1.1rem;
-`;
 
 const POSTS_PER_PAGE = 10;
 
@@ -223,15 +10,15 @@ export const Writing = () => {
   const location = useLocation();
 
   const [selectedTags, setSelectedTags] = useState<string[]>(
-    location.state?.selectedTags || []
+    location.state?.selectedTags || [],
   );
   const [currentPage, setCurrentPage] = useState(
-    location.state?.currentPage || 1
+    location.state?.currentPage || 1,
   );
   const [searchTerm, setSearchTerm] = useState("");
 
   const allTags = Array.from(
-    new Set(blogPosts.flatMap((post) => post.tags))
+    new Set(blogPosts.flatMap((post) => post.tags)),
   ).sort();
 
   const filteredPosts = blogPosts.filter((post) => {
@@ -249,12 +36,12 @@ export const Writing = () => {
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
   const paginatedPosts = filteredPosts.slice(
     (currentPage - 1) * POSTS_PER_PAGE,
-    currentPage * POSTS_PER_PAGE
+    currentPage * POSTS_PER_PAGE,
   );
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
     );
     setCurrentPage(1);
   };
@@ -270,12 +57,17 @@ export const Writing = () => {
 
   return (
     <Layout>
-      <WritingContainer>
-        <NavMenu menuItem="Writing" />
+      <div className="w-full max-w-2xl overflow-x-hidden md:max-w-full sm:max-w-full">
+        <a
+          href="/"
+          className="inline-flex items-center text-primary hover:text-blue-600 transition-colors duration-normal mb-2xl text-sm font-medium"
+        >
+          ← Back to home
+        </a>
 
-        <WritingSection>
-          <SearchContainer>
-            <SearchInput
+        <section className="mt-6xl">
+          <div className="mb-xl">
+            <input
               type="text"
               placeholder="Search for a topic..."
               value={searchTerm}
@@ -283,81 +75,110 @@ export const Writing = () => {
                 setSearchTerm(e.target.value);
                 setCurrentPage(1);
               }}
+              className="w-full max-w-full px-lg py-md border border-surface-hover rounded-md bg-surface text-primary text-base transition-all duration-normal placeholder:text-tertiary focus:outline-none focus:border-blue-600 focus:bg-surface-hover box-border md:px-md md:py-sm sm:px-sm"
             />
-          </SearchContainer>
+          </div>
 
-          <TagsContainer>
+          <div className="my-xl flex flex-wrap gap-sm w-full max-w-full overflow-x-hidden md:w-full md:max-w-full sm:w-full sm:max-w-full">
             {allTags.map((tag) => (
-              <Tag
+              <button
                 key={tag}
-                isActive={selectedTags.includes(tag)}
                 onClick={() => toggleTag(tag)}
+                className={`px-md py-sm rounded-md text-sm font-medium transition-all duration-normal ${
+                  selectedTags.includes(tag)
+                    ? "border border-blue-600 bg-blue-600 text-white"
+                    : "border border-surface-hover bg-surface text-secondary hover:bg-surface-hover hover:-translate-y-0.5"
+                }`}
               >
                 {tag}
-              </Tag>
+              </button>
             ))}
-          </TagsContainer>
+          </div>
 
-          <BlogList>
+          <div className="grid gap-lg grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {paginatedPosts.length > 0 ? (
               paginatedPosts.map((post) => (
-                <BlogPostCard
+                <div
                   key={post.id}
                   onClick={() => handlePostClick(post.slug)}
+                  className="bg-surface border border-surface-hover rounded-md px-lg py-lg cursor-pointer transition-all duration-normal hover:bg-surface-hover hover:-translate-y-0.5 h-full flex flex-col"
                 >
-                  <BlogMeta>
-                    <BlogDate>
+                  <div className="flex items-center gap-md mb-md flex-wrap">
+                    <span className="text-xs text-tertiary font-medium">
                       {new Date(post.date).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "long",
                         day: "numeric",
                       })}
-                    </BlogDate>
-                    <BlogTags>
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <BlogTag key={tag}>{tag}</BlogTag>
+                    </span>
+                    <div className="flex flex-wrap gap-xs">
+                      {post.tags.slice(0, 2).map((tag) => (
+                        <span
+                          key={tag}
+                          className="bg-surface-hover text-secondary px-xs py-xs rounded text-0.75rem font-medium"
+                        >
+                          {tag}
+                        </span>
                       ))}
-                      {post.tags.length > 3 && (
-                        <BlogTag>+{post.tags.length - 3}</BlogTag>
+                      {post.tags.length > 2 && (
+                        <span className="bg-surface-hover text-secondary px-xs py-xs rounded text-0.75rem font-medium">
+                          +{post.tags.length - 2}
+                        </span>
                       )}
-                    </BlogTags>
-                  </BlogMeta>
-                  <BlogTitle>{post.title}</BlogTitle>
-                  <BlogExcerpt>{post.excerpt}</BlogExcerpt>
-                </BlogPostCard>
+                    </div>
+                  </div>
+                  <h2 className="text-lg m-0 mb-sm text-primary font-semibold leading-normal flex-grow">
+                    {post.title}
+                  </h2>
+                  <p className="m-0 text-secondary leading-normal text-sm">
+                    {post.excerpt}
+                  </p>
+                </div>
               ))
             ) : (
-              <NoResults>No posts found matching your criteria.</NoResults>
+              <div className="text-center py-6xl text-tertiary text-lg col-span-full">
+                No posts found matching your criteria.
+              </div>
             )}
-          </BlogList>
+          </div>
 
           {totalPages > 1 && (
-            <PaginationContainer>
-              <PaginationButton
+            <div className="flex justify-center items-center gap-md mt-6xl">
+              <button
                 onClick={() =>
                   setCurrentPage((prev: number) => Math.max(1, prev - 1))
                 }
                 disabled={currentPage === 1}
+                className={`px-md py-sm rounded-md font-medium transition-all duration-normal ${
+                  currentPage === 1
+                    ? "bg-surface text-tertiary opacity-50 cursor-not-allowed"
+                    : "bg-blue-600 text-white hover:bg-blue-700 hover:-translate-y-0.5"
+                }`}
               >
                 Previous
-              </PaginationButton>
-              <PageInfo>
+              </button>
+              <span className="text-tertiary text-sm font-medium">
                 Page {currentPage} of {totalPages}
-              </PageInfo>
-              <PaginationButton
+              </span>
+              <button
                 onClick={() =>
                   setCurrentPage((prev: number) =>
-                    Math.min(totalPages, prev + 1)
+                    Math.min(totalPages, prev + 1),
                   )
                 }
                 disabled={currentPage === totalPages}
+                className={`px-md py-sm rounded-md font-medium transition-all duration-normal ${
+                  currentPage === totalPages
+                    ? "bg-surface text-tertiary opacity-50 cursor-not-allowed"
+                    : "bg-blue-600 text-white hover:bg-blue-700 hover:-translate-y-0.5"
+                }`}
               >
                 Next
-              </PaginationButton>
-            </PaginationContainer>
+              </button>
+            </div>
           )}
-        </WritingSection>
-      </WritingContainer>
+        </section>
+      </div>
     </Layout>
   );
 };

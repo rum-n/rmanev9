@@ -1,0 +1,93 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    fontFamily: {
+      sans: [
+        '"GeistMono"',
+        '"JetBrains Mono"',
+        '"Fira Code"',
+        '"Monaco"',
+        '"Cascadia Code"',
+        "monospace",
+      ],
+      mono: [
+        '"GeistMono"',
+        '"JetBrains Mono"',
+        '"Fira Code"',
+        '"Monaco"',
+        '"Cascadia Code"',
+        "monospace",
+      ],
+    },
+    colors: {
+      blue: {
+        600: "#2563eb",
+        700: "#1d4ed8",
+        800: "#1e40af",
+      },
+      slate: {
+        900: "#0f172a",
+      },
+      white: "#ffffff",
+      primary: "#0f1724",
+      secondary: "#475569",
+      tertiary: "#64748b",
+      surface: "#ffffff",
+      "surface-hover": "#eef2ff",
+    },
+    backgroundColor: {
+      primary: "#f7fafc",
+      secondary: "#f1f5f9",
+      surface: "#ffffff",
+      "surface-hover": "#eef2ff",
+    },
+    textColor: {
+      primary: "#0f1724",
+      secondary: "#475569",
+      tertiary: "#64748b",
+      white: "#ffffff",
+    },
+    spacing: {
+      0: "0",
+      xs: "0.25rem",
+      sm: "0.5rem",
+      md: "1rem",
+      lg: "1.5rem",
+      xl: "2rem",
+      "2xl": "3rem",
+      "3xl": "4rem",
+      0.5: "0.5px",
+    },
+    borderRadius: {
+      sm: "0.25rem",
+      md: "0.375rem",
+      lg: "0.5rem",
+      xl: "0.75rem",
+      "2xl": "1rem",
+      full: "9999px",
+    },
+    boxShadow: {
+      sm: "0 1px 2px 0 rgba(12, 13, 14, 0.04)",
+      md: "0 4px 12px rgba(12, 13, 14, 0.06)",
+      lg: "0 8px 30px rgba(12, 13, 14, 0.08)",
+      xl: "0 20px 40px rgba(12, 13, 14, 0.08)",
+    },
+    transitionDuration: {
+      fast: "150ms",
+      normal: "250ms",
+      slow: "350ms",
+    },
+    zIndex: {
+      dropdown: "1000",
+      sticky: "1020",
+      fixed: "1030",
+      "modal-backdrop": "1040",
+      modal: "1050",
+      popover: "1060",
+      tooltip: "1070",
+      toast: "1080",
+    },
+  },
+  plugins: [],
+};

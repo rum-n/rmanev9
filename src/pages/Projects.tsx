@@ -1,201 +1,95 @@
-import styled from "styled-components";
 import { Layout } from "../components/Layout";
-import { NavMenu } from "../components/NavMenu";
 import { projects } from "../data/projects";
 import { useState, useMemo } from "react";
 
-const ProjectsContainer = styled.div`
-  width: 100%;
-  max-width: 1000px;
-  overflow-x: hidden;
-`;
-
-const ProjectsSection = styled.section``;
-
-const Header = styled.div`
-  margin-bottom: var(--space-lg);
-`;
-
-const Title = styled.h1`
-  color: var(--text-primary);
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  margin: 0 0 var(--space-md) 0;
-`;
-
-const Controls = styled.div`
-  display: flex;
-  gap: var(--space-md);
-  margin: var(--space-lg) 0;
-  align-items: center;
-  flex-wrap: wrap;
-`;
-
-// const SearchInput = styled.input`
-//   padding: var(--space-sm) var(--space-md);
-//   border-radius: var(--radius-md);
-//   border: 1px solid var(--bg-surface-hover);
-//   background: var(--bg-primary);
-//   color: var(--text-primary);
-//   min-width: 240px;
-// `;
-
-const TagFilter = styled.div`
-  display: flex;
-  gap: var(--space-sm);
-`;
-
-const TagButton = styled.button<{ active?: boolean }>`
-  padding: 6px 10px;
-  border-radius: var(--radius-md);
-  border: 1px solid
-    ${(p) => (p.active ? "var(--primary)" : "var(--bg-surface-hover)")};
-  background: ${(p) => (p.active ? "var(--primary)" : "var(--bg-surface)")};
-  color: ${(p) => (p.active ? "white" : "var(--text-secondary)")};
-  cursor: pointer;
-`;
-
-const Grid = styled.div`
-  display: grid;
-  gap: var(--space-lg);
-  grid-template-columns: 1fr;
-
-  @media (min-width: 769px) {
-    grid-template-columns: 1fr 1fr;
-  }
-`;
-
-const Card = styled.div`
-  background: var(--bg-surface);
-  border: 1px solid var(--bg-surface-hover);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  transition: all var(--transition-normal);
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-  }
-`;
-
-const CardTitle = styled.h3`
-  margin: 0 0 var(--space-xs) 0;
-  color: var(--text-primary);
-  font-size: 1.1rem;
-`;
-
-const CardMeta = styled.div`
-  display: flex;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-xs);
-  align-items: center;
-  flex-wrap: wrap;
-`;
-
-const CardYear = styled.span`
-  color: var(--text-tertiary);
-  font-weight: 600;
-`;
-
-const CardTech = styled.span`
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-`;
-
-const CardDesc = styled.p`
-  color: var(--text-secondary);
-  margin: var(--space-md) 0 0 0;
-`;
-
-const ExternalLink = styled.a`
-  display: inline-block;
-  margin-top: var(--space-md);
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 600;
-`;
-
 export const Projects = () => {
-  // const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"all" | "personal" | "client">("all");
 
   const filtered = useMemo(() => {
-    return (
-      projects
-        .filter((p) => filter === "all" || p.tags.includes(filter))
-        // .filter(
-        //   (p) =>
-        //     p.title.toLowerCase().includes(search.toLowerCase()) ||
-        //     p.description.toLowerCase().includes(search.toLowerCase()) ||
-        //     p.tech.toLowerCase().includes(search.toLowerCase())
-        // )
-        .sort((a, b) => Number(b.year) - Number(a.year))
-    );
+    return projects
+      .filter((p) => filter === "all" || p.tags.includes(filter))
+      .sort((a, b) => Number(b.year) - Number(a.year));
   }, [filter]);
 
   return (
     <Layout>
-      <ProjectsContainer>
-        <NavMenu menuItem="Projects" />
+      <div className="w-full max-w-4xl overflow-x-hidden">
+        <a
+          href="/"
+          className="inline-flex items-center text-primary hover:text-blue-600 transition-colors duration-normal mb-2xl text-sm font-medium"
+        >
+          ← Back to home
+        </a>
 
-        <ProjectsSection>
-          <Header>
-            <Title>Projects</Title>
-          </Header>
+        <section>
+          <div className="mb-lg">
+            <h1 className="text-primary text-2xl m-0 mb-md">Projects</h1>
+          </div>
 
-          <Controls>
-            {/* <SearchInput
-              placeholder="Search projects..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            /> */}
-
-            <TagFilter>
-              <TagButton
-                active={filter === "all"}
+          <div className="flex gap-md my-lg items-center flex-wrap">
+            <div className="flex gap-sm">
+              <button
                 onClick={() => setFilter("all")}
+                className={`px-2.5 py-1.5 rounded-md border cursor-pointer ${
+                  filter === "all"
+                    ? "border-blue-600 bg-blue-600 text-white"
+                    : "border-surface-hover bg-surface text-secondary"
+                }`}
               >
                 All
-              </TagButton>
-              <TagButton
-                active={filter === "personal"}
+              </button>
+              <button
                 onClick={() => setFilter("personal")}
+                className={`px-2.5 py-1.5 rounded-md border cursor-pointer ${
+                  filter === "personal"
+                    ? "border-blue-600 bg-blue-600 text-white"
+                    : "border-surface-hover bg-surface text-secondary"
+                }`}
               >
                 Personal
-              </TagButton>
-              <TagButton
-                active={filter === "client"}
+              </button>
+              <button
                 onClick={() => setFilter("client")}
+                className={`px-2.5 py-1.5 rounded-md border cursor-pointer ${
+                  filter === "client"
+                    ? "border-blue-600 bg-blue-600 text-white"
+                    : "border-surface-hover bg-surface text-secondary"
+                }`}
               >
                 Client
-              </TagButton>
-            </TagFilter>
-          </Controls>
+              </button>
+            </div>
+          </div>
 
-          <Grid>
+          <div className="grid gap-lg grid-cols-1 md:grid-cols-2">
             {filtered.map((p, i) => (
-              <Card key={i}>
-                <CardTitle>{p.title}</CardTitle>
-                <CardMeta>
-                  <CardYear>{p.year}</CardYear>
-                  <CardTech>{p.tech}</CardTech>
-                </CardMeta>
+              <div
+                key={i}
+                className="bg-surface border border-surface-hover rounded-md px-lg py-lg transition-all duration-normal hover:-translate-y-1 hover:shadow-md"
+              >
+                <h3 className="m-0 mb-xs text-primary text-lg">{p.title}</h3>
+                <div className="flex gap-sm mb-xs items-center flex-wrap">
+                  <span className="text-tertiary font-semibold">{p.year}</span>
+                  <span className="text-secondary text-sm">{p.tech}</span>
+                </div>
 
-                <CardDesc>{p.description}</CardDesc>
+                <p className="text-secondary mt-md m-0">{p.description}</p>
 
                 {p.url && (
-                  <ExternalLink
+                  <a
                     href={p.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="inline-block mt-md text-blue-600 no-underline font-semibold"
                   >
                     Visit
-                  </ExternalLink>
+                  </a>
                 )}
-              </Card>
+              </div>
             ))}
-          </Grid>
-        </ProjectsSection>
-      </ProjectsContainer>
+          </div>
+        </section>
+      </div>
     </Layout>
   );
 };
