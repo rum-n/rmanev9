@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <!-- Unlisted, not blocked: search engines skip it, but Google Play's automated
+     check can still fetch the URL. Never disallow this path in robots.txt. -->
+    <meta name="robots" content="noindex, follow" />
+    <meta
+      name="description"
+      content="Политика за поверителност на приложението Avtotalon / Avtotalon privacy policy."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Crect width='1024' height='1024' rx='180' fill='%230F5257'/%3E%3Cpath d='M292 212h338l122 122v456a44 44 0 0 1-44 44H292a44 44 0 0 1-44-44V256a44 44 0 0 1 44-44z' fill='%23F6F2EA'/%3E%3Ccircle cx='636' cy='646' r='118' fill='%23B4531F'/%3E%3C/svg%3E"
+    />
+    <title>Avtotalon Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+    <style>
+      /* The app's page is authored against a host-provided reset; this file is
+     served standalone, so it brings its own. */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      img {
+        max-width: 100%;
+      }
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <style>
+      /* Palette lifted from the app's own tokens (src/theme/tokens.ts) so the
+     policy page reads as part of the product, not a stock legal template. */
+      :root {
+        --paper: #f1ede5;
+        --surface: #fffdf8;
+        --surface-sunk: #e8e2d6;
+        --ink: #1a1713;
+        --ink-2: rgba(26, 23, 19, 0.66);
+        --ink-3: rgba(26, 23, 19, 0.44);
+        --line: rgba(26, 23, 19, 0.12);
+        --line-strong: rgba(26, 23, 19, 0.24);
+        --petrol: #0f5257;
+        --copper: #b4531f;
+        --copper-soft: rgba(180, 83, 31, 0.1);
+        --body: "Golos Text", "Helvetica Neue", Arial, sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --paper: #13110e;
+          --surface: #1f1b16;
+          --surface-sunk: #2a251d;
+          --ink: #f5f0e8;
+          --ink-2: rgba(245, 240, 232, 0.68);
+          --ink-3: rgba(245, 240, 232, 0.46);
+          --line: rgba(245, 240, 232, 0.14);
+          --line-strong: rgba(245, 240, 232, 0.26);
+          --petrol: #59b2a8;
+          --copper: #d98a5a;
+          --copper-soft: rgba(217, 138, 90, 0.14);
+        }
+      }
+
+      :root[data-theme="dark"] {
+        --paper: #13110e;
+        --surface: #1f1b16;
+        --surface-sunk: #2a251d;
+        --ink: #f5f0e8;
+        --ink-2: rgba(245, 240, 232, 0.68);
+        --ink-3: rgba(245, 240, 232, 0.46);
+        --line: rgba(245, 240, 232, 0.14);
+        --line-strong: rgba(245, 240, 232, 0.26);
+        --petrol: #59b2a8;
+        --copper: #d98a5a;
+        --copper-soft: rgba(217, 138, 90, 0.14);
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--body);
+        font-size: 16px;
+        line-height: 1.62;
+        padding-inline: 20px;
+        padding-block: 0;
+      }
+
+      .wrap {
+        max-width: 44rem;
+        margin: 0 auto;
+      }
+
+      header.masthead {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+        padding-block: 40px 28px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .mark {
+        width: 44px;
+        height: 44px;
+        flex: none;
+        border-radius: 11px;
+        background: var(--petrol);
+        display: grid;
+        place-items: center;
+      }
+      .mark svg {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+
+      .wordmark {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-right: auto;
+      }
+      .wordmark b {
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: -0.01em;
+      }
+      .wordmark span {
+        font-family: var(--mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--ink-3);
+      }
+
+      .langs {
+        display: flex;
+        gap: 4px;
+        background: var(--surface-sunk);
+        padding: 3px;
+        border-radius: 9px;
+      }
+      .langs button {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        border: 0;
+        background: none;
+        color: var(--ink-2);
+        padding: 6px 12px;
+        border-radius: 7px;
+        cursor: pointer;
+      }
+      .langs button[aria-pressed="true"] {
+        background: var(--surface);
+        color: var(--ink);
+      }
+      .langs button:focus-visible {
+        outline: 2px solid var(--petrol);
+        outline-offset: 1px;
+      }
+
+      h1 {
+        font-size: clamp(30px, 6vw, 40px);
+        line-height: 1.12;
+        margin: 36px 0 10px;
+        text-wrap: balance;
+        letter-spacing: -0.02em;
+      }
+      .standfirst {
+        font-size: 18px;
+        color: var(--ink-2);
+        margin: 0 0 8px;
+        max-width: 34em;
+      }
+
+      .meta {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ink-3);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 18px;
+        margin-block: 18px 0;
+      }
+
+      section {
+        padding-block: 30px;
+        border-top: 1px solid var(--line);
+      }
+      section:first-of-type {
+        border-top: 0;
+      }
+
+      h2 {
+        font-size: 20px;
+        letter-spacing: -0.01em;
+        margin: 0 0 12px;
+        display: flex;
+        gap: 12px;
+        align-items: baseline;
+      }
+      h2 .n {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--petrol);
+        flex: none;
+        padding-top: 2px;
+      }
+      h3 {
+        font-size: 15px;
+        margin: 22px 0 6px;
+      }
+      p {
+        margin: 0 0 12px;
+      }
+      p:last-child,
+      ul:last-child {
+        margin-bottom: 0;
+      }
+      ul {
+        margin: 0 0 12px;
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+      a {
+        color: var(--petrol);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+      strong {
+        font-weight: 700;
+      }
+
+      /* Placeholders the operator must fill in before this page goes live. */
+      .fill {
+        font-family: var(--mono);
+        font-size: 0.86em;
+        background: var(--copper-soft);
+        color: var(--copper);
+        padding: 1px 6px;
+        border-radius: 5px;
+        white-space: nowrap;
+      }
+
+      .notice {
+        background: var(--surface);
+        border: 1px solid var(--line-strong);
+        border-left: 3px solid var(--copper);
+        border-radius: 10px;
+        padding: 18px 20px;
+        margin-block: 28px;
+      }
+      .notice h2 {
+        font-size: 15px;
+        margin-bottom: 8px;
+      }
+      .notice p {
+        font-size: 14.5px;
+        color: var(--ink-2);
+      }
+
+      .table-scroll {
+        overflow-x: auto;
+        margin-block: 16px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 34rem;
+        font-size: 14.5px;
+      }
+      caption {
+        text-align: left;
+        font-family: var(--mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--ink-3);
+        padding-bottom: 10px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 11px 14px 11px 0;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      th {
+        font-weight: 500;
+        font-size: 12px;
+        font-family: var(--mono);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--ink-3);
+      }
+      td:first-child {
+        font-weight: 500;
+      }
+      .where {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        white-space: nowrap;
+      }
+      .where.device {
+        color: var(--petrol);
+      }
+      .where.server {
+        color: var(--copper);
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding-block: 28px 56px;
+        font-size: 13.5px;
+        color: var(--ink-3);
+      }
+
+      @media (max-width: 460px) {
+        header.masthead {
+          padding-block: 28px 20px;
+        }
+        .langs {
+          width: 100%;
+        }
+        .langs button {
+          flex: 1;
+        }
+      }
+    </style>
+
+    <div class="wrap">
+      <header class="masthead">
+        <div class="mark" aria-hidden="true">
+          <svg viewBox="0 0 1024 1024" fill="none">
+            <path
+              d="M292 212h338l122 122v456a44 44 0 0 1-44 44H292a44 44 0 0 1-44-44V256a44 44 0 0 1 44-44z"
+              fill="#F6F2EA"
+            />
+            <path d="M630 212l122 122H630z" fill="#0A3C40" opacity=".32" />
+            <circle cx="636" cy="646" r="118" fill="#B4531F" />
+            <circle
+              cx="636"
+              cy="646"
+              r="118"
+              fill="none"
+              stroke="#F6F2EA"
+              stroke-width="18"
+              opacity=".6"
+            />
+          </svg>
+        </div>
+        <div class="wordmark">
+          <b>Avtotalon</b>
+          <span id="wm-sub">Политика за поверителност</span>
+        </div>
+        <div class="langs" role="group" aria-label="Език / Language">
+          <button type="button" id="btn-bg" aria-pressed="true">БГ</button>
+          <button type="button" id="btn-en" aria-pressed="false">EN</button>
+        </div>
+      </header>
+
+      <!-- ══════════════════ BULGARIAN ══════════════════ -->
+      <main id="doc-bg" lang="bg">
+        <h1>Политика за поверителност</h1>
+        <p class="standfirst">
+          Avtotalon пази документите, обслужването и разходите за колата ти.
+          Данните живеят на твоето устройство — качват се в профил само ако ти
+          поискаш.
+        </p>
+        <div class="meta">
+          <span>В сила от: 01.10.2026</span></span>
+          <span>Версия 1.0</span>
+          <span
+            >Администратор:
+            <span>Нордкинс ЕООД / 205456732</span></span
+          >
+        </div>
+
+        <section>
+          <h2><span class="n">01</span> Кой обработва данните</h2>
+          <p>
+            Администратор на личните данни по смисъла на Общия регламент относно
+            защитата на данните (ОРЗД / GDPR) е
+            <span>Нордкинс ЕООД</span>, ЕИК
+            <span>205456732</span>, със седалище
+            <span>София, бул. Васил Левски, 65</span>.
+          </p>
+          <p>
+            За въпроси по тази политика и за упражняване на правата ти:
+            <span>rumen@nordkins.com</span>.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">02</span> Накратко</h2>
+          <ul>
+            <li>
+              Приложението работи <strong>без профил</strong>. Ако не влезеш в
+              профил, нищо не напуска устройството ти.
+            </li>
+            <li>
+              <strong>Нямаме реклами, тракери и аналитични SDK-та.</strong> Не
+              събираме рекламен идентификатор и не следим местоположението ти.
+            </li>
+            <li>
+              Напомнянията се планират <strong>локално на устройството</strong>.
+              Не използваме push известия и не събираме токени за тях.
+            </li>
+            <li>
+              Не продаваме и не предоставяме данни на трети страни за маркетинг.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2><span class="n">03</span> Какви данни и къде се съхраняват</h2>
+          <p>
+            Всичко, което въвеждаш, се записва първо в база данни на самото
+            устройство. Ако създадеш профил, същите записи се синхронизират и
+            със сървъра, за да имаш резервно копие и достъп от друго устройство.
+          </p>
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Данни, които приложението обработва
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Данни</th>
+                  <th scope="col">Къде</th>
+                  <th scope="col">Защо</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Автомобил: марка, модел, година, VIN, регистрационен номер,
+                    километри, цена при покупка
+                  </td>
+                  <td class="where device">Устройство<br />+ профил</td>
+                  <td>Основната функция на приложението</td>
+                </tr>
+                <tr>
+                  <td>Сервизни записи, интервали и напомняния</td>
+                  <td class="where device">Устройство<br />+ профил</td>
+                  <td>История на обслужване и срокове</td>
+                </tr>
+                <tr>
+                  <td>Зареждания с гориво и разходи</td>
+                  <td class="where device">Устройство<br />+ профил</td>
+                  <td>Изчисляване на разход и цена на километър</td>
+                </tr>
+                <tr>
+                  <td>
+                    Документи и прикачени файлове (снимки, PDF) — талон,
+                    застраховка, технически преглед
+                  </td>
+                  <td class="where device">Устройство<br />+ профил</td>
+                  <td>Съхранение и напомняне преди изтичане</td>
+                </tr>
+                <tr>
+                  <td>Имейл адрес и идентификатор на профила</td>
+                  <td class="where server">Само профил</td>
+                  <td>Вход и свързване на записите с теб</td>
+                </tr>
+                <tr>
+                  <td>Настройки: език, валута, тема, напомняния</td>
+                  <td class="where device">Само устройство</td>
+                  <td>Приложението да помни избора ти</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Файловете ти се качват в частно хранилище. Правила за достъп на ниво
+            база данни (Row Level Security) гарантират, че само твоят профил
+            може да чете своите записи и файлове.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">04</span> Основание за обработката</h2>
+          <ul>
+            <li>
+              <strong>Изпълнение на договор</strong> (чл. 6, ал. 1, б. „б“ ОРЗД)
+              — за да ти предоставим самата услуга: съхранение на записите и
+              синхронизация.
+            </li>
+            <li>
+              <strong>Съгласие</strong> (чл. 6, ал. 1, б. „а“) — за достъп до
+              камерата и снимките, както и за известия. Можеш да го оттеглиш по
+              всяко време от настройките на устройството.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2><span class="n">05</span> Разрешения на устройството</h2>
+          <ul>
+            <li>
+              <strong>Камера</strong> — само когато сам избереш да снимаш
+              документ или бележка.
+            </li>
+            <li>
+              <strong>Снимки</strong> — само когато прикачваш съществуващо
+              изображение или снимка на колата.
+            </li>
+            <li>
+              <strong>Известия</strong> — за напомняния преди изтичане на
+              застраховка, преглед или предстоящо обслужване.
+            </li>
+          </ul>
+          <p>
+            Приложението не достъпва контакти, местоположение, микрофон или
+            календар.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">06</span> Обработващи данни</h2>
+          <p>
+            Когато използваш профил, данните се съхраняват при
+            <strong>Supabase</strong> (хостинг на база данни, вход и файлово
+            хранилище), в регион <span>ЕС</span>.
+            Supabase действа като обработващ лични данни по наши инструкции.
+          </p>
+          <p>
+            Разпространението на приложението се извършва през Google Play,
+            съответно App Store. Тези платформи събират собствени данни за
+            инсталации съгласно своите политики, върху които нямаме контрол.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">07</span> Срок на съхранение</h2>
+          <p>
+            Записите се пазят, докато ти ги изтриеш. Изтриването на приложението
+            премахва локалната база данни и запазените файлове от устройството.
+            Ако имаш профил, данните в него остават, докато не поискаш
+            изтриване.
+          </p>
+          <p>
+            При заявка за изтриване на профил премахваме всички свързани записи
+            и файлове в срок до <strong>30 дни</strong>.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">08</span> Твоите права</h2>
+          <p>
+            Съгласно ОРЗД имаш право на достъп, коригиране, изтриване,
+            ограничаване на обработката, преносимост на данните и възражение.
+            Пиши ни на <span>rumen@nordkins.com</span> и ще отговорим
+            в срок до един месец.
+          </p>
+          <p>
+            Имаш право и на жалба до
+            <a href="https://www.cpdp.bg" target="_blank" rel="noopener"
+              >Комисията за защита на личните данни</a
+            >
+            (КЗЛД), гр. София, бул. „Проф. Цветан Лазаров“ № 2.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">09</span> Деца</h2>
+          <p>
+            Приложението не е насочено към деца и не събираме съзнателно данни
+            от тях.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">10</span> Промени</h2>
+          <p>
+            При съществена промяна ще обновим датата в началото на страницата и
+            ще отбележим промяната в приложението. Ако в бъдеще добавим
+            аналитични инструменти или обработка с изкуствен интелект, тази
+            политика ще бъде актуализирана предварително.
+          </p>
+        </section>
+      </main>
+
+      <!-- ══════════════════ ENGLISH ══════════════════ -->
+      <main id="doc-en" lang="en" hidden>
+        <h1>Privacy Policy</h1>
+        <p class="standfirst">
+          Avtotalon keeps your car's documents, servicing and running costs.
+          Your data lives on your device — it only reaches a server if you
+          choose to create an account.
+        </p>
+        <div class="meta">
+          <span>Effective: <span>01.10.2026</span></span>
+          <span>Version 1.0</span>
+          <span
+            >Controller: <span>Nordkins Ltd. / 205456732</span></span
+          >
+        </div>
+
+        <div class="notice">
+          <h2>Before you publish</h2>
+          <p>
+            Fill in the fields marked in orange: controller name and
+            registration number, address, contact email, effective date and
+            hosting region. This text accurately describes what the app does,
+            but it is not legal advice — have a lawyer review it before you
+            submit to Google Play.
+          </p>
+        </div>
+
+        <section>
+          <h2><span class="n">01</span> Who processes your data</h2>
+          <p>
+            The data controller under the General Data Protection Regulation
+            (GDPR) is <span>Nordkins Ltd.</span>, registration
+            number <span>205456732</span>, registered at
+            <span>Sofia, Blvd. Vasilev Laski, 65</span>.
+          </p>
+          <p>
+            For questions about this policy or to exercise your rights:
+            <span>rumen@nordkins.com</span>.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">02</span> In short</h2>
+          <ul>
+            <li>
+              The app works <strong>without an account</strong>. If you don't
+              sign in, nothing leaves your device.
+            </li>
+            <li>
+              <strong>No ads, no trackers, no analytics SDKs.</strong> We don't
+              collect an advertising identifier and we don't track your
+              location.
+            </li>
+            <li>
+              Reminders are scheduled <strong>locally on your device</strong>.
+              We don't use push notifications and collect no push tokens.
+            </li>
+            <li>
+              We don't sell your data or share it with third parties for
+              marketing.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2><span class="n">03</span> What we store, and where</h2>
+          <p>
+            Everything you enter is written first to a database on the device
+            itself. If you create an account, those same records also sync to a
+            server so you have a backup and can use another device.
+          </p>
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Data the app processes
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">Where</th>
+                  <th scope="col">Why</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Vehicle: make, model, year, VIN, plate, mileage, purchase
+                    price
+                  </td>
+                  <td class="where device">Device<br />+ account</td>
+                  <td>The app's core function</td>
+                </tr>
+                <tr>
+                  <td>Service records, intervals and reminders</td>
+                  <td class="where device">Device<br />+ account</td>
+                  <td>Service history and deadlines</td>
+                </tr>
+                <tr>
+                  <td>Fuel fill-ups and expenses</td>
+                  <td class="where device">Device<br />+ account</td>
+                  <td>Consumption and cost per km</td>
+                </tr>
+                <tr>
+                  <td>
+                    Documents and attachments (photos, PDFs) — registration,
+                    insurance, inspection
+                  </td>
+                  <td class="where device">Device<br />+ account</td>
+                  <td>Storage and expiry reminders</td>
+                </tr>
+                <tr>
+                  <td>Email address and account identifier</td>
+                  <td class="where server">Account only</td>
+                  <td>Signing in and linking records to you</td>
+                </tr>
+                <tr>
+                  <td>Settings: language, currency, theme, reminders</td>
+                  <td class="where device">Device only</td>
+                  <td>Remembering your preferences</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Your files are uploaded to private storage. Row Level Security rules
+            at the database level ensure only your account can read its own
+            records and files.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">04</span> Legal basis</h2>
+          <ul>
+            <li>
+              <strong>Performance of a contract</strong> (Art. 6(1)(b) GDPR) —
+              to provide the service itself: storing your records and syncing
+              them.
+            </li>
+            <li>
+              <strong>Consent</strong> (Art. 6(1)(a)) — for camera and photo
+              access, and for notifications. You can withdraw it at any time in
+              your device settings.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2><span class="n">05</span> Device permissions</h2>
+          <ul>
+            <li>
+              <strong>Camera</strong> — only when you choose to photograph a
+              document or receipt.
+            </li>
+            <li>
+              <strong>Photos</strong> — only when you attach an existing image
+              or a photo of your car.
+            </li>
+            <li>
+              <strong>Notifications</strong> — for reminders before an insurance
+              policy, inspection or service falls due.
+            </li>
+          </ul>
+          <p>
+            The app does not access contacts, location, microphone or calendar.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">06</span> Processors</h2>
+          <p>
+            When you use an account, your data is stored with
+            <strong>Supabase</strong> (database hosting, authentication and file
+            storage) in the <span>EU</span> region.
+            Supabase acts as a processor on our instructions.
+          </p>
+          <p>
+            The app is distributed through Google Play and the App Store. Those
+            platforms collect their own installation data under their own
+            policies, which we do not control.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">07</span> Retention</h2>
+          <p>
+            Records are kept until you delete them. Uninstalling the app removes
+            the local database and saved files from your device. If you have an
+            account, the data in it remains until you ask us to delete it.
+          </p>
+          <p>
+            On an account deletion request we remove all associated records and
+            files within <strong>30 days</strong>.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">08</span> Your rights</h2>
+          <p>
+            Under the GDPR you have the right of access, rectification, erasure,
+            restriction of processing, data portability and objection. Write to
+            <span>rumen@nordkins.com</span> and we will respond within
+            one month.
+          </p>
+          <p>
+            You also have the right to lodge a complaint with the
+            <a href="https://www.cpdp.bg" target="_blank" rel="noopener"
+              >Commission for Personal Data Protection</a
+            >
+            (CPDP), 2 Prof. Tsvetan Lazarov Blvd, Sofia, Bulgaria.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">09</span> Children</h2>
+          <p>
+            The app is not directed at children and we do not knowingly collect
+            data from them.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="n">10</span> Changes</h2>
+          <p>
+            If anything material changes we will update the date at the top of
+            this page and note the change in the app. Should we add analytics or
+            AI-assisted processing in future, this policy will be updated
+            beforehand.
+          </p>
+        </section>
+      </main>
+
+      <footer>
+        <p>
+          Avtotalon · <span>Нордкинс ЕООД</span> ·
+          <span>rumen@nordkins.com</span>
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var docs = {
+          bg: document.getElementById("doc-bg"),
+          en: document.getElementById("doc-en"),
+        };
+        var buttons = {
+          bg: document.getElementById("btn-bg"),
+          en: document.getElementById("btn-en"),
+        };
+        var subtitle = document.getElementById("wm-sub");
+        var subtitles = {
+          bg: "Политика за поверителност",
+          en: "Privacy Policy",
+        };
+
+        function show(lang) {
+          Object.keys(docs).forEach(function (key) {
+            docs[key].hidden = key !== lang;
+            buttons[key].setAttribute("aria-pressed", String(key === lang));
+          });
+          subtitle.textContent = subtitles[lang];
+          document.documentElement.lang = lang;
+          try {
+            localStorage.setItem("avtotalon-policy-lang", lang);
+          } catch (e) {
+            /* private mode */
+          }
+        }
+
+        Object.keys(buttons).forEach(function (lang) {
+          buttons[lang].addEventListener("click", function () {
+            show(lang);
+          });
+        });
+
+        var saved = null;
+        try {
+          saved = localStorage.getItem("avtotalon-policy-lang");
+        } catch (e) {
+          /* private mode */
+        }
+        show(saved === "en" || saved === "bg" ? saved : "bg");
+      })();
+    </script>
+  </body>
+</html>
